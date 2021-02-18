@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.AboutPage"
              xmlns:vm="clr-namespace:MovieTracker.App.ViewModels"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             Shell.NavBarIsVisible="True">
     
     <ContentPage.BindingContext>
-        <vm:AboutViewModel />
+        <vm:AboutViewModel  x:Name="vm"/>
     </ContentPage.BindingContext>
     
     <ContentPage.Resources>
@@ -14,6 +15,8 @@
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
+    
+    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -23,12 +26,13 @@
         <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                 <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
+                    <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64"/>
                 </ContentView>
             </StackLayout>
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Entry IsReadOnly="False" Text="Test" VerticalOptions="Start" HorizontalOptions="Fill" IsVisible="True" Keyboard="Default" Background="green" MinimumWidthRequest="200"/>
                 <Label Text="Start developing now" FontSize="Title"/>
                 <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="0,0,0,0"/>
                 <Label FontSize="16" Padding="0,24,0,0">

@@ -1,5 +1,6 @@
 ﻿using MovieTracker.App.Models;
 using MovieTracker.App.Views;
+using MovieTracker.Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -69,6 +70,7 @@ namespace MovieTracker.App.ViewModels
 
         private async void OnAddItem(object obj)
         {
+            //await Class1.Sample(new System.Threading.CancellationToken());
             await Shell.Current.GoToAsync(nameof(NewItemPage));
         }
 

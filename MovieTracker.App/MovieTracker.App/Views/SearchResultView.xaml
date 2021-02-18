@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.App.Views.SearchResultView">
+    <Frame Margin="5"
+           CornerRadius="5"
+           HasShadow="False"
+           BackgroundColor="LightGray"
+           Padding="10">
+        
+        <Grid BackgroundColor="AntiqueWhite">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.67*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+            </Grid.RowDefinitions>
+            
+            <Image Source="{Binding PhotoUrl}"
+                   Margin="0"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="Start"
+                   />
+
+            <!--<BoxView Grid.Column="1" BackgroundColor="Green"/>-->
+
+            <StackLayout Grid.Column="1">
+                
+                <!--Movie Title/Release Year Label-->
+                <Label Padding="5,0,0,0"
+                       MaxLines="2"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="StartAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Title}"/>
+                            <Span Text=" - ("/>
+                            <Span Text="{Binding ReleaseYear}"/>
+                            <Span Text=")"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                
+                <!--Movie Overview-->
+                <Label Padding="30,5,5,5"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="StartAndExpand"/>
+                
+                <!--Rating-->
+
+            </StackLayout>
+            
+            <Label Grid.Column="1" 
+                   Text= "{Binding TextValue}"
+                   TextColor="DarkBlue"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   BackgroundColor="Green"/>
+        </Grid>
+    </Frame>
+</ContentView>
