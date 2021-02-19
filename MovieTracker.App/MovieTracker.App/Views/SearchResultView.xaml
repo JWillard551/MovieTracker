@@ -35,9 +35,9 @@
                        HorizontalOptions="StartAndExpand">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding Title}"/>
+                            <Span Text="{Binding SearchResult.Title}"/>
                             <Span Text=" - ("/>
-                            <Span Text="{Binding ReleaseYear}"/>
+                            <Span Text="{Binding SearchResult.ReleaseDate}"/>
                             <Span Text=")"/>
                         </FormattedString>
                     </Label.FormattedText>
@@ -46,7 +46,8 @@
                 <!--Movie Overview-->
                 <Label Padding="30,5,5,5"
                        LineBreakMode="WordWrap"
-                       HorizontalOptions="StartAndExpand"/>
+                       HorizontalOptions="StartAndExpand"
+                       Text="{Binding SearchResult.Overview}"/>
 
                 <!--<StackLayout>
                     

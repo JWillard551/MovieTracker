@@ -21,7 +21,7 @@
             x:Name="cv"
             ItemsSource="{Binding ItemsToDisplay}"
             RemainingItemsThreshold="5"
-            RemainingItemsThresholdReachedCommand="{Binding LoadMoreTestItems}"
+            RemainingItemsThresholdReachedCommand="{Binding LoadMoreItemsCommand}"
             VerticalScrollBarVisibility="Always"
             Margin="0">
 

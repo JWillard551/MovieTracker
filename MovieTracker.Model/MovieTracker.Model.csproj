@@ -39,6 +39,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\MovieTracker.App\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,8 +54,10 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Client\TMDbServiceClient.cs" />
+    <Compile Include="Client\TMDbServiceClientHelper.cs" />
     <Compile Include="ModelEnums\DataType.cs" />
-    <Compile Include="ModelObjects\Genre.cs" />
+    <Compile Include="ModelObjects\Model.cs" />
+    <Compile Include="ModelObjects\SearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
