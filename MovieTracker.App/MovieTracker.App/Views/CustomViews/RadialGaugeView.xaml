@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.App.Views.CustomViews.RadialGaugeView"
+             xmlns:controls="clr-namespace:MovieTracker.App.Controls"
+             xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"
+             >
+  <ContentView.Content>
+        <controls:OvalFrame HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand"
+                          BackgroundColor="White"
+                          Padding="0"
+                          HasShadow="True">
+            <Grid>
+                <customViews:CirclePathView MinValue="{Binding MinValue}"
+                                            MaxValue="{Binding MaxValue}"
+                                            CurrentProgress="{Binding CurrentProgress}"/>
+
+                <Label HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           Text="{Binding CurrentProgress, StringFormat='\{0\}%'}"
+                           TextColor="Black"/>
+            </Grid>
+        </controls:OvalFrame>
+  </ContentView.Content>
+</ContentView>

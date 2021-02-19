@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MovieTracker.App.Views.SearchResultView">
+             x:Class="MovieTracker.App.Views.SearchResultView"
+             xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews">
     <Frame Margin="5"
            CornerRadius="5"
            HasShadow="False"
@@ -46,17 +47,30 @@
                 <Label Padding="30,5,5,5"
                        LineBreakMode="WordWrap"
                        HorizontalOptions="StartAndExpand"/>
-                
+
+                <!--<StackLayout>
+                    
+                    <Label HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="StartAndExpand" 
+                           FontSize="5"
+                           Text="{Binding Detail}"
+                           TextColor="DarkSlateGray"/>
+                </StackLayout>-->
+
                 <!--Rating-->
+                <customViews:RadialGaugeView 
+                    WidthRequest="50" 
+                    HeightRequest="50" 
+                    BindingContext="{Binding RadialGaugeViewModel}"/>
 
             </StackLayout>
             
-            <Label Grid.Column="1" 
+            <!--<Label Grid.Column="1" 
                    Text= "{Binding TextValue}"
                    TextColor="DarkBlue"
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="CenterAndExpand"
-                   BackgroundColor="Green"/>
+                   BackgroundColor="Green"/>-->
         </Grid>
     </Frame>
 </ContentView>
