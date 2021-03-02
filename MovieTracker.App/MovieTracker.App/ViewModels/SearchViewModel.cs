@@ -63,10 +63,10 @@ namespace MovieTracker.App.ViewModels
             if (IsBusy)
                 return;
 
-            IsBusy = true;
-
             if (TMDbServiceClientHelper.CurrentPage > TMDbServiceClientHelper.TotalPages)
                 return;
+
+            IsBusy = true;
 
             var results = await TMDbServiceClientHelper.SearchAsync(CurrentQuery, new CancellationToken());
             ItemsToDisplay.AddRange(results.ToList().Select(searchResult => new SearchResultViewModel(searchResult)));

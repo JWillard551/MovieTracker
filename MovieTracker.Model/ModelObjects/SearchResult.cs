@@ -1,7 +1,6 @@
 ﻿using MovieTracker.Model.ModelEnums;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace MovieTracker.Model.ModelObjects
