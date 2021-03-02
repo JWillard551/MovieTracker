@@ -7,20 +7,8 @@ namespace MovieTracker.App.ViewModels
     public class SearchResultViewModel : BaseViewModel
     {
         public Command GoToDetailsCommand { get; set; }
-        public Command LoadMoreItemsCommand { get; set; }
 
         public SearchResult SearchResult { get; set; }
-        //public string PhotoUrl
-        //{
-        //    get
-        //    {
-        //        return "kingsman.jpg";
-        //    }
-        //}
-
-        //public string TextValue { get; set; }
-
-        //public string ReleaseYear { get; set; }
 
         private RadialGaugeViewModel _ratingVM;
         public RadialGaugeViewModel RadialGaugeViewModel

@@ -1,54 +1,94 @@
-﻿using System;
+﻿using MovieTracker.Model.ModelEnums;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieTracker.Model.ModelObjects
 {
     public class SearchResult
     {
-        public Genre Genre { get; set; }
-        public string Title { get; set; }
-        public DateTime? ReleaseDate { get; set; }
+        private int Id { get; set; }
+        public string ResultName { get; set; }
         public string Overview { get; set; }
+        public DateTime? ReleaseDate { get; set; }
         public decimal Rating { get; set; }
-        
-        public SearchResult() { }
+        public Uri ImageUri { get; set; }
+        public List<Genre> Genres { get; set; }
 
-        public SearchResult(System.Net.TMDb.Resource resource) 
+        public MediaType MediaType { get; set; }
+
+        protected bool HasRating
         {
-            if (resource is System.Net.TMDb.Movie)
-            {
-                var o = resource as System.Net.TMDb.Movie;
-                Title = o.OriginalTitle;
-                ReleaseDate = o.ReleaseDate.Value;
-                Overview = o.Overview;
-                Rating = o.VoteAverage * 10;
-            }
-            else if (resource is System.Net.TMDb.Show)
-            {
-                var o = resource as System.Net.TMDb.Show;
-                Title = o.OriginalName;
-                ReleaseDate = o.FirstAirDate.Value;
-                Overview = o.Overview;
-                Rating = o.VoteAverage * 10;
-            }
-            else if (resource is System.Net.TMDb.Person)
-            {
-                var o = resource as System.Net.TMDb.Person;
-                Title = o.Name;
-                ReleaseDate = DateTime.Now; //TODO:
-                Overview = o.Biography;
-                Rating = 0;
-            }
+            get { return Rating > 0; }
+        }
+        
+        protected bool HasReleaseDate
+        {
+            get { return ReleaseDate != null; }
+        }
+
+        public SearchResult() 
+        {
+            MediaType = MediaType.Unspecified;
+            ResultName = "UNKNOWN";
+            ReleaseDate = null;
+            Overview = "UNKNOWN";
+            Rating = 0;
+        }
+
+        public SearchResult(System.Net.TMDb.Movie movie)
+        {
+            Id = movie.Id;
+            ResultName = movie.OriginalTitle;
+            ReleaseDate = movie.ReleaseDate.Value;
+            Overview = movie.Overview;
+            Rating = CalculateRating(movie.VoteAverage);
+            Genres = movie.Genres?.Select(genre => new ModelObjects.Genre() { Id = genre.Id, Name = genre.Name }).ToList();
+            MediaType = MediaType.Movie;
+            ImageUri = GetImageUri(movie.Poster ?? string.Empty);
+        }
+
+        public SearchResult(System.Net.TMDb.Show show)
+        {
+            Id = show.Id;
+            ResultName = show.OriginalName;
+            ReleaseDate = DetermineShowReleaseDate(show.FirstAirDate, show.LastAirDate);
+            Overview = show.Overview;
+            Rating = CalculateRating(show.VoteAverage);
+            MediaType = MediaType.Show;
+            ImageUri = GetImageUri(show.Poster ?? string.Empty);
+        }
+
+        public SearchResult(System.Net.TMDb.Person person)
+        {
+            Id = person.Id;
+            ResultName = person.Name;
+            Overview = person.Biography;
+            MediaType = MediaType.Person;
+            ImageUri = GetImageUri(person.Poster ?? string.Empty);
+        }
+
+        protected Uri GetImageUri(string imagePath)
+        {
+            if (string.IsNullOrWhiteSpace(imagePath))
+                return null;
+            return new Uri(String.Concat("https://image.tmdb.org/t/p/original", imagePath));
+        }
+
+        protected decimal CalculateRating(decimal averageVoteValue)
+        {
+            return decimal.Round(averageVoteValue * 10, 0);
+        }
+
+        protected DateTime? DetermineShowReleaseDate(DateTime? firstAirDate, DateTime? lastAirDate)
+        {
+            if (firstAirDate != null && firstAirDate.HasValue)
+                return firstAirDate.Value;
+            else if (lastAirDate != null && lastAirDate.HasValue)
+                return lastAirDate.Value;
             else
-            {
-                Title = "Unknown Object";
-                ReleaseDate = DateTime.Now; //TODO:
-                Overview = "Unknown Object";
-                Rating = 0;
-            }
+                return null;
         }
     }
 }

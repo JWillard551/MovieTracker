@@ -56,6 +56,7 @@
     <Compile Include="Client\TMDbServiceClient.cs" />
     <Compile Include="Client\TMDbServiceClientHelper.cs" />
     <Compile Include="ModelEnums\DataType.cs" />
+    <Compile Include="ModelEnums\MediaType.cs" />
     <Compile Include="ModelObjects\Model.cs" />
     <Compile Include="ModelObjects\SearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

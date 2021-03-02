@@ -1,52 +1,33 @@
-﻿using MovieTracker.App.Models;
-using MovieTracker.Model.Client;
-using System;
+﻿using MovieTracker.Model.Client;
+using MvvmHelpers;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels
 {
     public class SearchViewModel : BaseViewModel
     {
-        public int CurrentPage { get; set; } = 1;
-        public int TotalPages { get; set; }
-        public int PageSize { get; set; } = 20;
+        public string CurrentQuery { get; set; } = string.Empty;
+        public Command LoadMoreItemsCommand { get; set; }
 
-        private ObservableCollection<SearchResultViewModel> itemsToDisplay;
-        public ObservableCollection<SearchResultViewModel> ItemsToDisplay { get => itemsToDisplay; set => SetProperty(ref itemsToDisplay, value); }
+        private ObservableRangeCollection<SearchResultViewModel> itemsToDisplay;
+        public ObservableRangeCollection<SearchResultViewModel> ItemsToDisplay { get => itemsToDisplay; set => SetProperty(ref itemsToDisplay, value); }
 
         public List<SearchResultViewModel> Items { get; set; }
 
         public SearchViewModel()
         {
+            LoadMoreItemsCommand = new Command(LoadMoreAsync);
             InitData();
         }
 
         public void InitData()
         {
             Items = new List<SearchResultViewModel>();
-
-            //for (var i = 1; i < 100; i++)
-            //{
-            //    Items.Add(new SearchResultViewModel()
-            //    {
-            //        TextValue = $"Text Value {i}",
-            //        Title="This is a really long title for a movie Title",
-            //        ReleaseYear=$"200{i}",
-            //        RadialGaugeViewModel = new RadialGaugeViewModel()
-            //        {
-            //            MinValue = 1,
-            //            MaxValue = 100,
-            //            CurrentProgress = i,
-            //            //Detail = GetRatingDetail(i),
-            //        }
-            //    });
-            //}
-
-            ItemsToDisplay = new ObservableCollection<SearchResultViewModel>(Items);
+            ItemsToDisplay = new ObservableRangeCollection<SearchResultViewModel>(Items);
         }
 
         private string GetRatingDetail(int rating)
@@ -65,16 +46,37 @@ namespace MovieTracker.App.ViewModels
 
         public async Task OnSearchAsync(string query)
         {
+            UpdateCurrentSearchQuery(query);
             //This method should take the query from the SearchBarQueryHandler and pass it into the TMDB client helper class.
             //The helper class will handle the API call to fetch data. The returned results will need to be converted to one of my internal model objects (a search result object).
-            //
             Items = new List<SearchResultViewModel>();
-            var results = await TMDbServiceClientHelper.SearchAsync(query, CurrentPage, new CancellationToken());
+            var results = await TMDbServiceClientHelper.SearchAsync(CurrentQuery, new CancellationToken());
             foreach (var res in results)
             {
                 Items.Add(new SearchResultViewModel(res));
             }
-            ItemsToDisplay = new ObservableCollection<SearchResultViewModel>(Items);
+            ItemsToDisplay = new ObservableRangeCollection<SearchResultViewModel>(Items);
+        }
+
+        private async void LoadMoreAsync()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
+            if (TMDbServiceClientHelper.CurrentPage > TMDbServiceClientHelper.TotalPages)
+                return;
+
+            var results = await TMDbServiceClientHelper.SearchAsync(CurrentQuery, new CancellationToken());
+            ItemsToDisplay.AddRange(results.ToList().Select(searchResult => new SearchResultViewModel(searchResult)));
+            IsBusy = false;
+        }
+
+        private void UpdateCurrentSearchQuery(string query)
+        {
+            if (!CurrentQuery.Equals(query))
+                CurrentQuery = query;
         }
     }
 }
