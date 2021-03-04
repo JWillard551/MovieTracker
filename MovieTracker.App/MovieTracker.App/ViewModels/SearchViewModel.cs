@@ -1,5 +1,8 @@
-﻿using MovieTracker.Model.Client;
+﻿using MovieTracker.App.ViewModels.ModalViewModels;
+using MovieTracker.App.Views.ModalViews;
+using MovieTracker.Model.Client;
 using MvvmHelpers;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -12,15 +15,18 @@ namespace MovieTracker.App.ViewModels
     {
         public string CurrentQuery { get; set; } = string.Empty;
         public Command LoadMoreItemsCommand { get; set; }
+        public Command SearchOptionsCommand { get; set; }
 
         private ObservableRangeCollection<SearchResultViewModel> itemsToDisplay;
         public ObservableRangeCollection<SearchResultViewModel> ItemsToDisplay { get => itemsToDisplay; set => SetProperty(ref itemsToDisplay, value); }
 
         public List<SearchResultViewModel> Items { get; set; }
+        private SearchOptionsViewModel SearchOptionsViewModel { get; set; }
 
         public SearchViewModel()
         {
             LoadMoreItemsCommand = new Command(LoadMoreAsync);
+            SearchOptionsCommand = new Command(SearchOptionsPressed);
             InitData();
         }
 
@@ -71,6 +77,12 @@ namespace MovieTracker.App.ViewModels
             var results = await TMDbServiceClientHelper.SearchAsync(CurrentQuery, new CancellationToken());
             ItemsToDisplay.AddRange(results.ToList().Select(searchResult => new SearchResultViewModel(searchResult)));
             IsBusy = false;
+        }
+
+        private async void SearchOptionsPressed()
+        {
+            var json = JsonConvert.SerializeObject(SearchOptionsViewModel);
+            await Shell.Current.GoToAsync($"{nameof(SearchOptionsPage)}?Content={json}");
         }
 
         private void UpdateCurrentSearchQuery(string query)

@@ -8,6 +8,13 @@
              Visual="Material"
              Shell.NavBarIsVisible="True">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary"
+                     Command="{Binding SearchOptionsCommand}"
+                     IconImageSource="settings_white.png">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.BindingContext>
         <vm:SearchViewModel x:Name="svm"/>
     </ContentPage.BindingContext>

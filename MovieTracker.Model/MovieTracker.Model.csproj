@@ -34,8 +34,8 @@
     <Reference Include="Hasseware.Net.TMDb, Version=1.3.0.0, Culture=neutral, PublicKeyToken=4d204bf90cffca75, processorArchitecture=MSIL">
       <HintPath>..\MovieTracker.App\packages\Hasseware.TheMovieDB.1.3.0.0\lib\net45\Hasseware.Net.TMDb.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\MovieTracker.App\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\MovieTracker.App\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,11 +56,14 @@
     <Compile Include="Client\TMDbServiceClientHelper.cs" />
     <Compile Include="ModelEnums\DataType.cs" />
     <Compile Include="ModelEnums\MediaType.cs" />
+    <Compile Include="ModelEnums\SearchOrderBy.cs" />
     <Compile Include="ModelObjects\Model.cs" />
+    <Compile Include="ModelObjects\SearchOptions.cs" />
     <Compile Include="ModelObjects\SearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
