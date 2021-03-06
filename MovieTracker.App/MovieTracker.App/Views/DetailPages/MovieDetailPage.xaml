@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.App.Views.DetailPages.MovieDetailPage"
+             xmlns:local="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels"
+             >
+    <ContentPage.Content>
+        <StackLayout x:DataType="local:MovieDetailViewModel">
+            <Label Text="{Binding MovieInfo.Title}"
+                   TextColor="Blue"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text="TEST"
+                   TextColor="Black"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

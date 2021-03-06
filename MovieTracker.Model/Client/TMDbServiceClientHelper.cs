@@ -11,18 +11,25 @@ namespace MovieTracker.Model.Client
 {
     public static class TMDbServiceClientHelper
     {
+        private static readonly string LANGUAGE_CODE = "en_US";
         private static string CurrentQuery { get; set; } = string.Empty;
         public static int CurrentPage { get; private set; }
         public static int TotalPages { get; private set; }
 
         public static int PageSize = 20;
 
+        /// <summary>
+        /// Search multiple models in a single request. Multi search currently supports searching for movies, tv shows and people in a single request.
+        /// </summary>
+        /// <param name="query">Search text.</param>
+        /// <param name="ct">Cancellation token.</param>
+        /// <returns></returns>
         public static async Task<IEnumerable<SearchResult>> SearchAsync(string query, CancellationToken ct)
         {
             try
             {
                 UpdateQueryAndPage(query);
-                var result = await TMDbServiceClient.Instance.SearchAsync(CurrentQuery, "en-US", false, CurrentPage, ct);
+                var result = await TMDbServiceClient.Instance.SearchAsync(CurrentQuery, LANGUAGE_CODE, false, CurrentPage, ct);
                 TotalPages = result.PageCount;
                 var results = ExtractDataFromResults(result.Results);
                 return results;
@@ -33,6 +40,36 @@ namespace MovieTracker.Model.Client
             }
             return new List<SearchResult>();
         }
+
+        public static async Task<ModelObjects.Movie> GetMovieDetailsById(int movieId, CancellationToken ct)
+        {
+            try
+            {
+                var result = await TMDbServiceClient.Instance.Movies.GetAsync(movieId, LANGUAGE_CODE, true, ct);
+                return new ModelObjects.Movie(result);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return new ModelObjects.Movie();
+        }
+
+
+        public static async Task<ModelObjects.Show> GetShowDetailsById(int showId, CancellationToken ct)
+        {
+            try
+            {
+                var result = await TMDbServiceClient.Instance.Shows.GetAsync(showId, LANGUAGE_CODE, true, ct);
+                return new ModelObjects.Show(result);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return new ModelObjects.Show();
+        }
+
 
         private static void UpdateQueryAndPage(string query)
         {

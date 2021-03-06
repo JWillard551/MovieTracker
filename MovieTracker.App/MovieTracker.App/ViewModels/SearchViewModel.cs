@@ -21,6 +21,9 @@ namespace MovieTracker.App.ViewModels
         public ObservableRangeCollection<SearchResultViewModel> ItemsToDisplay { get => itemsToDisplay; set => SetProperty(ref itemsToDisplay, value); }
 
         public List<SearchResultViewModel> Items { get; set; }
+
+        private bool SearchOptionsVisible { get; set; } = true;
+
         private SearchOptionsViewModel SearchOptionsViewModel { get; set; }
 
         public SearchViewModel()
@@ -52,6 +55,7 @@ namespace MovieTracker.App.ViewModels
 
         public async Task OnSearchAsync(string query)
         {
+            IsBusy = true;
             UpdateCurrentSearchQuery(query);
             //This method should take the query from the SearchBarQueryHandler and pass it into the TMDB client helper class.
             //The helper class will handle the API call to fetch data. The returned results will need to be converted to one of my internal model objects (a search result object).
@@ -62,6 +66,7 @@ namespace MovieTracker.App.ViewModels
                 Items.Add(new SearchResultViewModel(res));
             }
             ItemsToDisplay = new ObservableRangeCollection<SearchResultViewModel>(Items);
+            IsBusy = false;
         }
 
         private async void LoadMoreAsync()
@@ -81,8 +86,9 @@ namespace MovieTracker.App.ViewModels
 
         private async void SearchOptionsPressed()
         {
-            var json = JsonConvert.SerializeObject(SearchOptionsViewModel);
-            await Shell.Current.GoToAsync($"{nameof(SearchOptionsPage)}?Content={json}");
+            //SearchOptionsVisible = !SearchOptionsVisible;
+            //var json = JsonConvert.SerializeObject(SearchOptionsViewModel);
+            //await Shell.Current.GoToAsync($"{nameof(SearchOptionsPage)}?Content={json}");
         }
 
         private void UpdateCurrentSearchQuery(string query)

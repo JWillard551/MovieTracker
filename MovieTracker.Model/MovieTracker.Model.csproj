@@ -57,6 +57,7 @@
     <Compile Include="ModelEnums\DataType.cs" />
     <Compile Include="ModelEnums\MediaType.cs" />
     <Compile Include="ModelEnums\SearchOrderBy.cs" />
+    <Compile Include="ModelObjects\IMediaDetail.cs" />
     <Compile Include="ModelObjects\Model.cs" />
     <Compile Include="ModelObjects\SearchOptions.cs" />
     <Compile Include="ModelObjects\SearchResult.cs" />
@@ -65,6 +66,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Factory\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

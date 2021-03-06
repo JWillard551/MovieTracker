@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.TMDb;
 
 namespace MovieTracker.Model.ModelObjects
 {
     public class SearchResult
     {
-        private int Id { get; set; }
+        public int Id { get; set; }
         public string ResultName { get; set; }
         public string Overview { get; set; }
         public DateTime? ReleaseDate { get; set; }
@@ -43,7 +44,7 @@ namespace MovieTracker.Model.ModelObjects
             ReleaseDate = movie.ReleaseDate.Value;
             Overview = movie.Overview;
             Rating = CalculateRating(movie.VoteAverage);
-            Genres = movie.Genres?.Select(genre => new ModelObjects.Genre() { Id = genre.Id, Name = genre.Name }).ToList();
+            Genres = movie.Genres?.Select(genre => new Genre(genre)).ToList();
             MediaType = MediaType.Movie;
             ImageUri = GetImageUri(movie.Poster ?? string.Empty);
         }

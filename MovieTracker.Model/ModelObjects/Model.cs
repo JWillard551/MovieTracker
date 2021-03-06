@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MovieTracker.Model.ModelObjects
 {
@@ -61,6 +62,15 @@ namespace MovieTracker.Model.ModelObjects
 		public string Backdrop { get; set; }
 
 		public IEnumerable<Movie> Parts { get; set; }
+
+		public Collection(System.Net.TMDb.Collection c)
+        {
+			Id = c.Id;
+			Name = c.Name;
+			Poster = c.Poster;
+			Backdrop = c.Backdrop;
+			Parts = c.Parts?.Select(part => new Movie(part));
+        }
 	}
 
 	public class Collections : PagedResult<Collection>
@@ -93,6 +103,12 @@ namespace MovieTracker.Model.ModelObjects
 		public string Code { get; set; }
 
 		public string Name { get; set; }
+
+		public Country(System.Net.TMDb.Country country)
+        {
+			Code = country.Code;
+			Name = country.Name;
+        }
 	}
 
 	public class Genre
@@ -100,6 +116,12 @@ namespace MovieTracker.Model.ModelObjects
 		public int Id { get; set; }
 
 		public string Name { get; set; }
+
+		public Genre(System.Net.TMDb.Genre genre)
+        {
+			Id = genre.Id;
+			Name = genre.Name;
+        }
 	}
 
 	class Jobs
@@ -175,6 +197,40 @@ namespace MovieTracker.Model.ModelObjects
 		public string Status { get; set; }
 
 		public ExternalIds External { get; set; }
+
+		public Show(System.Net.TMDb.Show s)
+        {
+			Name = s.Name;
+			OriginalName = s.OriginalName;
+			Overview = s.Overview;
+			Poster = s.Poster;
+			Backdrop = s.Backdrop;
+			Countries = s.Countries;
+			EpisodeRuntimes = s.EpisodeRuntimes;
+			CreatedBy = s.CreatedBy?.Select(person => new Person(person));
+			FirstAirDate = s.FirstAirDate;
+			LastAirDate = s.LastAirDate;
+			Genres = s.Genres?.Select(genre => new Genre(genre));
+			HomePage = s.HomePage;
+			InProduction = s.InProduction;
+			EpisodeCount = s.EpisodeCount;
+			SeasonCount = s.SeasonCount;
+			Seasons = s.Seasons?.Select(season => new Season(season));
+			Languages = s.Languages;
+			Networks = s.Networks?.Select(network => new Network(network));
+			//Credits
+			//Images
+			//Videos
+			//Keywords
+			//Translations
+			Popularity = s.Popularity;
+			VoteAverage = s.VoteAverage;
+			VoteCount = s.VoteCount;
+			Status = s.Status;
+			//ExternalIds
+        }
+
+		public Show() { }
 	}
 
 	public class Season : Resource
@@ -198,6 +254,20 @@ namespace MovieTracker.Model.ModelObjects
 		public IEnumerable<Episode> Episodes { get; set; }
 
 		public ExternalIds External { get; set; }
+
+		public Season(System.Net.TMDb.Season s)
+        {
+			Name = s.Name;
+			Overview = s.Overview;
+			AirDate = s.AirDate;
+			Poster = s.Poster;
+			SeasonNumber = s.SeasonNumber;
+			//Credits
+			//Images
+			//Videos
+			//Episodes
+			//ExternalIds
+        }
 	}
 
 	public class Episode : Resource
@@ -234,6 +304,12 @@ namespace MovieTracker.Model.ModelObjects
 		public int Id { get; set; }
 
 		public string Name { get; set; }
+
+		public Network(System.Net.TMDb.Network n)
+        {
+			Id = n.Id;
+			Name = n.Name;
+        }
 	}
 
 	public class ExternalIds
@@ -276,11 +352,17 @@ namespace MovieTracker.Model.ModelObjects
 		public string Code { get; set; }
 
 		public string Name { get; set; }
+
+		public Language(System.Net.TMDb.Language lang)
+        {
+			Code = lang.Code;
+			Name = lang.Name;
+        }
 	}
 
 	public class Movie : Resource
 	{
-		public string Title { get; set; }
+		public string Title { get; set; } = "Uninstantiated Title";
 
 		public string OriginalTitle { get; set; }
 
@@ -339,6 +421,43 @@ namespace MovieTracker.Model.ModelObjects
 		public string Status { get; set; }
 
 		public ExternalIds External { get; set; }
+
+		public Movie(System.Net.TMDb.Movie m)
+        {
+			Title = m.Title;
+			OriginalTitle = m.OriginalTitle;
+			TagLine = m.TagLine;
+			Overview = m.Overview;
+			Poster = m.Poster;
+			Backdrop = m.Backdrop;
+			Adult = m.Adult;
+			if (m.BelongsTo != null)
+				BelongsTo = new Collection(m.BelongsTo);
+			Budget = m.Budget;
+			Genres = m.Genres?.Select(genre => new Genre(genre));
+			HomePage = m.HomePage;
+			Imdb = m.Imdb;
+			Companies = m.Companies?.Select(company => new Company() { Id = company.Id, Name = company.Name, Description = company.Description });
+			Countries = m.Countries?.Select(country => new Country(country));
+			ReleaseDate = m.ReleaseDate;
+			Revenue = m.Revenue;
+			Runtime = m.Runtime;
+			Languages = m.Languages?.Select(lang => new Language(lang));
+			//AlternativeTitles
+			//Credits
+			//Images
+			//Videos
+			//Keywords
+			//Releases
+			//Translations
+			Popularity = m.Popularity;
+			VoteAverage = m.VoteAverage;
+			VoteCount = m.VoteCount;
+			Status = m.Status;
+			//ExternalIds
+        }
+
+		public Movie() { }
 	}
 
 	public class Movies : PagedResult<Movie>
@@ -479,6 +598,22 @@ namespace MovieTracker.Model.ModelObjects
 		public PersonImages Images { get; set; }
 
 		public ExternalIds External { get; set; }
+
+		public Person(System.Net.TMDb.Person p)
+        {
+			Name = p.Name;
+			Adult = p.Adult;
+			KnownAs = p.KnownAs;
+			Biography = p.Biography;
+			BirthDay = p.BirthDay;
+			DeathDay = p.DeathDay;
+			HomePage = p.HomePage;
+			BirthPlace = p.BirthPlace;
+			Poster = p.Poster;
+			//PersonCredits
+			//PersonImages
+			//ExternalIds
+        }
 	}
 
 	public class PersonImages

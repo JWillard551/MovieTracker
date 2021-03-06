@@ -3,11 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MovieTracker.App.ViewModels"
              xmlns:views="clr-namespace:MovieTracker.App.Views"
+             xmlns:local="clr-namespace:MovieTracker.App.ViewModels"
              x:Class="MovieTracker.App.Views.SearchPage"
              Title=""
              Visual="Material"
              Shell.NavBarIsVisible="True">
 
+    <ContentPage.BindingContext>
+        <vm:SearchViewModel x:Name="svm" 
+                            x:DataType="local:SearchViewModel"/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary"
                      Command="{Binding SearchOptionsCommand}"
@@ -15,15 +21,11 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <ContentPage.BindingContext>
-        <vm:SearchViewModel x:Name="svm"/>
-    </ContentPage.BindingContext>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+        
         <CollectionView
             x:Name="cv"
             ItemsSource="{Binding ItemsToDisplay}"
