@@ -45,8 +45,16 @@ namespace MovieTracker.Model.Client
         {
             try
             {
-                var result = await TMDbServiceClient.Instance.Movies.GetAsync(movieId, LANGUAGE_CODE, true, ct);
-                return new ModelObjects.Movie(result);
+                List<Task> tasks = new List<Task>();
+                var movieDetailTask = TMDbServiceClient.Instance.Movies.GetAsync(movieId, LANGUAGE_CODE, true, ct);
+                var ratingDetailTask = TMDbServiceClient.Instance.Movies.GetReleasesAsync(movieId, ct);
+
+                await Task.WhenAll(movieDetailTask, ratingDetailTask);
+
+                var result = await movieDetailTask;
+                var releases = await ratingDetailTask;
+
+                return new ModelObjects.Movie(result, releases);
             }
             catch (Exception ex)
             {
@@ -68,6 +76,20 @@ namespace MovieTracker.Model.Client
 
             }
             return new ModelObjects.Show();
+        }
+
+        public static async Task<ModelObjects.Person> GetPersonDetailsById(int personId, CancellationToken ct)
+        {
+            try
+            {
+                var result = await TMDbServiceClient.Instance.People.GetAsync(personId, true, ct);
+                return new ModelObjects.Person(result);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return new ModelObjects.Person();
         }
 
 

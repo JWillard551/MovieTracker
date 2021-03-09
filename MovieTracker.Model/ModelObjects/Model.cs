@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieTracker.Model.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -362,7 +363,7 @@ namespace MovieTracker.Model.ModelObjects
 
 	public class Movie : Resource
 	{
-		public string Title { get; set; } = "Uninstantiated Title";
+		public string Title { get; set; }
 
 		public string OriginalTitle { get; set; }
 
@@ -370,9 +371,9 @@ namespace MovieTracker.Model.ModelObjects
 
 		public string Overview { get; set; }
 
-		public string Poster { get; set; }
+		public Uri Poster { get; set; }
 
-		public string Backdrop { get; set; }
+		public Uri Backdrop { get; set; }
 
 		public bool Adult { get; set; }
 
@@ -408,7 +409,18 @@ namespace MovieTracker.Model.ModelObjects
 
 		public Keywords Keywords { get; set; }
 
-		public Releases Releases { get; set; }
+		public IEnumerable<Release> Releases { get; set; }
+
+		public string Rating 
+		{
+            get
+            {
+				if (Releases != null && Releases.Any())
+					return Releases.Where(r => r.CountryCode.Equals("US")).FirstOrDefault()?.Certification ?? "??";
+				else
+					return "??";
+            }
+		}
 
 		public Translations Translations { get; set; }
 
@@ -422,14 +434,14 @@ namespace MovieTracker.Model.ModelObjects
 
 		public ExternalIds External { get; set; }
 
-		public Movie(System.Net.TMDb.Movie m)
+		public Movie(System.Net.TMDb.Movie m, IEnumerable<System.Net.TMDb.Release> releases = null)
         {
 			Title = m.Title;
 			OriginalTitle = m.OriginalTitle;
 			TagLine = m.TagLine;
 			Overview = m.Overview;
-			Poster = m.Poster;
-			Backdrop = m.Backdrop;
+			Poster = ModelUtils.GetImageUri(m.Poster);
+			Backdrop = ModelUtils.GetImageUri(m.Backdrop);
 			Adult = m.Adult;
 			if (m.BelongsTo != null)
 				BelongsTo = new Collection(m.BelongsTo);
@@ -448,7 +460,7 @@ namespace MovieTracker.Model.ModelObjects
 			//Images
 			//Videos
 			//Keywords
-			//Releases
+			Releases = releases?.Select(r => new Release(r));
 			//Translations
 			Popularity = m.Popularity;
 			VoteAverage = m.VoteAverage;
@@ -535,6 +547,13 @@ namespace MovieTracker.Model.ModelObjects
 		public string Certification { get; set; }
 
 		public DateTime Date { get; set; }
+
+		public Release(System.Net.TMDb.Release r)
+        {
+			CountryCode = r.CountryCode;
+			Certification = r.Certification;
+			Date = r.Date;
+        }
 	}
 
 	public class Videos
@@ -614,6 +633,8 @@ namespace MovieTracker.Model.ModelObjects
 			//PersonImages
 			//ExternalIds
         }
+
+		public Person() { }
 	}
 
 	public class PersonImages

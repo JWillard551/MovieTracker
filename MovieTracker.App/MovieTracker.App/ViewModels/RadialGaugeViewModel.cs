@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels
 {
-    public class RadialGaugeViewModel : BaseViewModel //ExtendedBindableObject
+    public class RadialGaugeViewModel : BaseViewModel
     {
         private string _detail;
         public string Detail 
@@ -38,17 +38,4 @@ namespace MovieTracker.App.ViewModels
 
         public RadialGaugeViewModel() { }
     }
-
-    //public class ExtendedBindableObject : BindableObject
-    //{
-    //    public bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
-    //    {
-    //        if (EqualityComparer<T>.Default.Equals(storage, value))
-    //            return false;
-
-    //        storage = value;
-    //        OnPropertyChanged(propertyName);
-    //        return true;
-    //    }
-    //}
 }

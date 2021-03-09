@@ -3,8 +3,131 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.DetailPages.MovieDetailPage"
              xmlns:local="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels"
-             >
-    <ContentPage.Content>
+             xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews">
+
+    <Grid x:DataType="local:MovieDetailViewModel"
+          BackgroundColor="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Main Detail - Should Be Templated-->
+        <Grid Grid.Row="0"
+              Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Frame Grid.Column="0"
+                   HasShadow="True"
+                   Margin="0"
+                   Padding="0"
+                   CornerRadius="5">
+                <Image 
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand">
+                    <Image.Source>
+                        <UriImageSource Uri="{Binding MovieInfo.Poster}"
+                                    CachingEnabled="True"
+                                    CacheValidity="14"/>
+                    </Image.Source>
+                </Image>
+            </Frame>
+            
+
+            <StackLayout Grid.Column="1"
+                         VerticalOptions="StartAndExpand"
+                         HorizontalOptions="Start">
+
+                <!--SearchResultView ResultName (Needs Template)-->
+                <Label Padding="2,0,0,0"
+                       MaxLines="3"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="End">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding MovieInfo.Title}" 
+                                  FontAttributes="Bold"
+                                  FontSize="15"/>
+                            <Span Text=" ("/>
+                            <Span Text="{Binding MovieInfo.ReleaseDate, StringFormat='{0:yyyy}'}"
+                                  FontAttributes="Bold"
+                                  FontSize="15"/>
+                            <Span Text=")"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Text="{Binding MovieInfo.TagLine}"
+                       FontAttributes="Italic"/>
+
+                <!--#region Rating + Genres (Needs Template)-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".15*"/>
+                        <ColumnDefinition Width=".85*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Frame Grid.Column="0" 
+                           BorderColor="Black"
+                           HasShadow="True"
+                           CornerRadius="2"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           BackgroundColor="LightCoral"
+                           Margin="0"
+                           Padding="2">
+                        <Label Text="{Binding MovieInfo.Rating}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Frame>
+                    <Label Grid.Column="1"
+                           Text="Science Fiction, Action/Adventure, Horror, Drama, Historical, Documentary"
+                           MaxLines="3"
+                           LineBreakMode="TailTruncation"/>
+                </Grid>
+                
+                <!--#endregion-->
+
+                
+
+                <customViews:RadialGaugeView WidthRequest="50" 
+                                             HeightRequest="50"
+                                             HorizontalOptions="Start"
+                                             VerticalOptions="Start"
+                                             BindingContext="{Binding RadialGaugeViewModel}"/>
+
+                <Label Text="Director/Creator"/>
+                <Label Text="Need Converter Here for Credits"/>
+
+            </StackLayout>
+        </Grid>
+        <!--#endregion-->
+        
+        <!--#region Overview-->
+        <Label Grid.Row="1"
+               Text="{Binding MovieInfo.Overview}"
+               FontAttributes="None"
+               FontSize="18"
+               LineBreakMode="WordWrap"
+               MaxLines="10"
+               Margin="5"/>
+
+        <!--#region Buttons Region -->
+
+        <StackLayout Grid.Row="2"
+                     BackgroundColor="CornflowerBlue">
+            
+        </StackLayout>
+
+
+    </Grid>
+    <!--<ContentPage.Content>
         <StackLayout x:DataType="local:MovieDetailViewModel">
             <Label Text="{Binding MovieInfo.Title}"
                    TextColor="Blue"
@@ -15,5 +138,5 @@
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand"/>
         </StackLayout>
-    </ContentPage.Content>
+    </ContentPage.Content>-->
 </ContentPage>

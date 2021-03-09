@@ -1,4 +1,5 @@
 ﻿using MovieTracker.Model.ModelEnums;
+using MovieTracker.Model.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace MovieTracker.Model.ModelObjects
             Rating = CalculateRating(movie.VoteAverage);
             Genres = movie.Genres?.Select(genre => new Genre(genre)).ToList();
             MediaType = MediaType.Movie;
-            ImageUri = GetImageUri(movie.Poster ?? string.Empty);
+            ImageUri = ModelUtils.GetImageUri(movie.Poster ?? string.Empty);
         }
 
         public SearchResult(System.Net.TMDb.Show show)
@@ -57,7 +58,7 @@ namespace MovieTracker.Model.ModelObjects
             Overview = show.Overview;
             Rating = CalculateRating(show.VoteAverage);
             MediaType = MediaType.Show;
-            ImageUri = GetImageUri(show.Poster ?? string.Empty);
+            ImageUri = ModelUtils.GetImageUri(show.Poster ?? string.Empty);
         }
 
         public SearchResult(System.Net.TMDb.Person person)
@@ -66,14 +67,7 @@ namespace MovieTracker.Model.ModelObjects
             ResultName = person.Name;
             Overview = person.Biography;
             MediaType = MediaType.Person;
-            ImageUri = GetImageUri(person.Poster ?? string.Empty);
-        }
-
-        protected Uri GetImageUri(string imagePath)
-        {
-            if (string.IsNullOrWhiteSpace(imagePath))
-                return null;
-            return new Uri(String.Concat("https://image.tmdb.org/t/p/original", imagePath));
+            ImageUri = ModelUtils.GetImageUri(person.Poster ?? string.Empty);
         }
 
         protected decimal CalculateRating(decimal averageVoteValue)
