@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels
 {
@@ -12,6 +13,14 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
     {
         public Task Initialization { get; private set; }
         public Person PersonInfo { get; set; }
+
+        public Command AddToListCommand => throw new NotImplementedException();
+
+        public Command AddToWatchListCommand => throw new NotImplementedException();
+
+        public Command AddToFavoritesCommand => throw new NotImplementedException();
+
+        public Command RateCommand => throw new NotImplementedException();
 
         public PersonDetailViewModel(int id)
         {

@@ -2,6 +2,7 @@
 using MovieTracker.Model.ModelObjects;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels
 {
@@ -9,6 +10,14 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
     {
         public Task Initialization { get; private set; }
         public Show ShowInfo { get; set; }
+
+        public Command AddToListCommand => throw new System.NotImplementedException();
+
+        public Command AddToWatchListCommand => throw new System.NotImplementedException();
+
+        public Command AddToFavoritesCommand => throw new System.NotImplementedException();
+
+        public Command RateCommand => throw new System.NotImplementedException();
 
         public ShowDetailViewModel(int id)
         {

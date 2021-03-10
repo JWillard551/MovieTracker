@@ -3,6 +3,7 @@ using MovieTracker.Model.ModelObjects;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels
 {
@@ -10,6 +11,15 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
     {
         public Movie MovieInfo { get; set; }
         public Task Initialization { get; private set; }
+
+        public Command AddToListCommand { get; private set; }
+
+        public Command AddToWatchListCommand { get; private set; }
+
+        public Command AddToFavoritesCommand { get; private set; }
+
+        public Command RateCommand { get; private set; }
+
 
         private RadialGaugeViewModel _ratingVM;
         public RadialGaugeViewModel RadialGaugeViewModel
@@ -33,6 +43,30 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
                 MaxValue = 100,
                 CurrentProgress = Convert.ToDouble(decimal.Round(MovieInfo.VoteAverage * 10, 0)),
             };
+            AddToListCommand = new Command(OnAddToListSelected);
+            AddToWatchListCommand = new Command(OnAddToWatchlistSelected);
+            AddToFavoritesCommand = new Command(OnAddToFavoritesSelected);
+            RateCommand = new Command(OnRateSelected);
+        }
+
+        private async void OnAddToListSelected()
+        {
+
+        }
+
+        private async void OnAddToWatchlistSelected()
+        {
+
+        }
+
+        private async void OnAddToFavoritesSelected()
+        {
+
+        }
+
+        private async void OnRateSelected()
+        {
+
         }
     }
 }

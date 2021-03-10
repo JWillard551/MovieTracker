@@ -43,4 +43,48 @@
         </Grid>
     </DataTemplate>
     
+    <!--<ControlTemplate x:Key="AddToListButton">
+        <ImageButton HeightRequest="40"
+                     WidthRequest="40"
+                     CornerRadius="20"
+                     BackgroundColor="#032541">
+            <ImageButton.Source>
+                <UriImageSource Uri="addlist_white.png" />
+            </ImageButton.Source>
+        </ImageButton>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="FavoritesButton">
+        <ImageButton HeightRequest="40"
+                     WidthRequest="40"
+                     CornerRadius="20"
+                     BackgroundColor="#032541">
+            <ImageButton.Source>
+                <UriImageSource Uri="favorite_white.png" />
+            </ImageButton.Source>
+        </ImageButton>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="AddToWatchlistButton">
+        <ImageButton HeightRequest="40"
+                     WidthRequest="40"
+                     CornerRadius="20"
+                     BackgroundColor="#032541">
+            <ImageButton.Source>
+                <UriImageSource Uri="bookmark_white.png" />
+            </ImageButton.Source>
+        </ImageButton>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RateButton">
+        <ImageButton HeightRequest="40"
+                     WidthRequest="40"
+                     CornerRadius="20"
+                     BackgroundColor="#032541">
+            <ImageButton.Source>
+                <UriImageSource Uri="rate_white.png" />
+            </ImageButton.Source>
+        </ImageButton>
+    </ControlTemplate>-->
+
 </ResourceDictionary>
