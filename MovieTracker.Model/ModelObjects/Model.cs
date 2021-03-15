@@ -379,9 +379,9 @@ namespace MovieTracker.Model.ModelObjects
 
 		public Collection BelongsTo { get; set; }
 
-		public int Budget { get; set; }
+		public string Budget { get; set; }
 
-		public IEnumerable<Genre> Genres { get; set; }
+		public string Genres { get; set; }
 
 		public string HomePage { get; set; }
 
@@ -393,7 +393,7 @@ namespace MovieTracker.Model.ModelObjects
 
 		public DateTime? ReleaseDate { get; set; }
 
-		public Int64 Revenue { get; set; }
+		public string Revenue { get; set; }
 
 		public int? Runtime { get; set; }
 
@@ -445,14 +445,14 @@ namespace MovieTracker.Model.ModelObjects
 			Adult = m.Adult;
 			if (m.BelongsTo != null)
 				BelongsTo = new Collection(m.BelongsTo);
-			Budget = m.Budget;
-			Genres = m.Genres?.Select(genre => new Genre(genre));
+			Budget = m.Budget.ToString();
+			Genres = String.Join(", ", m.Genres?.Select(genre => genre.Name).ToList());
 			HomePage = m.HomePage;
 			Imdb = m.Imdb;
 			Companies = m.Companies?.Select(company => new Company() { Id = company.Id, Name = company.Name, Description = company.Description });
 			Countries = m.Countries?.Select(country => new Country(country));
 			ReleaseDate = m.ReleaseDate;
-			Revenue = m.Revenue;
+			Revenue = m.Revenue.ToString();
 			Runtime = m.Runtime;
 			Languages = m.Languages?.Select(lang => new Language(lang));
 			//AlternativeTitles

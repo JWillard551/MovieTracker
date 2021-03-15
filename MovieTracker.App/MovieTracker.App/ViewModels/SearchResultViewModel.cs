@@ -40,7 +40,7 @@ namespace MovieTracker.App.ViewModels
             IsBusy = true;
             if (searchResult.MediaType == Model.ModelEnums.MediaType.Movie)
             {
-                await Shell.Current.GoToAsync($"{nameof(MovieDetailPage)}?MovieID={searchResult.Id}");
+                await Shell.Current.GoToAsync($"{nameof(MovieTabbedPage)}?MovieID={searchResult.Id}");
             }
             else if (searchResult.MediaType == Model.ModelEnums.MediaType.Show)
             {

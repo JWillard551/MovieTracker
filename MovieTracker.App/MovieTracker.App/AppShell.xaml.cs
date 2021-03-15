@@ -14,6 +14,7 @@ namespace MovieTracker.App
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(SearchOptionsPage), typeof(SearchOptionsPage));
+            Routing.RegisterRoute(nameof(MovieTabbedPage), typeof(MovieTabbedPage));
             Routing.RegisterRoute(nameof(MovieDetailPage), typeof(MovieDetailPage));
             Routing.RegisterRoute(nameof(ShowDetailPage), typeof(ShowDetailPage));
             Routing.RegisterRoute(nameof(PersonDetailPage), typeof(PersonDetailPage));

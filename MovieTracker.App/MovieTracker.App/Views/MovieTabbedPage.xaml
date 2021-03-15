@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MovieTracker.App.Views.MovieTabbedPage"
+            xmlns:detailPages="clr-namespace:MovieTracker.App.Views.DetailPages"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            BarBackgroundColor="Black"
+            BarTextColor="White">
+    <detailPages:MovieDetailPage Title="About" BindingContext="{Binding Tab1}"/>
+    <detailPages:MovieDetailPage Title="Cast/Credits" BindingContext="{Binding Tab2}"/>
+</TabbedPage>
