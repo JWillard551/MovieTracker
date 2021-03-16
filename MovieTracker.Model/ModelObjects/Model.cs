@@ -456,7 +456,7 @@ namespace MovieTracker.Model.ModelObjects
 			Runtime = m.Runtime;
 			Languages = m.Languages?.Select(lang => new Language(lang));
 			//AlternativeTitles
-			//Credits
+			Credits = new MediaCredits(m.Credits);
 			//Images
 			//Videos
 			//Keywords
@@ -500,6 +500,12 @@ namespace MovieTracker.Model.ModelObjects
 		public IEnumerable<MediaCast> Cast { get; set; }
 
 		public IEnumerable<MediaCrew> Crew { get; set; }
+
+		public MediaCredits(System.Net.TMDb.MediaCredits credits)
+        {
+			Cast = credits.Cast?.Select(cast => new MediaCast(cast)) ?? new List<MediaCast>();
+			Crew = credits.Crew?.Select(crew => new MediaCrew(crew)) ?? new List<MediaCrew>();
+        }
 	}
 
 	public abstract class MediaCredit
@@ -510,12 +516,25 @@ namespace MovieTracker.Model.ModelObjects
 
 		public string Name { get; set; }
 
-		public string Profile { get; set; }
+		public Uri Profile { get; set; }
+
+		public MediaCredit(System.Net.TMDb.MediaCredit credit)
+        {
+			Id = credit.Id;
+			CreditId = credit.CreditId;
+			Name = credit.Name;
+			Profile = ModelUtils.GetImageUri(credit.Profile);
+		}
 	}
 
 	public class MediaCast : MediaCredit
 	{
 		public string Character { get; set; }
+
+		public MediaCast(System.Net.TMDb.MediaCast cast) : base(cast)
+        {
+			Character = cast.Character;
+        }
 	}
 
 	public class MediaCrew : MediaCredit
@@ -523,6 +542,12 @@ namespace MovieTracker.Model.ModelObjects
 		public string Department { get; set; }
 
 		public string Job { get; set; }
+
+		public MediaCrew(System.Net.TMDb.MediaCrew crew) : base(crew)
+		{
+			Department = crew.Department;
+			Job = crew.Job;
+        }
 	}
 
 	public class Keywords

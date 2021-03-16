@@ -20,7 +20,7 @@
             <!--Movie Title / Tag Line Row-->
             <RowDefinition Height="Auto" />
             <!--Picture / Details Row-->
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <!--Buttons Row-->
             <RowDefinition Height="50" />
             <!--Overview Row-->
@@ -59,8 +59,8 @@
         <Grid Grid.Row="1"
               Margin="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width=".4*" />
+                <ColumnDefinition Width=".6*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -68,22 +68,26 @@
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
-            <Frame Grid.Column="0"
-                   Grid.RowSpan="2"
-                   HasShadow="True"
-                   Margin="0"
-                   Padding="0"
-                   CornerRadius="5"
-                   BackgroundColor="LightGray">
-                <Image VerticalOptions="CenterAndExpand"
-                       HorizontalOptions="CenterAndExpand">
-                    <Image.Source>
-                        <UriImageSource Uri="{Binding MovieInfo.Poster}"
-                                        CachingEnabled="True"
-                                        CacheValidity="14" />
-                    </Image.Source>
-                </Image>
-            </Frame>
+            <StackLayout Padding="5"
+                         Grid.Column="0"
+                         Grid.RowSpan="2">
+                <Frame HasShadow="True"
+                       Margin="0"
+                       Padding="0"
+                       CornerRadius="5"
+                       BackgroundColor="LightGray"
+                       IsClippedToBounds="True">
+                    <Image VerticalOptions="Center"
+                           HorizontalOptions="Center">
+                        <Image.Source>
+                            <UriImageSource Uri="{Binding MovieInfo.Poster}"
+                                            CachingEnabled="True"
+                                            CacheValidity="14" />
+                        </Image.Source>
+                    </Image>
+                </Frame>
+            </StackLayout>
+            
 
 
             <StackLayout Grid.Row="0" 
@@ -144,10 +148,10 @@
                        FontAttributes="Bold"
                        Padding="0"
                        Margin="0"
-                           FontSize="10"/>
+                       FontSize="10"/>
                 <Label Text="{Binding MovieInfo.Revenue, Converter={StaticResource CurrencyFormatConverter}}"
                        Padding="0"
-                       Margin="0" 
+                       Margin="0"
                        FontSize="10"/>
             </StackLayout>
 
@@ -173,6 +177,10 @@
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
 
             <controls:RoundImageButton Grid.Column="0"
                                        VerticalOptions="Center"
