@@ -1,4 +1,6 @@
-﻿namespace MovieTracker.Model.ModelObjects
+﻿using System.Collections.Generic;
+
+namespace MovieTracker.Model.ModelObjects
 {
 	public class MediaCast : MediaCredit
 	{
@@ -8,5 +10,12 @@
 		{
 			Character = cast.Character;
 		}
+	}
+
+	public class MediaCastList : List<MediaCast>
+	{
+		public readonly string GroupName = "Cast";
+
+		public MediaCastList(IEnumerable<MediaCast> castList) : base(castList) { }
 	}
 }

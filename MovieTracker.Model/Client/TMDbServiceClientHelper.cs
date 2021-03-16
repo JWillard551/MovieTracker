@@ -1,4 +1,5 @@
-﻿using MovieTracker.Model.ModelObjects;
+﻿using MovieTracker.Model.ModelEnums;
+using MovieTracker.Model.ModelObjects;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -61,6 +62,20 @@ namespace MovieTracker.Model.Client
 
             }
             return new ModelObjects.Movie();
+        }
+
+        public static async Task<List<ModelObjects.MediaCredits>> GetMovieCreditsById(int movieId, CancellationToken ct)
+        {
+            try
+            {
+                var movie = await TMDbServiceClient.Instance.Movies.GetAsync(movieId, LANGUAGE_CODE, true, ct);
+                return Utils.ModelUtils.GetMovieMediaCredits(movie);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return new List<ModelObjects.MediaCredits>();
         }
 
 

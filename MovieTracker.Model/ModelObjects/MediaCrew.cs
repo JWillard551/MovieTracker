@@ -1,4 +1,6 @@
-﻿namespace MovieTracker.Model.ModelObjects
+﻿using System.Collections.Generic;
+
+namespace MovieTracker.Model.ModelObjects
 {
 	public class MediaCrew : MediaCredit
 	{
@@ -10,5 +12,12 @@
 			Department = crew.Department;
 			Job = crew.Job;
 		}
+	}
+
+	public class MediaCrewList : List<MediaCrew>
+	{
+		public readonly string GroupName = "Crew";
+
+		public MediaCrewList(IEnumerable<MediaCrew> castList) : base(castList) { }
 	}
 }

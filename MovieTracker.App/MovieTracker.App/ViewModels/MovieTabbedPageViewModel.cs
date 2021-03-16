@@ -1,7 +1,6 @@
 ﻿using MovieTracker.App.ViewModels.DetailViewModels;
+using MovieTracker.Model.ModelEnums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,8 +10,7 @@ namespace MovieTracker.App.ViewModels
     {
         public MovieDetailViewModel Tab1 { get; set; }
 
-        public MovieDetailViewModel Tab2 { get; set; }
-
+        public CastAndCrewViewModel Tab2 { get; set; }
 
         public Task Initialization { get; private set; }
 
@@ -33,7 +31,7 @@ namespace MovieTracker.App.ViewModels
         {
             //Handle initialization for the movie info.
             Tab1 = new MovieDetailViewModel(id);
-            Tab2 = new MovieDetailViewModel(id);
+            Tab2 = new CastAndCrewViewModel(id, MediaType.Movie);
             await Task.WhenAll(Tab1.Initialization, Tab2.Initialization);
         }
     }

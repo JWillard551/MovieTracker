@@ -13,13 +13,5 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
         /// The result of the asynchronous initialization of this instance.
         /// </summary>
         Task Initialization { get; }
-
-        Command AddToListCommand { get; }
-
-        Command AddToWatchListCommand { get; }
-
-        Command AddToFavoritesCommand { get; }
-
-        Command RateCommand { get; }
     }
 }

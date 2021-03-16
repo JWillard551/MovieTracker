@@ -26,7 +26,7 @@ namespace MovieTracker.Model.ModelObjects
 		public int? Runtime { get; set; }
 		public IEnumerable<Language> Languages { get; set; }
 		public AlternativeTitles AlternativeTitles { get; set; }
-		public MediaCredits Credits { get; set; }
+		public List<MediaCredits> Credits { get; set; }
 		public Images Images { get; set; }
 		public Videos Videos { get; set; }
 		public Keywords Keywords { get; set; }
@@ -70,7 +70,7 @@ namespace MovieTracker.Model.ModelObjects
 			Runtime = m.Runtime;
 			Languages = m.Languages?.Select(lang => new Language(lang));
 			//AlternativeTitles
-			Credits = new MediaCredits(m.Credits);
+			//Credits = Utils.ModelUtils.GetMovieMediaCredits(m.Credits);
 			//Images
 			//Videos
 			//Keywords
