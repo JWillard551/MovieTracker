@@ -1,9 +1,7 @@
 ﻿using MovieTracker.Model.Client;
 using MovieTracker.Model.ModelEnums;
 using MovieTracker.Model.ModelObjects;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

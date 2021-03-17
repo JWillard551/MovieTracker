@@ -7,6 +7,10 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             BarBackgroundColor="Black"
             BarTextColor="White">
-    <detailPages:MovieDetailPage Title="About" BindingContext="{Binding Tab1}"/>
-    <detailPages:CastAndCrewDetailPage Title="Cast/Credits" BindingContext="{Binding Tab2}"/>
+    <detailPages:MovieDetailPage Title="About" 
+                                 BindingContext="{Binding Tab1}"/>
+    <detailPages:CastAndCrewDetailPage Title="Cast/Credits" 
+                                       BindingContext="{Binding Tab2}"/>
+    <detailPages:WatchOnDetailPage Title="Watch"
+                                   BindingContext="{Binding Tab3}" />
 </TabbedPage>

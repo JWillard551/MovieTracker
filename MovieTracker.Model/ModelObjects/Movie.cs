@@ -13,7 +13,6 @@ namespace MovieTracker.Model.ModelObjects
 		public string Overview { get; set; }
 		public Uri Poster { get; set; }
 		public Uri Backdrop { get; set; }
-		public bool Adult { get; set; }
 		public Collection BelongsTo { get; set; }
 		public string Budget { get; set; }
 		public string Genres { get; set; }
@@ -25,11 +24,6 @@ namespace MovieTracker.Model.ModelObjects
 		public string Revenue { get; set; }
 		public int? Runtime { get; set; }
 		public IEnumerable<Language> Languages { get; set; }
-		public AlternativeTitles AlternativeTitles { get; set; }
-		public List<MediaCredits> Credits { get; set; }
-		public Images Images { get; set; }
-		public Videos Videos { get; set; }
-		public Keywords Keywords { get; set; }
 		public IEnumerable<Release> Releases { get; set; }
 		public string Rating
 		{
@@ -41,12 +35,10 @@ namespace MovieTracker.Model.ModelObjects
 					return "??";
 			}
 		}
-		public Translations Translations { get; set; }
 		public decimal Popularity { get; set; }
 		public decimal VoteAverage { get; set; }
 		public int VoteCount { get; set; }
 		public string Status { get; set; }
-		public ExternalIds External { get; set; }
 
 		public Movie(System.Net.TMDb.Movie m, IEnumerable<System.Net.TMDb.Release> releases = null)
 		{
@@ -56,7 +48,6 @@ namespace MovieTracker.Model.ModelObjects
 			Overview = m.Overview;
 			Poster = ModelUtils.GetImageUri(m.Poster);
 			Backdrop = ModelUtils.GetImageUri(m.Backdrop);
-			Adult = m.Adult;
 			if (m.BelongsTo != null)
 				BelongsTo = new Collection(m.BelongsTo);
 			Budget = m.Budget.ToString();
@@ -69,18 +60,11 @@ namespace MovieTracker.Model.ModelObjects
 			Revenue = m.Revenue.ToString();
 			Runtime = m.Runtime;
 			Languages = m.Languages?.Select(lang => new Language(lang));
-			//AlternativeTitles
-			//Credits = Utils.ModelUtils.GetMovieMediaCredits(m.Credits);
-			//Images
-			//Videos
-			//Keywords
 			Releases = releases?.Select(r => new Release(r));
-			//Translations
 			Popularity = m.Popularity;
 			VoteAverage = m.VoteAverage;
 			VoteCount = m.VoteCount;
 			Status = m.Status;
-			//ExternalIds
 		}
 
 		public Movie() { }

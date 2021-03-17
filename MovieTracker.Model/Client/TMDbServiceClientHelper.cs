@@ -78,6 +78,20 @@ namespace MovieTracker.Model.Client
             return new List<ModelObjects.MediaCredits>();
         }
 
+        public static async Task<ProviderList> GetMovieProviders(int movieId, CancellationToken ct)
+        {
+            try
+            {
+                var providers = await TMDbJWServiceClient.Instance.Providers.GetProvidersAsync(movieId, MediaType.Movie, ct);
+                return providers; 
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
+
 
         public static async Task<ModelObjects.Show> GetShowDetailsById(int showId, CancellationToken ct)
         {

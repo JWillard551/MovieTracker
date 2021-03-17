@@ -12,6 +12,8 @@ namespace MovieTracker.App.ViewModels
 
         public CastAndCrewViewModel Tab2 { get; set; }
 
+        public WatchOnViewModel Tab3 { get; set; }
+
         public Task Initialization { get; private set; }
 
         public Command AddToListCommand => throw new NotImplementedException();
@@ -32,7 +34,8 @@ namespace MovieTracker.App.ViewModels
             //Handle initialization for the movie info.
             Tab1 = new MovieDetailViewModel(id);
             Tab2 = new CastAndCrewViewModel(id, MediaType.Movie);
-            await Task.WhenAll(Tab1.Initialization, Tab2.Initialization);
+            Tab3 = new WatchOnViewModel(id, MediaType.Movie);
+            await Task.WhenAll(Tab1.Initialization, Tab2.Initialization, Tab3.Initialization);
         }
     }
 }
