@@ -6,7 +6,8 @@ namespace MovieTracker.Model.Client
     {
         private const string API_KEY = "bbca921a0b03d5111e60a4010cb91102";
         public static ServiceClient Instance { get { return Client.Instance; } }
-        
+        public static ExtendedServiceClient ExtendedInstance { get { return Client.ExtendedInstance; } }
+
         private TMDbServiceClient() { }
 
         private class Client
@@ -14,11 +15,13 @@ namespace MovieTracker.Model.Client
             //Explicit static constructor to tell C# compiler not to mark type as beforefieldinit.
             static Client() { }
             internal static readonly ServiceClient Instance = new ServiceClient(API_KEY);
+            internal static readonly ExtendedServiceClient ExtendedInstance = new ExtendedServiceClient(API_KEY);
         }
 
         ~TMDbServiceClient()
         {
             Client.Instance.Dispose();
+            Client.ExtendedInstance.Dispose();
         }
     }
 }

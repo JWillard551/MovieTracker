@@ -58,10 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\IProviderInfo.cs" />
-    <Compile Include="Client\ProviderContext.cs" />
-    <Compile Include="Client\TMDbJustWatchServiceClient.cs" />
-    <Compile Include="Client\TMDbJWServiceClient.cs" />
+    <Compile Include="Client\ExtendedClient\IProviderInfo.cs" />
+    <Compile Include="Client\ExtendedClient\ProviderModel.cs" />
+    <Compile Include="Client\ExtendedClient\ExtendedServiceClient.cs" />
     <Compile Include="Client\TMDbServiceClient.cs" />
     <Compile Include="Client\TMDbServiceClientHelper.cs" />
     <Compile Include="ModelEnums\DataType.cs" />

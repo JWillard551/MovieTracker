@@ -1,8 +1,6 @@
 ﻿using MovieTracker.Model.Client;
+using MovieTracker.Model.Client.ExtendedClient;
 using MovieTracker.Model.ModelEnums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels
@@ -19,7 +17,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
 
         public async Task InitializeAsync(int id, MediaType mediaType)
         {
-            Providers = await TMDbServiceClientHelper.GetMovieProviders(id, new System.Threading.CancellationToken());
+            Providers = await TMDbServiceClientHelper.GetMovieProvidersById(id, new System.Threading.CancellationToken());
         }
     }
 }

@@ -1,19 +1,21 @@
-﻿using Newtonsoft.Json;
+﻿using MovieTracker.Model.Client.ExtendedClient;
+using MovieTracker.Model.ModelEnums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
-using System.Net.TMDb;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace MovieTracker.Model.Client
 {
-    public sealed class TMDbJustWatchServiceClient : IDisposable
+    public sealed class ExtendedServiceClient : IDisposable
     {
-        public readonly string apiKey;
+        private readonly string apiKey;
         private readonly HttpClient client;
         private bool disposed = false;
 
@@ -21,7 +23,7 @@ namespace MovieTracker.Model.Client
 
         public IProviderInfo Providers { get; private set;}
 
-        public TMDbJustWatchServiceClient(string apiKey) 
+        public ExtendedServiceClient(string apiKey) 
         {
             this.apiKey = apiKey;
             this.client = new HttpClient(new HttpClientHandler()
@@ -32,31 +34,30 @@ namespace MovieTracker.Model.Client
                 UseCookies = false,
                 AutomaticDecompression = System.Net.DecompressionMethods.GZip
             });
-            this.client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            this.client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             this.client.BaseAddress = new Uri("https://api.themoviedb.org/3/");
 
             this.Providers = new ProviderContext(this);
         }
 
-        static TMDbJustWatchServiceClient()
+        static ExtendedServiceClient()
         {
-            TMDbJustWatchServiceClient.jsonSettings = new JsonSerializerSettings
+            ExtendedServiceClient.jsonSettings = new JsonSerializerSettings
             {
                 Error = new EventHandler<Newtonsoft.Json.Serialization.ErrorEventArgs>((s, e) => OnSerializationError(e))
             };
         }
 
-        public Task<T> GetAsync<T>(string cmd, CancellationToken cancellationToken) //IDictionary<string, object> parameters, 
+        public Task<T> GetAsync<T>(string cmd, IDictionary<string, object> parameters, CancellationToken cancellationToken)
         {
-            return this.client.GetAsync(cmd, HttpCompletionOption.ResponseHeadersRead, cancellationToken) //CreateRequestUri(cmd, parameters)
+            return this.client.GetAsync(CreateRequestUri(cmd, parameters), HttpCompletionOption.ResponseHeadersRead, cancellationToken)
             .ContinueWith(t => DeserializeAsync<T>(t.Result))
             .Unwrap();
         }
 
-        //TODO: May not need this. Test stuff first.
         private string CreateRequestUri(string cmd, IDictionary<string, object> parameters)
         {
-            var sb = new System.Text.StringBuilder($"{cmd}?api_key={apiKey}&");
+            var sb = new StringBuilder($"{cmd}?api_key={apiKey}&");
 
             if (parameters != null)
             {
@@ -107,9 +108,31 @@ namespace MovieTracker.Model.Client
         {
             if (!this.disposed)
             {
-                if (disposing) // dispose aggregated resources
+                if (disposing)
                     this.client.Dispose();
-                this.disposed = true; // disposing has been done
+                this.disposed = true;
+            }
+        }
+    }
+
+    internal sealed class ProviderContext : IProviderInfo
+    {
+        private ExtendedServiceClient _client;
+
+        internal ProviderContext(ExtendedServiceClient client)
+        {
+            _client = client;
+        }
+
+        public Task<ProviderList> GetProvidersAsync(int id, MediaType mediaType, CancellationToken cancellationToken = default)
+        {
+            switch (mediaType)
+            {
+                case MediaType.Show:
+                    return _client.GetAsync<ProviderList>($"tv/{id}/watch/providers", null, new CancellationToken());
+                case MediaType.Movie:
+                default:
+                    return _client.GetAsync<ProviderList>($"movie/{id}/watch/providers", null, new CancellationToken());
             }
         }
     }

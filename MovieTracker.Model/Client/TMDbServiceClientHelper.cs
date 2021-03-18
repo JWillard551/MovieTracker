@@ -1,10 +1,9 @@
-﻿using MovieTracker.Model.ModelEnums;
+﻿using MovieTracker.Model.Client.ExtendedClient;
+using MovieTracker.Model.ModelEnums;
 using MovieTracker.Model.ModelObjects;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.TMDb;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -78,11 +77,11 @@ namespace MovieTracker.Model.Client
             return new List<ModelObjects.MediaCredits>();
         }
 
-        public static async Task<ProviderList> GetMovieProviders(int movieId, CancellationToken ct)
+        public static async Task<ProviderList> GetMovieProvidersById(int movieId, CancellationToken ct)
         {
             try
             {
-                var providers = await TMDbJWServiceClient.Instance.Providers.GetProvidersAsync(movieId, MediaType.Movie, ct);
+                var providers = await TMDbServiceClient.ExtendedInstance.Providers.GetProvidersAsync(movieId, MediaType.Movie, ct);
                 return providers; 
             }
             catch (Exception ex)
