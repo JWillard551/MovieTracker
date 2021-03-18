@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace MovieTracker.Model.Client.ExtendedClient
+namespace MovieTracker.Model.ModelObjects
 {
     [DataContract]
     public class ProviderList

@@ -1,5 +1,6 @@
 ﻿using MovieTracker.Model.Client.ExtendedClient;
 using MovieTracker.Model.ModelEnums;
+using MovieTracker.Model.ModelObjects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
