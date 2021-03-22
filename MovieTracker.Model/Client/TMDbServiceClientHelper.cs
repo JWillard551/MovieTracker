@@ -41,7 +41,7 @@ namespace MovieTracker.Model.Client
             return new List<SearchResult>();
         }
 
-        public static async Task<ModelObjects.Movie> GetMovieDetailsById(int movieId, CancellationToken ct)
+        public static async Task<Movie> GetMovieDetailsById(int movieId, CancellationToken ct)
         {
             try
             {
@@ -54,16 +54,16 @@ namespace MovieTracker.Model.Client
                 var result = await movieDetailTask;
                 var releases = await ratingDetailTask;
 
-                return new ModelObjects.Movie(result, releases);
+                return new Movie(result, releases);
             }
             catch (Exception ex)
             {
 
             }
-            return new ModelObjects.Movie();
+            return new Movie();
         }
 
-        public static async Task<List<ModelObjects.MediaCredits>> GetMovieCreditsById(int movieId, CancellationToken ct)
+        public static async Task<List<MediaCredits>> GetMovieCreditsById(int movieId, CancellationToken ct)
         {
             try
             {
@@ -74,15 +74,16 @@ namespace MovieTracker.Model.Client
             {
 
             }
-            return new List<ModelObjects.MediaCredits>();
+            return new List<MediaCredits>();
         }
 
-        public static async Task<ProviderDetails> GetMovieProvidersById(int movieId, CancellationToken ct)
+        public static async Task<ProviderModelDetails> GetMovieProvidersById(int movieId, CancellationToken ct)
         {
             try
             {
                 var providers = await TMDbServiceClient.ExtendedInstance.Providers.GetProvidersAsync(movieId, MediaType.Movie, ct);
-                return providers.Results.US; 
+
+                return new ProviderModelDetails(providers.Results.US); //TODO: We can return other regions. For now we just want US providers.
             }
             catch (Exception ex)
             {
@@ -92,32 +93,32 @@ namespace MovieTracker.Model.Client
         }
 
 
-        public static async Task<ModelObjects.Show> GetShowDetailsById(int showId, CancellationToken ct)
+        public static async Task<Show> GetShowDetailsById(int showId, CancellationToken ct)
         {
             try
             {
                 var result = await TMDbServiceClient.Instance.Shows.GetAsync(showId, LANGUAGE_CODE, true, ct);
-                return new ModelObjects.Show(result);
+                return new Show(result);
             }
             catch (Exception ex)
             {
 
             }
-            return new ModelObjects.Show();
+            return new Show();
         }
 
-        public static async Task<ModelObjects.Person> GetPersonDetailsById(int personId, CancellationToken ct)
+        public static async Task<Person> GetPersonDetailsById(int personId, CancellationToken ct)
         {
             try
             {
                 var result = await TMDbServiceClient.Instance.People.GetAsync(personId, true, ct);
-                return new ModelObjects.Person(result);
+                return new Person(result);
             }
             catch (Exception ex)
             {
 
             }
-            return new ModelObjects.Person();
+            return new Person();
         }
 
 

@@ -1,8 +1,57 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace MovieTracker.Model.ModelObjects
 {
+    public class ProviderLists : List<ProviderModel>
+    {
+        public string GroupName { get; set; }
+        public ProviderLists(string groupName, IEnumerable<ProviderModel> model) : base(model)
+        {
+            GroupName = groupName;
+        }
+    }
+
+    public class ProviderModelDetails
+    {
+        public string Link { get; set; }
+
+        public IEnumerable<ProviderModel> Flatrate { get; set; }
+
+        public IEnumerable<ProviderModel> Rent { get; set; }
+
+        public IEnumerable<ProviderModel> Buy { get; set; }
+
+        public ProviderModelDetails(ProviderDetails providerDetails)
+        {
+            Link = providerDetails.Link;
+            Flatrate = providerDetails.Flatrate?.Select(provider => new ProviderModel(provider));
+            Rent = providerDetails.Rent?.Select(provider => new ProviderModel(provider));
+            Buy = providerDetails.Buy?.Select(provider => new ProviderModel(provider));
+        }
+    }
+
+    public class ProviderModel
+    {
+        public int DisplayPriority { get; set; }
+
+        public Uri LogoPath { get; set; }
+
+        public int ProviderId { get; set; }
+
+        public string ProviderName { get; set; }
+
+        public ProviderModel(Provider provider)
+        {
+            DisplayPriority = provider.DisplayPriority;
+            LogoPath = Utils.ModelUtils.GetImageUri(provider.LogoPath);
+            ProviderId = provider.ProviderId;
+            ProviderName = provider.ProviderName;
+        }
+    }
+
     [DataContract]
     public class ProviderList
     {

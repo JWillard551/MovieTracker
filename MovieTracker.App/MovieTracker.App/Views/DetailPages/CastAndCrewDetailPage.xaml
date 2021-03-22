@@ -5,7 +5,7 @@
              xmlns:viewModels="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels">
     
     <CollectionView ItemsSource="{Binding MediaCast}"
-                    IsGrouped="true">
+                    IsGrouped="True">
         <CollectionView.GroupHeaderTemplate>
             <DataTemplate>
                 <Frame HeightRequest="50">
