@@ -2,12 +2,110 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.MainPage"
-             Shell.NavBarIsVisible="True">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="You made it to the main page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             Shell.NavBarIsVisible="True"
+             Shell.BackgroundColor="{StaticResource Primary}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" 
+               Text="Movies"
+               HorizontalOptions="Center"></Label>
+
+        <CarouselView Grid.Row="1"
+                      ItemsSource="{Binding PopularMovies}"
+                      PeekAreaInsets="100"
+                      Loop="True"
+                      BackgroundColor="{StaticResource Secondary}">
+            <CarouselView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"
+                                   ItemSpacing="10" 
+                                   />
+            </CarouselView.ItemsLayout>
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame HasShadow="True"
+                               BorderColor="DarkGray"
+                               CornerRadius="10"
+                               Margin="20"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               BackgroundColor="{StaticResource Primary}">
+                            <StackLayout>
+                                <Image Margin="0"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="Center">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Poster}"
+                                                        CachingEnabled="True"
+                                                        CacheValidity="14" />
+                                    </Image.Source>
+                                </Image>
+                                <Label Text="{Binding Title}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="End">
+                                    
+                                </Label>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+
+        </CarouselView>
+
+        <Label Grid.Row="2"
+               Text="Shows"
+               HorizontalOptions="Center"></Label>
+
+        <CarouselView Grid.Row="3"
+                      ItemsSource="{Binding PopularShows}"
+                      PeekAreaInsets="100"
+                      Loop="True"
+                      BackgroundColor="{StaticResource Secondary}">
+            <CarouselView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"
+                                   ItemSpacing="10" />
+            </CarouselView.ItemsLayout>
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame HasShadow="True"
+                               BorderColor="DarkGray"
+                               CornerRadius="10"
+                               Margin="20"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               BackgroundColor="{StaticResource Primary}">
+                            <StackLayout>
+                                <Image Margin="0"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="Center">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Poster}"
+                                                        CachingEnabled="True"
+                                                        CacheValidity="14" />
+                                    </Image.Source>
+                                </Image>
+                                <Label Text="{Binding Name}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="End">
+
+                                </Label>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+
+        </CarouselView>
+
+
+
+    </Grid>
 </ContentPage>

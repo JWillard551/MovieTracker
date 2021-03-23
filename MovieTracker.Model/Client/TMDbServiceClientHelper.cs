@@ -92,6 +92,36 @@ namespace MovieTracker.Model.Client
             return null;
         }
 
+        public static async Task<List<Movie>> GetPopularMovies(CancellationToken ct)
+        {
+            try
+            {
+                var popular = await TMDbServiceClient.Instance.Movies.GetPopularAsync(LANGUAGE_CODE, 1, ct);
+                var list = popular.Results.Select(movie => new Movie(movie)).ToList();
+                return list;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
+
+        public static async Task<List<Show>> GetPopularShows(CancellationToken ct)
+        {
+            try
+            {
+                var popular = await TMDbServiceClient.Instance.Shows.GetPopularAsync(LANGUAGE_CODE, 1, ct);
+                var list = popular.Results.Select(show => new Show(show)).ToList();
+                return list;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
+
 
         public static async Task<Show> GetShowDetailsById(int showId, CancellationToken ct)
         {

@@ -51,7 +51,8 @@ namespace MovieTracker.Model.ModelObjects
 			if (m.BelongsTo != null)
 				BelongsTo = new Collection(m.BelongsTo);
 			Budget = m.Budget.ToString();
-			Genres = String.Join(", ", m.Genres?.Select(genre => genre.Name).ToList());
+			if (m.Genres != null)
+				Genres = String.Join(", ", m.Genres?.Select(genre => genre.Name).ToList());
 			HomePage = m.HomePage;
 			Imdb = m.Imdb;
 			Companies = m.Companies?.Select(company => new Company() { Id = company.Id, Name = company.Name, Description = company.Description });
