@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.MainPage"
+             xmlns:views="clr-namespace:MovieTracker.App.Views"
              Shell.NavBarIsVisible="True"
              Shell.BackgroundColor="{StaticResource Primary}">
     <Grid>
@@ -38,32 +39,7 @@
             </CarouselView.ItemsLayout>
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Frame HasShadow="True"
-                               BorderColor="DarkGray"
-                               CornerRadius="10"
-                               Margin="20"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               BackgroundColor="{StaticResource Primary}">
-                            <StackLayout>
-                                <Image Margin="0"
-                                       VerticalOptions="CenterAndExpand"
-                                       HorizontalOptions="Center">
-                                    <Image.Source>
-                                        <UriImageSource Uri="{Binding Poster}"
-                                                        CachingEnabled="True"
-                                                        CacheValidity="14" />
-                                    </Image.Source>
-                                </Image>
-                                <Label Text="{Binding Title}"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="End">
-
-                                </Label>
-                            </StackLayout>
-                        </Frame>
-                    </StackLayout>
+                    <views:PopularItemView />
                 </DataTemplate>
             </CarouselView.ItemTemplate>
 

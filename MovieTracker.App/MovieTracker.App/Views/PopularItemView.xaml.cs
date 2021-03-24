@@ -5,9 +5,9 @@ using Xamarin.Forms.Xaml;
 namespace MovieTracker.App.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SearchResultView : ContentView
+    public partial class PopularItemView : ContentView
     {
-        public SearchResultView()
+        public PopularItemView()
         {
             InitializeComponent();
         }
@@ -19,11 +19,11 @@ namespace MovieTracker.App.Views
             //2. Because it's faster, it handles scenarios with FFImageLoading sometimes (or always) repeating images on a collection view.
             //   as the null set on source helps prevent this from occurring.
             cachedImage.Source = null;
-            var item = BindingContext as SearchResultViewModel;
+            var item = BindingContext as PopularItemViewModel;
             if (item == null)
                 return;
 
-            cachedImage.Source = item.SearchResult.ImageUri;
+            cachedImage.Source = item.PopularItem.Poster;
             base.OnBindingContextChanged();
         }
     }

@@ -4,6 +4,7 @@ using MovieTracker.Model.ModelObjects;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -12,12 +13,12 @@ namespace MovieTracker.App.ViewModels
 {
     public class MainPageViewModel : BaseViewModel, IDetailViewModel
     {
-        public ObservableCollection<PopularItem> PopularMovies { get; set; }
+        public ObservableCollection<PopularItemViewModel> PopularMovies { get; set; }
 
-        public ObservableCollection<PopularItem> PopularShows { get; set; }
+        public ObservableCollection<PopularItemViewModel> PopularShows { get; set; }
 
-        private ObservableCollection<PopularItem> _selectedSource;
-        public ObservableCollection<PopularItem> SelectedSource { get => _selectedSource; set => SetProperty(ref _selectedSource, value); }
+        private ObservableCollection<PopularItemViewModel> _selectedSource;
+        public ObservableCollection<PopularItemViewModel> SelectedSource { get => _selectedSource; set => SetProperty(ref _selectedSource, value); }
 
         public Command ShowsClickedCommand { get; set; }
 
@@ -32,8 +33,10 @@ namespace MovieTracker.App.ViewModels
 
         public async Task InitializeAsync()
         {
-            PopularMovies = await TMDbServiceClientHelper.GetPopularMovies(new System.Threading.CancellationToken());
-            PopularShows = await TMDbServiceClientHelper.GetPopularShows(new System.Threading.CancellationToken());
+            var popularMovies = await TMDbServiceClientHelper.GetPopularMovies(new System.Threading.CancellationToken());
+            PopularMovies = new ObservableCollection<PopularItemViewModel>(popularMovies.Select(pm => new PopularItemViewModel(pm)));
+            var popularShows = await TMDbServiceClientHelper.GetPopularShows(new System.Threading.CancellationToken());
+            PopularShows = new ObservableCollection<PopularItemViewModel>(popularShows.Select(ps => new PopularItemViewModel(ps)));
             SelectedSource = PopularMovies;
             //MoviesClickedCommand = new Command(OnMoviesClicked);
             //ShowsClickedCommand = new Command(OnShowsClicked);
