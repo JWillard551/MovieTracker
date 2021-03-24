@@ -12,19 +12,29 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" 
-               Text="Movies"
-               HorizontalOptions="Center"></Label>
+        <StackLayout Grid.Row="0"
+                     Margin="30,0,30,0"
+                     Orientation="Horizontal">
+            <Button Text="Movies"
+                    BackgroundColor="{StaticResource Tertiary}"
+                    Clicked="OnMoviesClicked"/>
+            <Button Text="Shows"
+                    BackgroundColor="{StaticResource Tertiary}"
+                    Clicked="OnShowsClicked"/>
+        </StackLayout>
 
-        <CarouselView Grid.Row="1"
-                      ItemsSource="{Binding PopularMovies}"
+        <CarouselView x:Name="cv_popularItems"
+                      Grid.Row="1"
+                      ItemsSource="{Binding SelectedSource}"
                       PeekAreaInsets="100"
                       Loop="True"
-                      BackgroundColor="{StaticResource Secondary}">
+                      BackgroundColor="{StaticResource Secondary}"
+                      Position="10">
             <CarouselView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"
-                                   ItemSpacing="10" 
-                                   />
+                                   ItemSpacing="10"
+                                   SnapPointsAlignment="Center"
+                                   SnapPointsType="Mandatory" />
             </CarouselView.ItemsLayout>
             <CarouselView.ItemTemplate>
                 <DataTemplate>
@@ -49,52 +59,6 @@
                                 <Label Text="{Binding Title}"
                                        HorizontalOptions="Center"
                                        VerticalOptions="End">
-                                    
-                                </Label>
-                            </StackLayout>
-                        </Frame>
-                    </StackLayout>
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-
-        </CarouselView>
-
-        <Label Grid.Row="2"
-               Text="Shows"
-               HorizontalOptions="Center"></Label>
-
-        <CarouselView Grid.Row="3"
-                      ItemsSource="{Binding PopularShows}"
-                      PeekAreaInsets="100"
-                      Loop="True"
-                      BackgroundColor="{StaticResource Secondary}">
-            <CarouselView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal"
-                                   ItemSpacing="10" />
-            </CarouselView.ItemsLayout>
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Frame HasShadow="True"
-                               BorderColor="DarkGray"
-                               CornerRadius="10"
-                               Margin="20"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               BackgroundColor="{StaticResource Primary}">
-                            <StackLayout>
-                                <Image Margin="0"
-                                       VerticalOptions="CenterAndExpand"
-                                       HorizontalOptions="Center">
-                                    <Image.Source>
-                                        <UriImageSource Uri="{Binding Poster}"
-                                                        CachingEnabled="True"
-                                                        CacheValidity="14" />
-                                    </Image.Source>
-                                </Image>
-                                <Label Text="{Binding Name}"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="End">
 
                                 </Label>
                             </StackLayout>
@@ -104,8 +68,5 @@
             </CarouselView.ItemTemplate>
 
         </CarouselView>
-
-
-
     </Grid>
 </ContentPage>

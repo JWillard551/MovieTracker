@@ -89,6 +89,7 @@
     <Compile Include="ModelObjects\PagedResult.cs" />
     <Compile Include="ModelObjects\Person.cs" />
     <Compile Include="ModelObjects\PersonCredit.cs" />
+    <Compile Include="ModelObjects\PopularItem.cs" />
     <Compile Include="ModelObjects\ProviderList.cs" />
     <Compile Include="ModelObjects\Release.cs" />
     <Compile Include="ModelObjects\Resource.cs" />

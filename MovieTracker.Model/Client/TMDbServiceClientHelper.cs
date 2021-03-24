@@ -3,6 +3,7 @@ using MovieTracker.Model.ModelEnums;
 using MovieTracker.Model.ModelObjects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -92,13 +93,13 @@ namespace MovieTracker.Model.Client
             return null;
         }
 
-        public static async Task<List<Movie>> GetPopularMovies(CancellationToken ct)
+        public static async Task<ObservableCollection<PopularItem>> GetPopularMovies(CancellationToken ct)
         {
             try
             {
                 var popular = await TMDbServiceClient.Instance.Movies.GetPopularAsync(LANGUAGE_CODE, 1, ct);
-                var list = popular.Results.Select(movie => new Movie(movie)).ToList();
-                return list;
+                var popularItems = new ObservableCollection<PopularItem>(popular.Results.Select(movie => new PopularItem(movie)));
+                return StaggerPopularItemResults(popularItems);
             }
             catch (Exception ex)
             {
@@ -107,13 +108,13 @@ namespace MovieTracker.Model.Client
             return null;
         }
 
-        public static async Task<List<Show>> GetPopularShows(CancellationToken ct)
+        public static async Task<ObservableCollection<PopularItem>> GetPopularShows(CancellationToken ct)
         {
             try
             {
                 var popular = await TMDbServiceClient.Instance.Shows.GetPopularAsync(LANGUAGE_CODE, 1, ct);
-                var list = popular.Results.Select(show => new Show(show)).ToList();
-                return list;
+                var popularItems = new ObservableCollection<PopularItem>(popular.Results.Select(show => new PopularItem(show)));
+                return StaggerPopularItemResults(popularItems);
             }
             catch (Exception ex)
             {
@@ -122,6 +123,20 @@ namespace MovieTracker.Model.Client
             return null;
         }
 
+        private static ObservableCollection<PopularItem> StaggerPopularItemResults(ObservableCollection<PopularItem> popularItems)
+        {
+            ObservableCollection<PopularItem> result = new ObservableCollection<PopularItem>();
+
+            //A bit of a hack, but we want the carousel view this will be displayed on to be midway through.
+            if (popularItems.Count == 20)
+            {
+                for (int i = 10; i < popularItems.Count; i++)
+                    result.Add(popularItems[i]);
+                for (int i = 0; i < 10; i++)
+                    result.Add(popularItems[i]);
+            }
+            return result;
+        }
 
         public static async Task<Show> GetShowDetailsById(int showId, CancellationToken ct)
         {

@@ -26,6 +26,19 @@ namespace MovieTracker.App.Views
             _viewModel = new MainPageViewModel();
             await _viewModel.Initialization;
             BindingContext = _viewModel;
+            cv_popularItems.ScrollTo(_viewModel.PopularMovies[10], position: ScrollToPosition.MakeVisible);
+        }
+
+        public void OnMoviesClicked(object sender, EventArgs e)
+        {
+            _viewModel.OnMoviesClicked();
+            cv_popularItems.ScrollTo(_viewModel.PopularMovies[10], position:ScrollToPosition.MakeVisible);
+        }
+
+        public void OnShowsClicked(object sender, EventArgs e)
+        {
+            _viewModel.OnShowsClicked();
+            cv_popularItems.ScrollTo(_viewModel.PopularShows[10], position: ScrollToPosition.MakeVisible);
         }
     }
 }
