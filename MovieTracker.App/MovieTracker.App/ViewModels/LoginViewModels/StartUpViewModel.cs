@@ -15,9 +15,9 @@ namespace MovieTracker.App.ViewModels.LoginViewModels
             var authenticated = false;
             //var authenticated = await this.LoginService.Authenticate();
             if (authenticated)
-                await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+                await Shell.Current.GoToAsync($"//Main/{nameof(MainPage)}");
             else
-                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+                await Shell.Current.GoToAsync($"//LoginPage");
         }
     }
 

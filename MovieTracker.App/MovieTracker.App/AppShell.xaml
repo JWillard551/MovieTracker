@@ -82,17 +82,18 @@
     -->
     
     <!--Start Up Page & Login Page-->
-    <FlyoutItem IsVisible="False">
-        <ShellContent Route="StartUp"
+    <FlyoutItem IsVisible="False"
+                Route="StartUp">
+        <ShellContent Route="StartUpPage"
                       Shell.FlyoutBehavior="Disabled"
                       ContentTemplate="{DataTemplate login:StartUpPage}" />
     </FlyoutItem>
-    
-    <FlyoutItem IsVisible="False">
-        <ShellContent Route="LoginPage"
+
+    <TabBar>
+        <ShellContent Route="LoginPage" 
                       Shell.FlyoutBehavior="Disabled"
                       ContentTemplate="{DataTemplate login:LoginPage}" />
-    </FlyoutItem>
+    </TabBar>
     
     <!--Main Pages-->
     <FlyoutItem Route="Main"
