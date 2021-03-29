@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.MainPage"
              xmlns:views="clr-namespace:MovieTracker.App.Views"
-             Shell.NavBarIsVisible="True"
-             Shell.BackgroundColor="{StaticResource Primary}">
-    <Grid>
+             Shell.NavBarIsVisible="True">
+    
+    <Grid BackgroundColor="{StaticResource Primary}">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -13,36 +14,132 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackLayout Grid.Row="0"
-                     Margin="30,0,30,0"
-                     Orientation="Horizontal">
-            <Button Text="Movies"
-                    BackgroundColor="{StaticResource Tertiary}"
-                    Clicked="OnMoviesClicked"/>
-            <Button Text="Shows"
-                    BackgroundColor="{StaticResource Tertiary}"
-                    Clicked="OnShowsClicked"/>
-        </StackLayout>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
+            <Button Grid.Column="0" 
+                    x:Name="btn_Movies"
+                    Text="Popular Movies"
+                    BorderWidth="1"
+                    BorderColor="{StaticResource Tertiary}"
+                    FontAttributes="Bold"
+                    HeightRequest="25"
+                    WidthRequest="150"
+                    Padding="0"
+                    Margin="20,5,5,0"
+                    CornerRadius="15"
+                    BackgroundColor="{StaticResource Secondary}"
+                    Clicked="OnMoviesClicked" />
+
+            <Button Grid.Column="1" 
+                    x:Name="btn_Shows"
+                    Text="Popular Shows"
+                    BorderWidth="1"
+                    BorderColor="{StaticResource Tertiary}"
+                    FontAttributes="Bold"
+                    HeightRequest="25"
+                    WidthRequest="150"
+                    Padding="0"
+                    Margin="5,5,20,0"
+                    CornerRadius="15"
+                    BackgroundColor="{StaticResource Secondary}"
+                    Clicked="OnShowsClicked" />
+
+        </Grid>
+
+        <ActivityIndicator Grid.Row="1"
+                           Color="Navy"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Margin="0,0,0,0"
+                           InputTransparent="True" />
+        
         <CarouselView x:Name="cv_popularItems"
                       Grid.Row="1"
                       ItemsSource="{Binding SelectedSource}"
-                      PeekAreaInsets="100"
+                      PeekAreaInsets="110"
                       Loop="True"
-                      BackgroundColor="{StaticResource Secondary}"
                       Position="10">
+            
             <CarouselView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"
                                    ItemSpacing="10"
                                    SnapPointsAlignment="Center"
                                    SnapPointsType="Mandatory" />
             </CarouselView.ItemsLayout>
+            
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <views:PopularItemView />
                 </DataTemplate>
             </CarouselView.ItemTemplate>
+        </CarouselView>
 
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" 
+                    x:Name="btn_Today"
+                    Text="Trending Today"
+                    BorderWidth="1"
+                    BorderColor="{StaticResource Tertiary}"
+                    FontAttributes="Bold"
+                    HeightRequest="25"
+                    WidthRequest="150"
+                    Padding="0"
+                    Margin="20,5,5,0"
+                    CornerRadius="15"
+                    BackgroundColor="{StaticResource Secondary}"
+                    Clicked="OnTrendingTodayClicked" />
+            <Button Grid.Column="1" 
+                    x:Name="btn_ThisWeek"
+                    Text="Trending This Week"
+                    BorderWidth="1"
+                    BorderColor="{StaticResource Tertiary}"
+                    FontAttributes="Bold"
+                    HeightRequest="25"
+                    WidthRequest="150"
+                    Padding="0"
+                    Margin="5,5,20,0"
+                    CornerRadius="15"
+                    BackgroundColor="{StaticResource Secondary}"
+                    Clicked="OnTrendingThisWeekClicked" />
+        </Grid>
+
+        <ActivityIndicator Grid.Row="3"
+                           Color="Navy"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Margin="0,0,0,20"
+                           InputTransparent="True" />
+
+        <CarouselView x:Name="cv_trendingItems"
+                      Grid.Row="3"
+                      ItemsSource="{Binding SelectedTrendingSource}"
+                      PeekAreaInsets="110"
+                      Loop="True"
+                      Position="10">
+
+            <CarouselView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"
+                                   ItemSpacing="10"
+                                   SnapPointsAlignment="Center"
+                                   SnapPointsType="Mandatory" />
+            </CarouselView.ItemsLayout>
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <views:PopularItemView />
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
         </CarouselView>
     </Grid>
 </ContentPage>

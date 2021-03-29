@@ -17,7 +17,6 @@ namespace MovieTracker.App.Views
         public MainPage()
         {
             InitializeComponent();
-
         }
 
         protected override async void OnAppearing()
@@ -31,14 +30,39 @@ namespace MovieTracker.App.Views
 
         public void OnMoviesClicked(object sender, EventArgs e)
         {
+            ToggleSelectedColorOnButton(btn_Movies, true);
+            ToggleSelectedColorOnButton(btn_Shows, false);
             _viewModel.OnMoviesClicked();
             cv_popularItems.ScrollTo(_viewModel.PopularMovies[10], position:ScrollToPosition.MakeVisible);
         }
 
         public void OnShowsClicked(object sender, EventArgs e)
         {
+            ToggleSelectedColorOnButton(btn_Shows, true);
+            ToggleSelectedColorOnButton(btn_Movies, false);
             _viewModel.OnShowsClicked();
             cv_popularItems.ScrollTo(_viewModel.PopularShows[10], position: ScrollToPosition.MakeVisible);
+        }
+
+        public void OnTrendingTodayClicked(object sender, EventArgs e)
+        {
+            ToggleSelectedColorOnButton(btn_Today, true);
+            ToggleSelectedColorOnButton(btn_ThisWeek, false);
+            _viewModel.OnTrendingTodayClicked();
+            cv_trendingItems.ScrollTo(_viewModel.TrendingToday[10], position: ScrollToPosition.MakeVisible);
+        }
+
+        public void OnTrendingThisWeekClicked(object sender, EventArgs e)
+        {
+            ToggleSelectedColorOnButton(btn_ThisWeek, true);
+            ToggleSelectedColorOnButton(btn_Today, false);
+            _viewModel.OnShowsClicked();
+            cv_trendingItems.ScrollTo(_viewModel.TrendingThisWeek[10], position: ScrollToPosition.MakeVisible);
+        }
+
+        private void ToggleSelectedColorOnButton(Button button, bool isSelected)
+        {
+            button.BackgroundColor = isSelected ? Color.FromHex("3F92A3") : Color.FromHex("3FA382");
         }
     }
 }

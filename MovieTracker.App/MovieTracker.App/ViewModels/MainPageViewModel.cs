@@ -20,26 +20,36 @@ namespace MovieTracker.App.ViewModels
         private ObservableCollection<PopularItemViewModel> _selectedSource;
         public ObservableCollection<PopularItemViewModel> SelectedSource { get => _selectedSource; set => SetProperty(ref _selectedSource, value); }
 
-        public Command ShowsClickedCommand { get; set; }
+        public ObservableCollection<PopularItemViewModel> TrendingToday { get; set; }
 
-        public Command MoviesClickedCommand { get; set; }
+        public ObservableCollection<PopularItemViewModel> TrendingThisWeek { get; set; }
+
+        private ObservableCollection<PopularItemViewModel> _selectedTrendingSource;
+        public ObservableCollection<PopularItemViewModel> SelectedTrendingSource { get => _selectedTrendingSource; set => SetProperty(ref _selectedTrendingSource, value); }
 
         public Task Initialization { get; private set; }
 
         public MainPageViewModel()
         {
+            
             Initialization = InitializeAsync();
+            
         }
 
         public async Task InitializeAsync()
         {
+            IsBusy = true;
             var popularMovies = await TMDbServiceClientHelper.GetPopularMovies(new System.Threading.CancellationToken());
             PopularMovies = new ObservableCollection<PopularItemViewModel>(popularMovies.Select(pm => new PopularItemViewModel(pm)));
             var popularShows = await TMDbServiceClientHelper.GetPopularShows(new System.Threading.CancellationToken());
             PopularShows = new ObservableCollection<PopularItemViewModel>(popularShows.Select(ps => new PopularItemViewModel(ps)));
             SelectedSource = PopularMovies;
-            //MoviesClickedCommand = new Command(OnMoviesClicked);
-            //ShowsClickedCommand = new Command(OnShowsClicked);
+            var trendingToday= await TMDbServiceClientHelper.GetPopularMovies(new System.Threading.CancellationToken());
+            TrendingToday = new ObservableCollection<PopularItemViewModel>(trendingToday.Select(ttd => new PopularItemViewModel(ttd)));
+            var trendingThisWeek = await TMDbServiceClientHelper.GetPopularShows(new System.Threading.CancellationToken());
+            TrendingThisWeek = new ObservableCollection<PopularItemViewModel>(trendingThisWeek.Select(ttw => new PopularItemViewModel(ttw)));
+            SelectedTrendingSource = TrendingToday;
+            IsBusy = false;
         }
 
         public void OnMoviesClicked()
@@ -50,6 +60,16 @@ namespace MovieTracker.App.ViewModels
         public void OnShowsClicked()
         {
             SelectedSource = PopularShows;
+        }
+
+        public void OnTrendingTodayClicked()
+        {
+            SelectedTrendingSource = TrendingToday;
+        }
+
+        public void OnTrendingThisWeekClicked()
+        {
+            SelectedTrendingSource = TrendingThisWeek;
         }
     }
 }

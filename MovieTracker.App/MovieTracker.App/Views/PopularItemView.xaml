@@ -9,33 +9,28 @@
         <Frame HasShadow="True"
                BorderColor="DarkGray"
                CornerRadius="10"
-               Margin="20"
+               Margin="0"
+               Padding="0"
+               HeightRequest="250"
+               WidthRequest="166"
                HorizontalOptions="Center"
                VerticalOptions="Center"
-               BackgroundColor="{StaticResource Primary}">
+               IsClippedToBounds="True">
             <StackLayout>
 
                 <ffImage:CachedImage x:Name="cachedImage"
                                      Margin="0"
-                                     HorizontalOptions="Center"
-                                     VerticalOptions="CenterAndExpand">
+                                     HeightRequest="250"
+                                     WidthRequest="166"
+                                     Aspect="AspectFill">
                 </ffImage:CachedImage>
-                <!--Gonna remove this, but want to test FFImageLoading for a while first...-->
-                <!--<Image Margin="0"
-                       VerticalOptions="CenterAndExpand"
-                       HorizontalOptions="Center">
-                    <Image.Source>
-                        <UriImageSource Uri="{Binding Poster}"
-                                        CachingEnabled="True"
-                                        CacheValidity="14" />
-                    </Image.Source>
-                </Image>-->
-                <Label Text="{Binding Title}"
-                       HorizontalOptions="Center"
-                       VerticalOptions="End">
-
-                </Label>
             </StackLayout>
         </Frame>
+        <Label Text="{Binding PopularItem.PopularItemName}"
+               TextColor="White"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               VerticalOptions="End" />
     </StackLayout>
 </ContentView>

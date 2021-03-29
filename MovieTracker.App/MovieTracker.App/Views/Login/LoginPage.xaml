@@ -9,12 +9,15 @@
              Shell.PresentationMode="ModalAnimated"
              Shell.TabBarIsVisible="False"
              BackgroundColor="#3F92A3">
-    <ContentPage.Content>
-        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" 
-                    Text="Login" 
-                    Command="{Binding LoginCommand}"
-                    BackgroundColor="{StaticResource Secondary}"/>
-        </StackLayout>
-    </ContentPage.Content>
+    <StackLayout Padding="10,0,10,0"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center">
+        <Label Text="Welcome to MovieTracker!" 
+               TextColor="Black"
+               FontSize="Large"/>
+        <Button Text="Login"
+                TextColor="Black"
+                Command="{Binding LoginCommand}"
+                BackgroundColor="{StaticResource Secondary}" />
+    </StackLayout>
 </ContentPage>
