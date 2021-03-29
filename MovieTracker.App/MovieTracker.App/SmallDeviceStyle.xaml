@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.App.SmallDeviceStyle"
+             xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+
+    <OnIdiom x:TypeArguments="x:Double"
+             Tablet="15"
+             Phone="10"
+             x:Key="PageSpacing" />
+    <OnIdiom x:TypeArguments="Thickness"
+             Tablet="15"
+             Phone="10"
+             x:Key="PagePadding" />
+
+    <Style TargetType="Frame"
+           x:Key="ImageFrameStyle">
+        <Setter Property="HeightRequest">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="250"
+                         Tablet="500" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="WidthRequest">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="166"
+                         Tablet="332" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CornerRadius">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="10"
+                         Tablet="20" />
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="HasShadow"
+                Value="True" />
+        <Setter Property="BorderColor"
+                Value="DarkGray" />
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+        <Setter Property="VerticalOptions"
+                Value="Center" />
+        <Setter Property="IsClippedToBounds"
+                Value="True" />
+        <Setter Property="Margin"
+                Value="0" />
+        <Setter Property="Padding"
+                Value="0" />
+    </Style>
+
+    <Style TargetType="ffImage:CachedImage"
+           x:Key="FFCachedImageStyle">
+        <Setter Property="HeightRequest">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="250"
+                         Tablet="500" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="WidthRequest">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="166"
+                         Tablet="332" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Aspect"
+                Value="AspectFill" />
+        <Setter Property="Margin"
+                Value="0" />
+    </Style>
+
+    <Style TargetType="CarouselView"
+           x:Key="CarouselViewStyle">
+        <Setter Property="PeekAreaInsets">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="Thickness"
+                         Phone="110"
+                         Tablet="220" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Loop"
+                Value="True" />
+    </Style>
+</ResourceDictionary>

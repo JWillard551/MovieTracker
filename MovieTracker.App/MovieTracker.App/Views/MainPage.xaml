@@ -61,9 +61,7 @@
         <CarouselView x:Name="cv_popularItems"
                       Grid.Row="1"
                       ItemsSource="{Binding SelectedSource}"
-                      PeekAreaInsets="110"
-                      Loop="True"
-                      Position="10">
+                      Style="{StaticResource CarouselViewStyle}">
             
             <CarouselView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"
@@ -124,9 +122,7 @@
         <CarouselView x:Name="cv_trendingItems"
                       Grid.Row="3"
                       ItemsSource="{Binding SelectedTrendingSource}"
-                      PeekAreaInsets="110"
-                      Loop="True"
-                      Position="10">
+                      Style="{StaticResource CarouselViewStyle}">
 
             <CarouselView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"

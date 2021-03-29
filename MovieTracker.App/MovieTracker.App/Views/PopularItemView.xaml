@@ -6,23 +6,10 @@
              xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:DataType="viewModel:PopularItemViewModel">
     <StackLayout>
-        <Frame HasShadow="True"
-               BorderColor="DarkGray"
-               CornerRadius="10"
-               Margin="0"
-               Padding="0"
-               HeightRequest="250"
-               WidthRequest="166"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               IsClippedToBounds="True">
+        <Frame Style="{StaticResource ImageFrameStyle}">
             <StackLayout>
-
                 <ffImage:CachedImage x:Name="cachedImage"
-                                     Margin="0"
-                                     HeightRequest="250"
-                                     WidthRequest="166"
-                                     Aspect="AspectFill">
+                                     Style="{StaticResource FFCachedImageStyle}">
                 </ffImage:CachedImage>
             </StackLayout>
         </Frame>
