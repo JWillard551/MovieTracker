@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Purpose of this file is to omit SecureStorage from Android's auto backup functionality. -->
+<full-backup-content>
+  <include domain="sharedpref" path="."/>
+  <include domain="sharedpref" path="${applicationId}.xamarinessentials.xml"/>
+</full-backup-content>

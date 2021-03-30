@@ -12,43 +12,82 @@ namespace MovieTracker.Model.Services
         private readonly string ACCOUNT_ID = "account_id";
         private readonly string SESSION_ID_TOKEN = "session_id_token";
         private readonly string SESSION_ID_EXPIRATION = "session_id_expiration";
+        private readonly int EXPIRATION_TIME = 6; //Hours
 
         public async Task<string> GetSessionIDAsync()
         {
-            return await SecureStorage.GetAsync(SESSION_ID_TOKEN);
+            try
+            {
+                return await SecureStorage.GetAsync(SESSION_ID_TOKEN);
+            }
+            catch
+            {
+                Console.WriteLine("AccountService.GetSessionIDAsync() - Exception occurred.");
+                return string.Empty;
+            }
         }
 
         public async Task<int> GetAccountIDAsync()
         {
-            var id = await SecureStorage.GetAsync(ACCOUNT_ID);
-            return Convert.ToInt32(id);
+            try
+            {
+                string id = await SecureStorage.GetAsync(ACCOUNT_ID);
+                return Convert.ToInt32(id);
+            }
+            catch
+            {
+                Console.WriteLine("AccountService.GetAccountIDAsync() - Exception occurred.");
+                return 0;
+            }
         }
 
         public async Task<bool> ActiveSessionHasExpired()
         {
-            var sessionDateTime = await SecureStorage.GetAsync(SESSION_ID_EXPIRATION);
-            if (sessionDateTime == null)
-                return true;
+            try
+            {
+                var sessionDateTime = await SecureStorage.GetAsync(SESSION_ID_EXPIRATION);
+                if (sessionDateTime == null)
+                    return true;
 
-            //If conversion fails, treat it as a session has expired (relog).
-            DateTime timestamp = Convert.ToDateTime(sessionDateTime);
-            if (timestamp == null)
-                return true;
+                //If conversion fails, treat it as a session has expired (relog).
+                DateTime timestamp = Convert.ToDateTime(sessionDateTime);
+                if (timestamp == null)
+                    return true;
 
-            //If the timestamp is "greater" than DateTime.Now, it is expired and a new session ID should be requested.
-            return timestamp < DateTime.Now;
+                //If the timestamp is "greater" than DateTime.Now, it is expired and a new session ID should be requested.
+                return timestamp < DateTime.Now;
+            }
+            catch
+            {
+                Console.WriteLine("AccountService.ActiveSessionHasExpired() - Exception occurred.");
+                return true;
+            }
         }
 
         public async Task SetSessionID(string sessionId)
         {
-            //Set expiration - 6 hours from now.
-            await SecureStorage.SetAsync(SESSION_ID_TOKEN, sessionId);
-            await SecureStorage.SetAsync(SESSION_ID_EXPIRATION, DateTime.Now.AddHours(6).ToString());
+            try
+            {
+                //Set expiration - 6 hours from now.
+                await SecureStorage.SetAsync(SESSION_ID_TOKEN, sessionId);
+                await SecureStorage.SetAsync(SESSION_ID_EXPIRATION, DateTime.Now.AddHours(EXPIRATION_TIME).ToString());
+            }
+            catch
+            {
+                Console.WriteLine("AccountService.SetSessionID(string sessionId) - Exception occurred.");
+            }
         }
 
         public async Task SetAccountID(string id)
         {
-            await SecureStorage.SetAsync(ACCOUNT_ID, id);
+            try
+            {
+                await SecureStorage.SetAsync(ACCOUNT_ID, id);
+            }
+            catch
+            {
+                Console.WriteLine("AccountService.SetAccountID(string id) - Exception occurred.");
+            }
         }
 
         public async Task<bool> LoginAccountAsync(Credentials creds)
@@ -68,10 +107,11 @@ namespace MovieTracker.Model.Services
                 await SetAccountID(accountID.ToString());
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
+                Console.WriteLine("AccountService.LoginAccountAsync(Credentials creds) - Exception occurred.");
+                return false;
             }
-            return false;
         }
 
         public async Task<bool> HasActiveSessionID()
@@ -85,17 +125,25 @@ namespace MovieTracker.Model.Services
                 var idIsExpired = await ActiveSessionHasExpired();
                 return !idIsExpired;
             }
-            catch (Exception ex)
+            catch
             {
+                Console.WriteLine("AccountService.HasActiveSessionID() - Exception occurred.");
+                return false;
             }
-            return false;
         }
 
         public void Logout()
         {
-            SecureStorage.Remove(ACCOUNT_ID);
-            SecureStorage.Remove(SESSION_ID_TOKEN);
-            SecureStorage.Remove(SESSION_ID_EXPIRATION);
+            try
+            {
+                SecureStorage.Remove(ACCOUNT_ID);
+                SecureStorage.Remove(SESSION_ID_TOKEN);
+                SecureStorage.Remove(SESSION_ID_EXPIRATION);
+            }
+            catch
+            {
+                Console.WriteLine("AccountService.Logout() - Failed to remove from SecureStorage.");
+            }
         }
     }
 }
