@@ -1,12 +1,14 @@
 ﻿using MovieTracker.Model.Client.ExtendedClient;
 using MovieTracker.Model.ModelEnums;
 using MovieTracker.Model.ModelObjects;
+using MovieTracker.Model.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace MovieTracker.Model.Client
 {
@@ -206,6 +208,23 @@ namespace MovieTracker.Model.Client
                 return new SearchResult(resource as System.Net.TMDb.Person);
             else
                 return new SearchResult();
+        }
+
+        public static async Task<string> LoginAsync(string user, string pass, CancellationToken ct)
+        {
+            try
+            {
+                var token = await TMDbServiceClient.Instance.LoginAsync(user, pass, ct);
+                if (string.IsNullOrWhiteSpace(token))
+                    return null;
+
+                return await TMDbServiceClient.Instance.GetSessionAsync(token, ct);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
     }
 }

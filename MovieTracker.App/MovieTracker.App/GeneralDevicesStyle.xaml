@@ -88,4 +88,28 @@
                 Value="True" />
     </Style>
 
+    <Style TargetType="Entry"
+           x:Key="MainEntryStyle">
+        <Setter Property="HeightRequest">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="40"
+                         Tablet="60" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="18"
+                         Tablet="24" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="HorizontalOptions"
+                Value="FillAndExpand" />
+        <Setter Property="TextColor"
+                Value="Black" />
+        <Setter Property="PlaceholderColor"
+                Value="Gray" />
+    </Style>
+
 </ResourceDictionary>

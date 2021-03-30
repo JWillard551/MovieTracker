@@ -1,5 +1,5 @@
-﻿using MovieTracker.App.Services;
-using MovieTracker.App.Views;
+﻿using MovieTracker.App.Views;
+using MovieTracker.Model.Services;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -17,7 +17,7 @@ namespace MovieTracker.App
             InitializeComponent();
             LoadDeviceStyles();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<LoginService>();
             MainPage = new AppShell();
         }
 

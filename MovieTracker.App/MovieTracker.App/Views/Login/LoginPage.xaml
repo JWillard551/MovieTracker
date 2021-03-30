@@ -5,19 +5,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MovieTracker.App.Views.Login.LoginPage"
+             xmlns:viewModels="clr-namespace:MovieTracker.App.ViewModels.LoginViewModels"
              Shell.NavBarIsVisible="False"
              Shell.PresentationMode="ModalAnimated"
              Shell.TabBarIsVisible="False"
-             BackgroundColor="#3F92A3">
+             BackgroundColor="#3F92A3"
+             x:DataType="viewModels:LoginViewModel">
     <StackLayout Padding="10,0,10,0"
                  HorizontalOptions="Center"
                  VerticalOptions="Center">
         <Label Text="Welcome to MovieTracker!" 
                TextColor="Black"
                FontSize="Large"/>
+        <Entry x:Name="usernameEntry" 
+               Style="{StaticResource MainEntryStyle}"
+               Text="{Binding Credentials.Username, Mode=OneWayToSource}"/>
+        <Entry x:Name="passwordEntry"
+               IsPassword="True"
+               Style="{StaticResource MainEntryStyle}"
+               Text="{Binding Credentials.Password, Mode=OneWayToSource}"/>
         <Button Text="Login"
                 TextColor="Black"
                 Command="{Binding LoginCommand}"
+                CommandParameter="{Binding Credentials}"
                 BackgroundColor="{StaticResource Secondary}" />
     </StackLayout>
 </ContentPage>

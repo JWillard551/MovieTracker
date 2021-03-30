@@ -4,6 +4,7 @@ using System.Linq;
 using FFImageLoading.Forms.Platform;
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
 namespace MovieTracker.App.iOS
 {
@@ -27,6 +28,8 @@ namespace MovieTracker.App.iOS
 
             CachedImageRenderer.Init();
             CachedImageRenderer.InitImageSourceHandler();
+
+            DependencyService.Register<iOSToast>();
 
             LoadApplication(new App());
 

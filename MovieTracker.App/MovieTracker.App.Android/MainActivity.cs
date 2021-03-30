@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using FFImageLoading.Forms.Platform;
+using Xamarin.Forms;
 
 namespace MovieTracker.App.Droid
 {
@@ -25,6 +26,8 @@ namespace MovieTracker.App.Droid
 
             CachedImageRenderer.Init(enableFastRenderer: true);
             CachedImageRenderer.InitImageViewHandler();
+
+            DependencyService.Register<AndroidToast>();
 
             LoadApplication(new App());
         }

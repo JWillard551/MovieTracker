@@ -87,4 +87,18 @@
         <Setter Property="Loop"
                 Value="True" />
     </Style>
+
+    <Style TargetType="Entry"
+           x:Key="MainEntryStyle">
+        <Setter Property="HeightRequest"
+                Value="35" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="HorizontalOptions"
+                Value="FillAndExpand" />
+        <Setter Property="TextColor"
+                Value="Black" />
+        <Setter Property="PlaceholderColor"
+                Value="Gray" />
+    </Style>
 </ResourceDictionary>

@@ -56,8 +56,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Essentials">
+      <HintPath>..\..\..\..\..\..\Microsoft\Xamarin\NuGet\xamarin.essentials\1.5.3.2\lib\monoandroid10.0\Xamarin.Essentials.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\ExtendedClient\IAccountListInfo.cs" />
     <Compile Include="Client\ExtendedClient\IProviderInfo.cs" />
     <Compile Include="Client\ExtendedClient\ExtendedServiceClient.cs" />
     <Compile Include="Client\TMDbServiceClient.cs" />
@@ -73,6 +77,7 @@
     <Compile Include="ModelObjects\Collection.cs" />
     <Compile Include="ModelObjects\Company.cs" />
     <Compile Include="ModelObjects\Country.cs" />
+    <Compile Include="ModelObjects\Credentials.cs" />
     <Compile Include="ModelObjects\Episode.cs" />
     <Compile Include="ModelObjects\ExternalIds.cs" />
     <Compile Include="ModelObjects\Genre.cs" />
@@ -101,6 +106,8 @@
     <Compile Include="ModelObjects\Translation.cs" />
     <Compile Include="ModelObjects\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ILoginService.cs" />
+    <Compile Include="Services\LoginService.cs" />
     <Compile Include="Utils\ModelUtils.cs" />
   </ItemGroup>
   <ItemGroup>
