@@ -22,7 +22,8 @@ namespace MovieTracker.Model.Client
 
         private static readonly JsonSerializerSettings jsonSettings;
 
-        public IProviderInfo Providers { get; private set;}
+        public IProviderInfo Providers { get; private set; }
+        public IAccountListInfo AccountLists { get; private set; }
 
         public ExtendedServiceClient(string apiKey) 
         {
@@ -39,6 +40,7 @@ namespace MovieTracker.Model.Client
             this.client.BaseAddress = new Uri("https://api.themoviedb.org/3/");
 
             this.Providers = new ProviderContext(this);
+            this.AccountLists = new AccountListsContext(this);
         }
 
         static ExtendedServiceClient()
@@ -135,6 +137,25 @@ namespace MovieTracker.Model.Client
                 default:
                     return _client.GetAsync<ProviderList>($"movie/{id}/watch/providers", null, new CancellationToken());
             }
+        }
+    }
+
+    internal sealed class AccountListsContext : IAccountListInfo
+    {
+        private ExtendedServiceClient _client;
+
+        internal AccountListsContext(ExtendedServiceClient client)
+        {
+            _client = client;
+        }
+
+        public Task<Lists> GetAccountCreatedLists(int accountId, string sessionId, int page, CancellationToken ct)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("language", "en-US");
+            parameters.Add("page", page);
+            parameters.Add("session_id", sessionId);
+            return _client.GetAsync<Lists>($"account/{accountId}/lists", parameters, ct);
         }
     }
 }

@@ -226,5 +226,33 @@ namespace MovieTracker.Model.Client
             }
             return null;
         }
+
+        public static async Task<Lists> GetAccountCreatedLists(int accountId, string sessionId, int page, CancellationToken ct)
+        {
+            try
+            {
+                var result = await TMDbServiceClient.ExtendedInstance.AccountLists.GetAccountCreatedLists(accountId, sessionId, page, ct);
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return new Lists();
+        }
+
+        public static async Task<int?> GetAccountId(string sessionId, CancellationToken ct)
+        {
+            try
+            {
+                var id = await TMDbServiceClient.Instance.Settings.GetAccountAsync(sessionId, ct);
+                return id.Id;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
     }
 }

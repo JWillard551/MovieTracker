@@ -11,7 +11,7 @@ namespace MovieTracker.App.ViewModels.LoginViewModels
 
         public Credentials Credentials { get; set; } = new Credentials();
 
-        public ILoginService LoginService => DependencyService.Get<ILoginService>();
+        public IAccountService LoginService => DependencyService.Get<IAccountService>();
         public IMessage ToastService => DependencyService.Get<IMessage>();
 
         public LoginViewModel()
@@ -21,7 +21,9 @@ namespace MovieTracker.App.ViewModels.LoginViewModels
 
         private async void OnLoginClicked(Credentials credentials)
         {
-            var authenticated = await LoginService.AuthenticateAsync(credentials.Username, credentials.Password);
+            IsBusy = true;
+            var authenticated = await LoginService.LoginAccountAsync(credentials);
+            IsBusy = false;
             if (authenticated)
                 await Shell.Current.GoToAsync("//Main/MainPage");
             else

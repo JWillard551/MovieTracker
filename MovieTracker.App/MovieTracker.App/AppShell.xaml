@@ -111,6 +111,12 @@
                       ContentTemplate="{DataTemplate local:SearchPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="My Lists"
+                Icon="icon_feed.png">
+        <ShellContent Route="MyListsPage"
+                      ContentTemplate="{DataTemplate local:MyListsPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Browse" 
                 Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" 

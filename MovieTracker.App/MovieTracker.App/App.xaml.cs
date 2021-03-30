@@ -17,7 +17,7 @@ namespace MovieTracker.App
             InitializeComponent();
             LoadDeviceStyles();
 
-            DependencyService.Register<LoginService>();
+            DependencyService.Register<AccountService>();
             MainPage = new AppShell();
         }
 

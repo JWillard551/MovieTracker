@@ -9,7 +9,7 @@ namespace MovieTracker.App
 {
     public partial class AppShell : Xamarin.Forms.Shell
     {
-        public ILoginService LoginService => DependencyService.Get<ILoginService>();
+        public IAccountService LoginService => DependencyService.Get<IAccountService>();
 
         public AppShell()
         {

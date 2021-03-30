@@ -29,5 +29,12 @@
                 Command="{Binding LoginCommand}"
                 CommandParameter="{Binding Credentials}"
                 BackgroundColor="{StaticResource Secondary}" />
+        <ActivityIndicator Color="White"
+                           IsRunning="{Binding IsBusy, Mode=TwoWay}"
+                           IsVisible="{Binding IsBusy, Mode=TwoWay}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           Margin="0,0,0,20"
+                           InputTransparent="True" />
     </StackLayout>
 </ContentPage>
