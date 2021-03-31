@@ -10,6 +10,12 @@ namespace MovieTracker.App.Droid.Renderers
 {
     public class CirclePathRenderer : ViewRenderer
     {
+        private bool disposed = false;
+        public bool IsDisposed
+        {
+            get { return disposed; }
+        }
+
         public CirclePathRenderer(Context context) : base(context)
         {
             SetWillNotDraw(false); //Allow the view to call the Draw method.
@@ -28,7 +34,8 @@ namespace MovieTracker.App.Droid.Renderers
 
         private void OnCurrentProgressChanged()
         {
-            Invalidate(); //Forces redraw.
+            if (!IsDisposed)
+                Invalidate(); //Forces redraw.
         }
 
         public override void Draw(Canvas canvas)
@@ -46,6 +53,21 @@ namespace MovieTracker.App.Droid.Renderers
             //We're representing the rating as a percentage. To display it as a degree, we multiply our percentage by 360.
             var progressPercent = (float)((view.CurrentProgress / 100) * 360f);
             canvas.DrawArc(pathWidth, pathWidth, canvas.Width - pathWidth, canvas.Height - pathWidth, 0, progressPercent, false, paintObj);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (!IsDisposed)
+            {
+                if (disposing)
+                {
+                    // free only managed resources here
+                    base.Dispose(disposing);
+                }
+
+                // free unmanaged resources here
+                disposed = true;
+            }
         }
     }
 }

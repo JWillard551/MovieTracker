@@ -1,6 +1,7 @@
 ﻿using MovieTracker.App.Views;
 using MovieTracker.App.Views.DetailPages;
 using MovieTracker.App.Views.ModalViews;
+using MovieTracker.App.Views.TabbedPages;
 using MovieTracker.Model.Services;
 using System;
 using Xamarin.Forms;
@@ -14,8 +15,6 @@ namespace MovieTracker.App
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(SearchOptionsPage), typeof(SearchOptionsPage));
             Routing.RegisterRoute(nameof(MovieTabbedPage), typeof(MovieTabbedPage));
         }

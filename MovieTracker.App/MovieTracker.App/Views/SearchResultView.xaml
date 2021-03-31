@@ -21,16 +21,6 @@
                 <RowDefinition Height="200"/>
             </Grid.RowDefinitions>
 
-            <!--Gonna remove this, but want to test FFImageLoading for a while first...-->
-            <!--<Image Margin="0"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="Start">
-                <Image.Source>
-                    <UriImageSource Uri="{Binding SearchResult.ImageUri}"
-                                    CachingEnabled="True"
-                                    CacheValidity="14"/>
-                </Image.Source>
-            </Image>-->
             <ffImage:CachedImage x:Name="cachedImage"
                                  HorizontalOptions="Start"
                                  VerticalOptions="Center">

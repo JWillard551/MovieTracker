@@ -16,7 +16,8 @@
     </ContentPage.Resources>
 
     <Grid x:DataType="local:MovieDetailViewModel"
-          BackgroundColor="LightGray">
+          BackgroundColor="LightGray"
+          IsVisible="{Binding IsLoaded}">
         <Grid.RowDefinitions>
             <!--Movie Title / Tag Line Row-->
             <RowDefinition Height="Auto" />
@@ -83,21 +84,12 @@
                                          HorizontalOptions="Center"
                                          VerticalOptions="Center">
                     </ffImage:CachedImage>
-
-                    <!--<Image VerticalOptions="Center"
-                           HorizontalOptions="Center">
-                        <Image.Source>
-                            <UriImageSource Uri="{Binding MovieInfo.Poster}"
-                                            CachingEnabled="True"
-                                            CacheValidity="14" />
-                        </Image.Source>
-                    </Image>-->
                 </Frame>
             </StackLayout>
-            
 
 
-            <StackLayout Grid.Row="0" 
+
+            <StackLayout Grid.Row="0"
                          Grid.Column="1"
                          VerticalOptions="StartAndExpand"
                          HorizontalOptions="Start">
@@ -133,33 +125,33 @@
                            LineBreakMode="TailTruncation" />
                 </Grid>
 
-                <Label Text="Status" 
+                <Label Text="Status"
                        FontAttributes="Bold"
                        Padding="0"
                        Margin="0"
-                       FontSize="10"/>
+                       FontSize="10" />
                 <Label Text="{Binding MovieInfo.Status}"
                        Padding="0"
                        Margin="0"
-                       FontSize="10"/>
+                       FontSize="10" />
                 <Label Text="Budget"
                        FontAttributes="Bold"
                        Padding="0"
                        Margin="0"
-                       FontSize="10"/>
+                       FontSize="10" />
                 <Label Text="{Binding MovieInfo.Budget, Converter={StaticResource CurrencyFormatConverter}}"
                        Padding="0"
                        Margin="0"
-                       FontSize="10"/>
+                       FontSize="10" />
                 <Label Text="Revenue"
                        FontAttributes="Bold"
                        Padding="0"
                        Margin="0"
-                       FontSize="10"/>
+                       FontSize="10" />
                 <Label Text="{Binding MovieInfo.Revenue, Converter={StaticResource CurrencyFormatConverter}}"
                        Padding="0"
                        Margin="0"
-                       FontSize="10"/>
+                       FontSize="10" />
             </StackLayout>
 
             <customViews:RadialGaugeView Grid.Row="1"

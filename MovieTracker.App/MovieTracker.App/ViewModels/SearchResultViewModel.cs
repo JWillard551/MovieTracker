@@ -1,5 +1,6 @@
 ﻿using MovieTracker.App.Views;
 using MovieTracker.App.Views.DetailPages;
+using MovieTracker.App.Views.TabbedPages;
 using MovieTracker.Model.ModelObjects;
 using System;
 using Xamarin.Forms;

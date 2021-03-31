@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MovieTracker.App.Views
+namespace MovieTracker.App.Views.DetailPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LandingPage : ContentPage
+    public partial class MovieWatchlistPage : ContentPage
     {
-        public LandingPage()
+        public MovieWatchlistPage()
         {
             InitializeComponent();
         }

@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace MovieTracker.App.ViewModels
+namespace MovieTracker.App.ViewModels.TabbedPageViewModels
 {
     public class MovieTabbedPageViewModel : BaseViewModel, IDetailViewModel
     {
@@ -31,13 +31,11 @@ namespace MovieTracker.App.ViewModels
 
         private async Task InitializeAsync(int id)
         {
-            IsBusy = true;
             //Handle initialization for the movie info.
             Tab1 = new MovieDetailViewModel(id);
             Tab2 = new CastAndCrewViewModel(id, MediaType.Movie);
             Tab3 = new WatchOnViewModel(id, MediaType.Movie);
             await Task.WhenAll(Tab1.Initialization, Tab2.Initialization, Tab3.Initialization);
-            IsBusy = false;
         }
     }
 }

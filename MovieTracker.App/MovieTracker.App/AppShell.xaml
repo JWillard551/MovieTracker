@@ -2,6 +2,7 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MovieTracker.App.Views"
+       xmlns:tabbedPages="clr-namespace:MovieTracker.App.Views.TabbedPages"
        xmlns:login="clr-namespace:MovieTracker.App.Views.Login"
        Title="MovieTracker.App"
        x:Class="MovieTracker.App.AppShell">
@@ -110,18 +111,33 @@
         <ShellContent Route="SearchPage" 
                       ContentTemplate="{DataTemplate local:SearchPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Watchlists"
+                Icon="icon_feed.png">
+        <ShellContent Route="WatchlistPage"
+                      ContentTemplate="{DataTemplate tabbedPages:WatchlistTabbedPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Favorites"
+                Icon="icon_feed.png">
+        <ShellContent Route="FavoritesPage"
+                      ContentTemplate="{DataTemplate tabbedPages:FavoritesTabbedPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Ratings"
+                Icon="icon_feed.png">
+        <ShellContent Route="RatingsPage"
+                      ContentTemplate="{DataTemplate tabbedPages:RatingsTabbedPage}" />
+    </FlyoutItem>
 
-    <FlyoutItem Title="My Lists"
+    <!--<FlyoutItem Title="My Lists"
                 Icon="icon_feed.png">
         <ShellContent Route="MyListsPage"
                       ContentTemplate="{DataTemplate local:MyListsPage}" />
-    </FlyoutItem>
+    </FlyoutItem>-->
 
-    <FlyoutItem Title="Browse" 
+    <!--<FlyoutItem Title="Browse" 
                 Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" 
                       ContentTemplate="{DataTemplate local:ItemsPage}" />
-    </FlyoutItem>
+    </FlyoutItem>-->
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
