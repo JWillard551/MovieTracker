@@ -42,7 +42,7 @@ namespace MovieTracker.Model.ModelObjects
         {
             Id = movie.Id;
             ResultName = movie.OriginalTitle;
-            ReleaseDate = movie.ReleaseDate.Value;
+            ReleaseDate = movie.ReleaseDate.HasValue ? movie.ReleaseDate.Value : DateTime.Now;
             Overview = movie.Overview;
             Rating = CalculateRating(movie.VoteAverage);
             Genres = movie.Genres?.Select(genre => new Genre(genre)).ToList();

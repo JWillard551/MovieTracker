@@ -24,6 +24,14 @@ namespace MovieTracker.Model.ModelObjects
 
         public IEnumerable<ProviderModel> Buy { get; set; }
 
+        public ProviderModelDetails()
+        {
+            Link = string.Empty;
+            Flatrate = new List<ProviderModel>();
+            Rent = new List<ProviderModel>();
+            Buy = new List<ProviderModel>();
+        }
+
         public ProviderModelDetails(ProviderDetails providerDetails)
         {
             Link = providerDetails.Link;

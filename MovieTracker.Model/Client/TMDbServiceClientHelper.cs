@@ -86,7 +86,10 @@ namespace MovieTracker.Model.Client
             {
                 var providers = await TMDbServiceClient.ExtendedInstance.Providers.GetProvidersAsync(movieId, MediaType.Movie, ct);
 
-                return new ProviderModelDetails(providers.Results.US); //TODO: We can return other regions. For now we just want US providers.
+                if (providers?.Results?.US != null)
+                    return new ProviderModelDetails(providers.Results.US); //TODO: We can return other regions. For now we just want US providers.
+                else
+                    return new ProviderModelDetails();
             }
             catch (Exception ex)
             {

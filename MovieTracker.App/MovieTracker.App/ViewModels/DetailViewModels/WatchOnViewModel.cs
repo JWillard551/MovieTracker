@@ -26,9 +26,12 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
             ProviderLists = new List<ProviderLists>();
             try
             {
-                ProviderLists.Add(new ProviderLists("Stream", ProviderDetails.Flatrate.OrderBy(provider => provider.DisplayPriority)));
-                ProviderLists.Add(new ProviderLists("Rent", ProviderDetails.Rent.OrderBy(provider => provider.DisplayPriority)));
-                ProviderLists.Add(new ProviderLists("Buy", ProviderDetails.Buy.OrderBy(provider => provider.DisplayPriority)));
+                if (ProviderDetails?.Flatrate != null)
+                    ProviderLists.Add(new ProviderLists("Stream", ProviderDetails.Flatrate.OrderBy(provider => provider.DisplayPriority)));
+                if (ProviderDetails?.Rent != null)
+                    ProviderLists.Add(new ProviderLists("Rent", ProviderDetails.Rent.OrderBy(provider => provider.DisplayPriority)));
+                if (ProviderDetails?.Buy != null)
+                    ProviderLists.Add(new ProviderLists("Buy", ProviderDetails.Buy.OrderBy(provider => provider.DisplayPriority)));
             }
             catch (Exception ex)
             {
