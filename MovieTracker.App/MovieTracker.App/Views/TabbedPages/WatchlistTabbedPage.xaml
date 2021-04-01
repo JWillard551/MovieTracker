@@ -7,8 +7,6 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             BarBackgroundColor="Black"
             BarTextColor="White">
-    <detailPages:MovieWatchlistPage Title="Movies"
-                                 BindingContext="{Binding Tab1}" />
-    <detailPages:ShowWatchlistPage Title="TV Shows"
-                                   BindingContext="{Binding Tab2}" />
+    <detailPages:MovieWatchlistPage x:Name="movieTab" Title="Movies"/>
+    <detailPages:ShowWatchlistPage x:Name="showTab" Title="TV Shows"/>
 </TabbedPage>

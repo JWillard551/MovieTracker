@@ -49,13 +49,16 @@ namespace MovieTracker.Model.Services
                 if (sessionDateTime == null)
                     return true;
 
-                //If conversion fails, treat it as a session has expired (relog).
+                //If conversion fails, treat it as a session has expired.
                 DateTime timestamp = Convert.ToDateTime(sessionDateTime);
                 if (timestamp == null)
                     return true;
 
-                //If the timestamp is "greater" than DateTime.Now, it is expired and a new session ID should be requested.
-                return timestamp < DateTime.Now;
+                //If the timestamp is "less" than DateTime.Now, it is expired.
+                bool hasExpired = timestamp < DateTime.Now;
+                if (hasExpired)
+                    ClearFromStorage(); //This could fail silently, but probably not a problem if it does at this point since a new session will just be set over it on login.
+                return hasExpired;
             }
             catch
             {
@@ -122,7 +125,7 @@ namespace MovieTracker.Model.Services
                 if (string.IsNullOrWhiteSpace(sessionID))
                     return false;
 
-                var idIsExpired = await ActiveSessionHasExpired();
+                bool idIsExpired = await ActiveSessionHasExpired();
                 return !idIsExpired;
             }
             catch
@@ -132,18 +135,35 @@ namespace MovieTracker.Model.Services
             }
         }
 
-        public void Logout()
+        public async Task<OperationResult> LogoutAccountAsync()
         {
             try
             {
-                SecureStorage.Remove(ACCOUNT_ID);
-                SecureStorage.Remove(SESSION_ID_TOKEN);
-                SecureStorage.Remove(SESSION_ID_EXPIRATION);
+                var sessionId = await GetSessionIDAsync();
+                if (string.IsNullOrWhiteSpace(sessionId))
+                    return new OperationResult(false, "Session ID could not be retrieved for logout");
+
+                return await TMDbServiceClientHelper.LogoutAsync(sessionId, new CancellationToken());
             }
             catch
             {
                 Console.WriteLine("AccountService.Logout() - Failed to remove from SecureStorage.");
             }
+            return new OperationResult(false, "Something went wrong");
+        }
+
+        public OperationResult ClearFromStorage()
+        {
+            if (!SecureStorage.Remove(ACCOUNT_ID))
+                return new OperationResult(false, "Account ID could not be removed from secure storage");
+
+            if (!SecureStorage.Remove(SESSION_ID_TOKEN))
+                return new OperationResult(false, "Session ID could not be removed from secure storage");
+
+            if (!SecureStorage.Remove(SESSION_ID_EXPIRATION))
+                return new OperationResult(false, "Session ID Expiration could not be removed from secure storage");
+
+            return new OperationResult(true, string.Empty);
         }
     }
 }

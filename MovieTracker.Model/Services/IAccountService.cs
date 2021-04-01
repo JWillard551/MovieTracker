@@ -1,4 +1,5 @@
-﻿using MovieTracker.Model.ModelObjects;
+﻿using MovieTracker.Model.Client;
+using MovieTracker.Model.ModelObjects;
 using System;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace MovieTracker.Model.Services
         Task SetAccountID(string id);
         Task<bool> LoginAccountAsync(Credentials credentials);
         Task<bool> HasActiveSessionID();
-        void Logout();
+        Task<OperationResult> LogoutAccountAsync();
+        OperationResult ClearFromStorage();
     }
 }

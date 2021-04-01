@@ -58,6 +58,21 @@ namespace MovieTracker.Model.Client
             .Unwrap();
         }
 
+        public Task<T> DeleteAsync<T>(string cmd, IDictionary<string, object> parameters, IDictionary<string, object> content, CancellationToken cancellationToken)
+        {
+            var httpRequest = new HttpRequestMessage(HttpMethod.Delete, CreateRequestUri(cmd, parameters))
+            {
+                Content = Serialize(content) 
+            };
+
+            return this.client.SendAsync(httpRequest, cancellationToken).ContinueWith(t => DeserializeAsync<T>(t.Result)).Unwrap();
+        }
+
+        private static HttpContent Serialize(object data) 
+        {
+            return new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"); 
+        }
+
         private string CreateRequestUri(string cmd, IDictionary<string, object> parameters)
         {
             var sb = new StringBuilder($"{cmd}?api_key={apiKey}&");
@@ -156,6 +171,48 @@ namespace MovieTracker.Model.Client
             parameters.Add("page", page);
             parameters.Add("session_id", sessionId);
             return _client.GetAsync<Lists>($"account/{accountId}/lists", parameters, ct);
+        }
+
+        public Task<System.Net.TMDb.Movies> GetMovieWatchlistAsync(int accountId, string sessionId, string language, int page, CancellationToken cancellationToken = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("language", language);
+            parameters.Add("page", page);
+            parameters.Add("session_id", sessionId);
+            return _client.GetAsync<System.Net.TMDb.Movies>($"account/{accountId}/watchlist/movies", parameters, cancellationToken);
+        }
+
+        public Task<System.Net.TMDb.Shows> GetShowWatchlistAsync(int accountId, string sessionId, string language, int page, CancellationToken cancellationToken = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("language", language);
+            parameters.Add("page", page);
+            parameters.Add("session_id", sessionId);
+            return _client.GetAsync<System.Net.TMDb.Shows>($"account/{accountId}/watchlist/tv", parameters, cancellationToken);
+        }
+
+        public Task<HttpResponseMessage> LogoutAsync(string sessionId, CancellationToken cancellationToken = default) 
+        {
+            var sessionContent = new Dictionary<string, object>();
+            sessionContent.Add("session_id", sessionId);
+            return _client.DeleteAsync<HttpResponseMessage>($"authentication/session", null, sessionContent, cancellationToken);
+        }
+    }
+
+    public class OperationResult
+    {
+        public bool Success { get; set; } = false;
+        public string Message { get; set; } = string.Empty;
+
+        public OperationResult(bool success)
+        {
+            Success = success;
+        }
+
+        public OperationResult(bool success, string message)
+        {
+            Success = success;
+            Message = message;
         }
     }
 }

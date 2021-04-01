@@ -230,18 +230,50 @@ namespace MovieTracker.Model.Client
             return null;
         }
 
-        public static async Task<Lists> GetAccountCreatedLists(int accountId, string sessionId, int page, CancellationToken ct)
+        public static async Task<OperationResult> LogoutAsync(string sessionId, CancellationToken ct)
         {
             try
             {
-                var result = await TMDbServiceClient.ExtendedInstance.AccountLists.GetAccountCreatedLists(accountId, sessionId, page, ct);
-                return result;
+                var response = await TMDbServiceClient.ExtendedInstance.AccountLists.LogoutAsync(sessionId, ct);
+                if (!response.IsSuccessStatusCode)
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    return new OperationResult(false, message);
+                }
+                return new OperationResult(true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult(false, ex.Message);
+            }
+        }
+
+        public static async Task<List<Movie>> GetMovieWatchlistAsync(int accountId, string sessionId, int page, CancellationToken ct)
+        {
+            try
+            {
+                var result = await TMDbServiceClient.ExtendedInstance.AccountLists.GetMovieWatchlistAsync(accountId, sessionId, LANGUAGE_CODE, page, ct);
+                return result.Results.Select(movie => new Movie(movie)).ToList();
             }
             catch (Exception ex)
             {
 
             }
-            return new Lists();
+            return new List<Movie>();
+        }
+
+        public static async Task<List<Show>> GetShowWatchlistAsync(int accountId, string sessionId, int page, CancellationToken ct)
+        {
+            try
+            {
+                var result = await TMDbServiceClient.ExtendedInstance.AccountLists.GetShowWatchlistAsync(accountId, sessionId, LANGUAGE_CODE, page, ct);
+                return result.Results.Select(show => new Show(show)).ToList();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return new List<Show>();
         }
 
         public static async Task<int?> GetAccountId(string sessionId, CancellationToken ct)
