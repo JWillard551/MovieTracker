@@ -25,7 +25,7 @@ namespace MovieTracker.Model.ModelObjects
 		public int? Runtime { get; set; }
 		public IEnumerable<Language> Languages { get; set; }
 		public IEnumerable<Release> Releases { get; set; }
-		public string Rating
+		public string MovieRating
 		{
 			get
 			{

@@ -16,7 +16,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
     {
         public Task Initialization { get; private set; }
 
-        public List<ShowWatchlistItemViewModel> WatchlistShows { get; set; }
+        public List<ShowItemViewModel> WatchlistShows { get; set; }
 
         public ShowWatchlistViewModel(int id, int accountId, string sessionId)
         {
@@ -26,7 +26,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
         private async Task InitializeAsync(int id, int accountId, string sessionId)
         {
             var shows = await TMDbServiceClientHelper.GetShowWatchlistAsync(accountId, sessionId, 1, new CancellationToken());
-            WatchlistShows = shows.Select(show => new ShowWatchlistItemViewModel(show)).ToList();
+            WatchlistShows = shows.Select(show => new ShowItemViewModel(show)).ToList();
         }
     }
 }

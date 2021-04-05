@@ -114,7 +114,7 @@
                            BackgroundColor="LightCoral"
                            Margin="0"
                            Padding="2">
-                        <Label Text="{Binding MovieInfo.Rating}"
+                        <Label Text="{Binding MovieInfo.MovieRating}"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
                                VerticalOptions="Center" />

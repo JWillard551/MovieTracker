@@ -66,6 +66,8 @@
     <Compile Include="Client\ExtendedClient\ExtendedServiceClient.cs" />
     <Compile Include="Client\TMDbServiceClient.cs" />
     <Compile Include="Client\TMDbServiceClientHelper.cs" />
+    <Compile Include="ExtendedModelObjects\RatedMovie.cs" />
+    <Compile Include="ExtendedModelObjects\RatedShow.cs" />
     <Compile Include="ModelEnums\DataType.cs" />
     <Compile Include="ModelEnums\MediaType.cs" />
     <Compile Include="ModelEnums\SearchOrderBy.cs" />

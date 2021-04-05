@@ -5,11 +5,11 @@ using System.Text;
 
 namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
 {
-    public class MovieWatchlistItemViewModel : BaseViewModel
+    public class MovieItemViewModel : BaseViewModel
     {
         public Movie Movie { get; set; }
 
-        public MovieWatchlistItemViewModel(Movie movie)
+        public MovieItemViewModel(Movie movie)
         {
             Movie = movie;
         }

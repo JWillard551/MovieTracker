@@ -25,7 +25,7 @@ namespace MovieTracker.App.Views.CollectionItemViews
             //2. Because it's faster, it handles scenarios with FFImageLoading sometimes (or always) repeating images on a collection view.
             //   as the null set on source helps prevent this from occurring.
             cachedImage.Source = null;
-            var item = BindingContext as ShowWatchlistItemViewModel;
+            var item = BindingContext as ShowItemViewModel;
             if (item == null)
                 return;
 

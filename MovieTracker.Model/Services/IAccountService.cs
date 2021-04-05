@@ -9,7 +9,7 @@ namespace MovieTracker.Model.Services
     {
         Task<string> GetSessionIDAsync();
         Task<int> GetAccountIDAsync();
-        Task<bool> ActiveSessionHasExpired();
+        //Task<bool> ActiveSessionHasExpired();
         Task SetSessionID(string id);
         Task SetAccountID(string id);
         Task<bool> LoginAccountAsync(Credentials credentials);

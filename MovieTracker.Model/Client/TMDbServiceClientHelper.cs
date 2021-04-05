@@ -1,4 +1,5 @@
 ﻿using MovieTracker.Model.Client.ExtendedClient;
+using MovieTracker.Model.ExtendedModelObjects;
 using MovieTracker.Model.ModelEnums;
 using MovieTracker.Model.ModelObjects;
 using MovieTracker.Model.Services;
@@ -248,6 +249,8 @@ namespace MovieTracker.Model.Client
             }
         }
 
+        #region Extended Movie Watchlist Endpoints
+
         public static async Task<List<Movie>> GetMovieWatchlistAsync(int accountId, string sessionId, int page, CancellationToken ct)
         {
             try
@@ -262,6 +265,28 @@ namespace MovieTracker.Model.Client
             return new List<Movie>();
         }
 
+        public static async Task<OperationResult> SetMovieWatchlistAsync(int accountId, int mediaId, string sessionId, bool toAdd, CancellationToken ct)
+        {
+            try
+            {
+                var response = await TMDbServiceClient.ExtendedInstance.AccountLists.SetMovieWatchlistAsync(accountId, sessionId, mediaId, toAdd, ct);
+                if (!response.IsSuccessStatusCode)
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    return new OperationResult(false, message);
+                }
+                return new OperationResult(true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult(false, ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Extended Show Watchlist Endpoints
+
         public static async Task<List<Show>> GetShowWatchlistAsync(int accountId, string sessionId, int page, CancellationToken ct)
         {
             try
@@ -275,6 +300,116 @@ namespace MovieTracker.Model.Client
             }
             return new List<Show>();
         }
+
+        public static async Task<OperationResult> SetShowWatchlistAsync(int accountId, int mediaId, string sessionId, bool toAdd, CancellationToken ct)
+        {
+            try
+            {
+                var response = await TMDbServiceClient.ExtendedInstance.AccountLists.SetShowWatchlistAsync(accountId, sessionId, mediaId, toAdd, ct);
+                if (!response.IsSuccessStatusCode)
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    return new OperationResult(false, message);
+                }
+                return new OperationResult(true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult(false, ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Favorites
+
+        public static async Task<List<Movie>> GetAccountFavoriteMovies(int accountId, string sessionId, int page, CancellationToken ct)
+        {
+            try
+            {
+                var result = await TMDbServiceClient.ExtendedInstance.AccountLists.GetMovieFavoritesAsync(accountId, sessionId, LANGUAGE_CODE, page, ct);
+                return result.Results.Select(movie => new Movie(movie)).ToList();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return new List<Movie>();
+        }
+
+        public static async Task<List<Show>> GetAccountFavoriteShows(int accountId, string sessionId, int page, CancellationToken ct)
+        {
+            try
+            {
+                var result = await TMDbServiceClient.ExtendedInstance.AccountLists.GetShowFavoritesAsync(accountId, sessionId, LANGUAGE_CODE, page, ct);
+                return result.Results.Select(show => new Show(show)).ToList();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return new List<Show>();
+        }
+
+        #endregion
+
+        #region Ratings
+
+        public static async Task<RatedMovies> GetAccountRatedMovies(int accountId, string sessionId, int page, CancellationToken ct)
+        {
+            try
+            {
+                var result = await TMDbServiceClient.ExtendedInstance.AccountLists.GetRatedMoviesAsync(accountId, sessionId, LANGUAGE_CODE, page, ct);
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return new RatedMovies();
+        }
+
+        public static async Task<bool> SetMovieRating(string sessionId, int movieId, decimal value, CancellationToken ct)
+        {
+            try
+            {
+                return await TMDbServiceClient.Instance.Movies.SetRatingAsync(sessionId, movieId, value, ct);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return false;
+        }
+
+        public static async Task<RatedShows> GetAccountRatedShows(int accountId, string sessionId, int page, CancellationToken ct)
+        {
+            try
+            {
+                var result = await TMDbServiceClient.ExtendedInstance.AccountLists.GetRatedShowsAsync(accountId, sessionId, LANGUAGE_CODE, page, ct);
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return new RatedShows();
+        }
+
+        public static async Task<bool> SetShowRating(string sessionId, int showId, decimal value, CancellationToken ct)
+        {
+            try
+            {
+                return await TMDbServiceClient.Instance.Shows.SetRatingAsync(sessionId, showId, value, ct);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return false;
+        }
+
+        #endregion
 
         public static async Task<int?> GetAccountId(string sessionId, CancellationToken ct)
         {

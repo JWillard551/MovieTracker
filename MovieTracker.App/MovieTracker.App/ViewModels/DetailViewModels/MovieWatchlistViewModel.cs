@@ -16,7 +16,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
     {
         public Task Initialization { get; private set; }
 
-        public List<MovieWatchlistItemViewModel> WatchlistMovies { get; set; }
+        public List<MovieItemViewModel> WatchlistMovies { get; set; }
         
 
         public MovieWatchlistViewModel(int id, int accountId, string sessionId)
@@ -26,8 +26,19 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
 
         private async Task InitializeAsync(int id, int accountId, string sessionId)
         {
+            ////var addMovie = await TMDbServiceClientHelper.SetMovieWatchlistAsync(accountId, 8587, sessionId, true, new CancellationToken()); //Lion King add
+            ////var addTV = await TMDbServiceClientHelper.SetShowWatchlistAsync(accountId, 2426, sessionId, true, new CancellationToken()); //Angel add
+            ////var removeMovie = await TMDbServiceClientHelper.SetMovieWatchlistAsync(accountId, 8587, sessionId, false, new CancellationToken()); //Lion King remove
+            ////var removeTV = await TMDbServiceClientHelper.SetShowWatchlistAsync(accountId, 2426, sessionId, false, new CancellationToken()); //Angel remove
+
+            ////var ratedMovies = await TMDbServiceClientHelper.GetAccountRatedMovies(accountId, sessionId, 1, new CancellationToken());
+            ////var ratedTV = await TMDbServiceClientHelper.GetAccountRatedShows(accountId, sessionId, 1, new CancellationToken());
+
+            //var favoritesMovies = await TMDbServiceClientHelper.GetAccountFavoriteMovies(accountId, sessionId, 1, new CancellationToken());
+            //var favoritesShows = await TMDbServiceClientHelper.GetAccountFavoriteShows(accountId, sessionId, 1, new CancellationToken());
+
             var movies = await TMDbServiceClientHelper.GetMovieWatchlistAsync(accountId, sessionId, 1, new CancellationToken());
-            WatchlistMovies = movies.Select(movie => new MovieWatchlistItemViewModel(movie)).ToList();
+            WatchlistMovies = movies.Select(movie => new MovieItemViewModel(movie)).ToList();
         }
     }
 }
