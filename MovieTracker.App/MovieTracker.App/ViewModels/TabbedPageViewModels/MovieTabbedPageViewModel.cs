@@ -1,5 +1,4 @@
 ﻿using MovieTracker.App.ViewModels.DetailViewModels;
-using MovieTracker.Model.ModelEnums;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -33,8 +32,8 @@ namespace MovieTracker.App.ViewModels.TabbedPageViewModels
         {
             //Handle initialization for the movie info.
             Tab1 = new MovieDetailViewModel(id);
-            Tab2 = new CastAndCrewViewModel(id, MediaType.Movie);
-            Tab3 = new WatchOnViewModel(id, MediaType.Movie);
+            Tab2 = new CastAndCrewViewModel(id);
+            Tab3 = new WatchOnViewModel(id);
             await Task.WhenAll(Tab1.Initialization, Tab2.Initialization, Tab3.Initialization);
         }
     }

@@ -29,7 +29,7 @@ namespace MovieTracker.App.Views.CollectionItemViews
             if (item == null)
                 return;
 
-            cachedImage.Source = item.Show.Poster;
+            cachedImage.Source = item.Show.PosterPath;
             base.OnBindingContextChanged();
         }
     }

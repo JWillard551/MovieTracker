@@ -1,9 +1,9 @@
-﻿using MovieTracker.Model.Client;
-using MovieTracker.Model.ModelEnums;
-using MovieTracker.Model.ModelObjects;
+﻿using MovieTracker.TMDbModel.Services;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using TMDbLib.Objects.Movies;
+using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels
 {
@@ -11,17 +11,17 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
     {
         public Task Initialization { get; private set; }
 
-        public List<MediaCredits> MediaCast { get; set; }
+        public Movie MediaCast { get; set; }
 
-        public CastAndCrewViewModel(int id, MediaType mediaType)
+        public CastAndCrewViewModel(int id)
         {
-            Initialization = InitializeAsync(id, mediaType);
+            Initialization = InitializeAsync(id);
         }
 
-        private async Task InitializeAsync(int id, MediaType mediaType)
+        private async Task InitializeAsync(int id)
         {
             //Handle initialization for the movie info.
-            MediaCast = await TMDbServiceClientHelper.GetMovieCreditsById(id, new CancellationToken());
+            MediaCast = await TMDbService.GetMovieAsync(id, MovieMethods.Credits);
         }
     }
 }

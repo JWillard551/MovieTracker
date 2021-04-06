@@ -1,6 +1,4 @@
 ﻿using MovieTracker.App.ViewModels;
-using MovieTracker.Model.Client;
-using System.Threading;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.Handlers

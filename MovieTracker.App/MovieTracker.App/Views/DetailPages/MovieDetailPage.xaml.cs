@@ -19,7 +19,7 @@ namespace MovieTracker.App.Views.DetailPages
             if (item == null)
                 return;
 
-            cachedImage.Source = item.MovieInfo.Poster;
+            cachedImage.Source = item.MovieInfo.PosterPath;
             base.OnBindingContextChanged();
         }
     }

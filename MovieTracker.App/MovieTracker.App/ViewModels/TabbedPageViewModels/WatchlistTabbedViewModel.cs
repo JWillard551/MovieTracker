@@ -1,5 +1,5 @@
 ﻿using MovieTracker.App.ViewModels.DetailViewModels;
-using MovieTracker.Model.Services;
+using MovieTracker.TMDbModel.Services;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -13,7 +13,7 @@ namespace MovieTracker.App.ViewModels.TabbedPageViewModels
 
         public ShowWatchlistViewModel ShowViewModel { get; set; }
 
-        public IAccountService AccountService { get; } = DependencyService.Get<IAccountService>();
+        public ITMDbService TMDbService => DependencyService.Get<ITMDbService>();
 
         public WatchlistTabbedViewModel(int id)
         {
@@ -22,10 +22,9 @@ namespace MovieTracker.App.ViewModels.TabbedPageViewModels
 
         private async Task InitializeAsync(int id)
         {
-            var sessionId = await AccountService.GetSessionIDAsync();
-            var accountId = await AccountService.GetAccountIDAsync();
-            MovieViewModel = new MovieWatchlistViewModel(id, accountId, sessionId);
-            ShowViewModel = new ShowWatchlistViewModel(id, accountId, sessionId);
+            var sessionId = await TMDbService.GetSessionIDAsync();
+            MovieViewModel = new MovieWatchlistViewModel(sessionId);
+            ShowViewModel = new ShowWatchlistViewModel(sessionId);
             await Task.WhenAll(MovieViewModel.Initialization, ShowViewModel.Initialization);
         }
     }

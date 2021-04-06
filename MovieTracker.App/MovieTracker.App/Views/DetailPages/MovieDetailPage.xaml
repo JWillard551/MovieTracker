@@ -51,7 +51,7 @@
                 </Label.FormattedText>
             </Label>
 
-            <Label Text="{Binding MovieInfo.TagLine}"
+            <Label Text="{Binding MovieInfo.Title}"
                    Padding="5,0,0,0"
                    FontAttributes="Italic" />
         </StackLayout>
@@ -114,10 +114,10 @@
                            BackgroundColor="LightCoral"
                            Margin="0"
                            Padding="2">
-                        <Label Text="{Binding MovieInfo.MovieRating}"
+                        <!--<Label Text="{Binding MovieInfo.MovieRating}"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
-                               VerticalOptions="Center" />
+                               VerticalOptions="Center" />-->
                     </Frame>
                     <Label Grid.Column="1"
                            Text="{Binding MovieInfo.Genres}"

@@ -1,5 +1,4 @@
-﻿using MovieTracker.Model.ModelEnums;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,8 +26,6 @@ namespace MovieTracker.App.ViewModels.ModalViewModels
         //Sort By Date (Ascending and Descending)
         //Sort By Name (Ascending and Descending)
 
-        public SearchOrderBy DateOrderBy;
-
         //Include People Checkbox
         public bool IncludePeopleInSearch { get; set; } = true;
 
@@ -47,7 +44,6 @@ namespace MovieTracker.App.ViewModels.ModalViewModels
         {
             var content = JsonConvert.DeserializeObject<SearchOptionsViewModel>(json);
             //Map properties here.
-            DateOrderBy = content.DateOrderBy;
             IncludeMoviesInSearch = content.IncludeMoviesInSearch;
             IncludePeopleInSearch = content.IncludePeopleInSearch;
             IncludeTVInSearch = content.IncludeTVInSearch;

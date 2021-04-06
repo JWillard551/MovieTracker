@@ -1,8 +1,5 @@
 ﻿using MovieTracker.App.ViewModels.ModalViewModels;
-using MovieTracker.App.Views.ModalViews;
-using MovieTracker.Model.Client;
 using MvvmHelpers;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -60,8 +57,8 @@ namespace MovieTracker.App.ViewModels
             //This method should take the query from the SearchBarQueryHandler and pass it into the TMDB client helper class.
             //The helper class will handle the API call to fetch data. The returned results will need to be converted to one of my internal model objects (a search result object).
             Items = new List<SearchResultViewModel>();
-            var results = await TMDbServiceClientHelper.SearchAsync(CurrentQuery, new CancellationToken());
-            foreach (var res in results)
+            var results = await TMDbService.SearchAsync(CurrentQuery, new CancellationToken());
+            foreach (var res in results.Results)
             {
                 Items.Add(new SearchResultViewModel(res));
             }
@@ -74,13 +71,13 @@ namespace MovieTracker.App.ViewModels
             if (IsBusy)
                 return;
 
-            if (TMDbServiceClientHelper.CurrentPage > TMDbServiceClientHelper.TotalPages)
+            if (TMDbService.CurrentPage > TMDbService.TotalPages)
                 return;
 
             IsBusy = true;
 
-            var results = await TMDbServiceClientHelper.SearchAsync(CurrentQuery, new CancellationToken());
-            ItemsToDisplay.AddRange(results.ToList().Select(searchResult => new SearchResultViewModel(searchResult)));
+            var results = await TMDbService.SearchAsync(CurrentQuery, new CancellationToken());
+            ItemsToDisplay.AddRange(results.Results.Select(searchResult => new SearchResultViewModel(searchResult)));
             IsBusy = false;
         }
 

@@ -1,5 +1,6 @@
 ﻿using MovieTracker.App.Models;
 using MovieTracker.App.Services;
+using MovieTracker.TMDbModel.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ namespace MovieTracker.App.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public ITMDbService TMDbService => DependencyService.Get<ITMDbService>();
 
         bool isBusy = false;
         public bool IsBusy

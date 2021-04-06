@@ -1,15 +1,12 @@
-﻿using MovieTracker.Model.ModelObjects;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using TMDbLib.Objects.Search;
 
 namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
 {
     public class ShowItemViewModel : BaseViewModel
     {
-        public Show Show { get; set; }
+        public SearchTv Show { get; set; }
 
-        public ShowItemViewModel(Show show)
+        public ShowItemViewModel(SearchTv show)
         {
             Show = show;
         }

@@ -1,8 +1,4 @@
 ﻿using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
-using MovieTracker.Model.Client;
-using MovieTracker.Model.ModelObjects;
-using MovieTracker.Model.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,15 +14,15 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
 
         public List<ShowItemViewModel> WatchlistShows { get; set; }
 
-        public ShowWatchlistViewModel(int id, int accountId, string sessionId)
+        public ShowWatchlistViewModel(string sessionId)
         {
-            Initialization = InitializeAsync(id, accountId, sessionId);
+            Initialization = InitializeAsync(sessionId);
         }
 
-        private async Task InitializeAsync(int id, int accountId, string sessionId)
+        private async Task InitializeAsync(string sessionId)
         {
-            var shows = await TMDbServiceClientHelper.GetShowWatchlistAsync(accountId, sessionId, 1, new CancellationToken());
-            WatchlistShows = shows.Select(show => new ShowItemViewModel(show)).ToList();
+            var shows = await TMDbService.AccountGetTvWatchlistAsync();
+            WatchlistShows = shows.Results.Select(show => new ShowItemViewModel(show)).ToList();
         }
     }
 }

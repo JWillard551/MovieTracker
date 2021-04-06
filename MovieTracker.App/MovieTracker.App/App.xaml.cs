@@ -1,9 +1,6 @@
-﻿using MovieTracker.App.Views;
-using MovieTracker.Model.Services;
-using System;
+﻿using MovieTracker.TMDbModel.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MovieTracker.App
 {
@@ -17,7 +14,7 @@ namespace MovieTracker.App
             InitializeComponent();
             LoadDeviceStyles();
 
-            DependencyService.Register<AccountService>();
+            DependencyService.Register<TMDbService>();
             MainPage = new AppShell();
         }
 

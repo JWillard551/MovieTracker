@@ -1,10 +1,9 @@
-﻿using MovieTracker.Model.Client;
-using MovieTracker.Model.ModelObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TMDbLib.Objects.People;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels
@@ -29,7 +28,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
 
         public async Task InitializeAsync(int id)
         {
-            PersonInfo = await TMDbServiceClientHelper.GetPersonDetailsById(id, new CancellationToken());
+            PersonInfo = await TMDbService.GetPersonAsync(id);
         }
     }
 }

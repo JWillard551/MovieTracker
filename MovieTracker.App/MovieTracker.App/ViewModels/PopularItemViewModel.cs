@@ -1,4 +1,5 @@
-﻿using MovieTracker.Model.ModelObjects;
+﻿using MovieTracker.TMDbModel.ModelObjects;
+using TMDbLib.Objects.Search;
 
 namespace MovieTracker.App.ViewModels
 {
@@ -6,9 +7,14 @@ namespace MovieTracker.App.ViewModels
     {
         public PopularItem PopularItem { get; set; }
 
-        public PopularItemViewModel(PopularItem item)
+        public PopularItemViewModel(SearchMovie item)
         {
-            PopularItem = item;
+            PopularItem = new PopularItem(item);
+        }
+
+        public PopularItemViewModel(SearchTv item)
+        {
+            PopularItem = new PopularItem(item);
         }
     }
 }

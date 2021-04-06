@@ -3,7 +3,7 @@ using MovieTracker.App.Views;
 using MovieTracker.App.Views.DetailPages;
 using MovieTracker.App.Views.ModalViews;
 using MovieTracker.App.Views.TabbedPages;
-using MovieTracker.Model.Services;
+using MovieTracker.TMDbModel.Services;
 using System;
 using Xamarin.Forms;
 
@@ -11,7 +11,7 @@ namespace MovieTracker.App
 {
     public partial class AppShell : Xamarin.Forms.Shell
     {
-        public IAccountService AccountService => DependencyService.Get<IAccountService>();
+        public ITMDbService TMDbService => DependencyService.Get<ITMDbService>();
         public IMessage ToastService => DependencyService.Get<IMessage>();
 
         public AppShell()
@@ -23,15 +23,17 @@ namespace MovieTracker.App
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            var response = await AccountService.LogoutAccountAsync();
-            if (response.Success)
+
+            //var response = await TMDbService.LogoutAccountAsync();
+            if (true)
             {
-                AccountService.ClearFromStorage();
+                //TMDbService.ClearFromStorage();
                 await Shell.Current.GoToAsync("//LoginPage");
             }
             else
             {
-                ToastService.LongAlertMessage(response.Message);
+                ToastService.LongAlertMessage("Failed!");
+                //ToastService.LongAlertMessage(response.Message);
             }
         }
     }

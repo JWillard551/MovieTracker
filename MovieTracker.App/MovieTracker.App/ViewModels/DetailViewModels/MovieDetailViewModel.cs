@@ -1,8 +1,7 @@
-﻿using MovieTracker.Model.Client;
-using MovieTracker.Model.ModelObjects;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using TMDbLib.Objects.Movies;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels
@@ -36,12 +35,12 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
         private async Task InitializeAsync(int id)
         {
             //Handle initialization for the movie info.
-            MovieInfo = await TMDbServiceClientHelper.GetMovieDetailsById(id, new CancellationToken());
+            MovieInfo = await TMDbService.GetMovieAsync(id);
             RadialGaugeViewModel = new RadialGaugeViewModel()
             {
                 MinValue = 1,
                 MaxValue = 100,
-                CurrentProgress = Convert.ToDouble(decimal.Round(MovieInfo.VoteAverage * 10, 0)),
+                CurrentProgress = Convert.ToDouble(MovieInfo.VoteAverage * 10)
             };
             AddToListCommand = new Command(OnAddToListSelected);
             AddToWatchListCommand = new Command(OnAddToWatchlistSelected);

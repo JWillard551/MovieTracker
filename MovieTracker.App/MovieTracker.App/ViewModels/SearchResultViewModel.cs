@@ -1,8 +1,9 @@
 ﻿using MovieTracker.App.Views;
 using MovieTracker.App.Views.DetailPages;
 using MovieTracker.App.Views.TabbedPages;
-using MovieTracker.Model.ModelObjects;
+using MovieTracker.TMDbModel.ModelObjects;
 using System;
+using TMDbLib.Objects.Search;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels
@@ -11,9 +12,9 @@ namespace MovieTracker.App.ViewModels
     {
         public Command GoToDetailsCommand { get; set; }
 
-        public Command<SearchResult> SearchResultTapped { get; set; }
+        public Command<SearchItem> SearchResultTapped { get; set; }
 
-        public SearchResult SearchResult { get; set; }
+        public SearchItem SearchResult { get; set; }
 
         private RadialGaugeViewModel _ratingVM;
         public RadialGaugeViewModel RadialGaugeViewModel
@@ -24,38 +25,38 @@ namespace MovieTracker.App.ViewModels
 
         public SearchResultViewModel() { }
 
-        public SearchResultViewModel(SearchResult searchResult)
+        public SearchResultViewModel(SearchBase searchResult)
         {
-            SearchResult = searchResult;
-            RadialGaugeViewModel = new RadialGaugeViewModel()
-            {
-                MinValue = 1,
-                MaxValue = 100,
-                CurrentProgress = Convert.ToDouble(searchResult.Rating),
-            };
-            SearchResultTapped = new Command<SearchResult>(OnSearchResultTapped);
+            SearchResult = new SearchItem(searchResult);
+            //RadialGaugeViewModel = new RadialGaugeViewModel()
+            //{
+            //    MinValue = 1,
+            //    MaxValue = 100,
+            //    CurrentProgress = Convert.ToDouble(searchResult.Rating),
+            //};
+            //SearchResultTapped = new Command<SearchResult>(OnSearchResultTapped);
         }
 
-        private async void OnSearchResultTapped(SearchResult searchResult)
-        {
-            IsBusy = true;
-            if (searchResult.MediaType == Model.ModelEnums.MediaType.Movie)
-            {
-                await Shell.Current.GoToAsync($"{nameof(MovieTabbedPage)}?MovieID={searchResult.Id}");
-            }
-            else if (searchResult.MediaType == Model.ModelEnums.MediaType.Show)
-            {
-                //Create ShowDetailViewModel + Push ShowDetailPage
-            }
-            else if (searchResult.MediaType == Model.ModelEnums.MediaType.Person)
-            {
-                //Create PersonDetailViewModel + Push PersonDetailPage
-            }
-            else
-            {
-                //Unspecified - Handle.
-            }
-            IsBusy = false;
-        }
+        //private async void OnSearchResultTapped(SearchBase searchResult)
+        //{
+        //    IsBusy = true;
+        //    if (searchResult.MediaType == Model.ModelEnums.MediaType.Movie)
+        //    {
+        //        await Shell.Current.GoToAsync($"{nameof(MovieTabbedPage)}?MovieID={searchResult.Id}");
+        //    }
+        //    else if (searchResult.MediaType == Model.ModelEnums.MediaType.Show)
+        //    {
+        //        //Create ShowDetailViewModel + Push ShowDetailPage
+        //    }
+        //    else if (searchResult.MediaType == Model.ModelEnums.MediaType.Person)
+        //    {
+        //        //Create PersonDetailViewModel + Push PersonDetailPage
+        //    }
+        //    else
+        //    {
+        //        //Unspecified - Handle.
+        //    }
+        //    IsBusy = false;
+        //}
     }
 }
