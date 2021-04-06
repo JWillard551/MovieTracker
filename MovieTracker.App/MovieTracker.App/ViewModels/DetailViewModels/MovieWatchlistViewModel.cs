@@ -12,12 +12,12 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
         public List<MovieItemViewModel> WatchlistMovies { get; set; }
         
 
-        public MovieWatchlistViewModel(string sessionId)
+        public MovieWatchlistViewModel()
         {
-            Initialization = InitializeAsync(sessionId);
+            Initialization = InitializeAsync();
         }
 
-        private async Task InitializeAsync(string sessionId)
+        private async Task InitializeAsync()
         {
             var movies = await TMDbService.AccountGetMovieWatchlistAsync();
             WatchlistMovies = movies.Results.Select(movie => new MovieItemViewModel(movie)).ToList();

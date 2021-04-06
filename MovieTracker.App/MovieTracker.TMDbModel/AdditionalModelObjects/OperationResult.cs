@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieTracker.TMDbModel.ModelObjects
+namespace MovieTracker.TMDbModel.AdditionalModelObjects
 {
     public class OperationResult
     {

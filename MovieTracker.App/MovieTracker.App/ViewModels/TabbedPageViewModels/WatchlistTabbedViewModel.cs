@@ -13,8 +13,6 @@ namespace MovieTracker.App.ViewModels.TabbedPageViewModels
 
         public ShowWatchlistViewModel ShowViewModel { get; set; }
 
-        public ITMDbService TMDbService => DependencyService.Get<ITMDbService>();
-
         public WatchlistTabbedViewModel(int id)
         {
             Initialization = InitializeAsync(id);
@@ -22,9 +20,8 @@ namespace MovieTracker.App.ViewModels.TabbedPageViewModels
 
         private async Task InitializeAsync(int id)
         {
-            var sessionId = await TMDbService.GetSessionIDAsync();
-            MovieViewModel = new MovieWatchlistViewModel(sessionId);
-            ShowViewModel = new ShowWatchlistViewModel(sessionId);
+            MovieViewModel = new MovieWatchlistViewModel();
+            ShowViewModel = new ShowWatchlistViewModel();
             await Task.WhenAll(MovieViewModel.Initialization, ShowViewModel.Initialization);
         }
     }

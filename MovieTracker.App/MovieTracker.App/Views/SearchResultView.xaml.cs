@@ -23,7 +23,7 @@ namespace MovieTracker.App.Views
             if (item == null)
                 return;
 
-            //cachedImage.Source = item.SearchResult.ImageUri;
+            cachedImage.Source = item.SearchItem.ImageUri;
             base.OnBindingContextChanged();
         }
     }

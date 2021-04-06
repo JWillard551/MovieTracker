@@ -1,10 +1,6 @@
 ﻿using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
+using MovieTracker.TMDbModel.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -29,7 +25,7 @@ namespace MovieTracker.App.Views.CollectionItemViews
             if (item == null)
                 return;
 
-            cachedImage.Source = item.Show.PosterPath;
+            cachedImage.Source = new UriImageSource() { Uri = ModelUtils.GetImageUri(item.Show.PosterPath) }; 
             base.OnBindingContextChanged();
         }
     }

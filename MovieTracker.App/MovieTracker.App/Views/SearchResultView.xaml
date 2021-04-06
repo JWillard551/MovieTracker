@@ -31,7 +31,7 @@
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1"
                                           Command="{Binding SearchResultTapped}"
-                                          CommandParameter="{Binding SearchResult}"/>
+                                          CommandParameter="{Binding SearchItem}"/>
                 </StackLayout.GestureRecognizers>
 
                 <!--Movie Title/Release Year Label-->
@@ -41,11 +41,11 @@
                        HorizontalOptions="StartAndExpand">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding SearchResult.ResultName}" 
+                            <Span Text="{Binding SearchItem.ResultName}" 
                                   FontAttributes="Bold"
                                   FontSize="15"/>
                             <Span Text=" ("/>
-                            <Span Text="{Binding SearchResult.ReleaseDate, StringFormat='{0:yyyy}'}"
+                            <Span Text="{Binding SearchItem.ReleaseDate, StringFormat='{0:yyyy}'}"
                                   FontAttributes="Bold"
                                   FontSize="15"/>
                             <Span Text=")"/>
@@ -59,7 +59,7 @@
                        MaxLines="6"
                        LineBreakMode="TailTruncation"
                        HorizontalOptions="StartAndExpand"
-                       Text="{Binding SearchResult.Overview}"/>
+                       Text="{Binding SearchItem.Overview}"/>
             </StackLayout>
 
             <!--Rating-->

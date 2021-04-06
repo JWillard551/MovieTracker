@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using TMDbLib.Objects.Search;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels
@@ -58,8 +59,14 @@ namespace MovieTracker.App.ViewModels
             //The helper class will handle the API call to fetch data. The returned results will need to be converted to one of my internal model objects (a search result object).
             Items = new List<SearchResultViewModel>();
             var results = await TMDbService.SearchAsync(CurrentQuery, new CancellationToken());
+
+            var movies = results.Results.OfType<SearchMovie>().ToList();
+            var tvs = results.Results.OfType<SearchTv>().ToList();
+            var persons = results.Results.OfType<SearchPerson>().ToList();
+
             foreach (var res in results.Results)
             {
+
                 Items.Add(new SearchResultViewModel(res));
             }
             ItemsToDisplay = new ObservableRangeCollection<SearchResultViewModel>(Items);

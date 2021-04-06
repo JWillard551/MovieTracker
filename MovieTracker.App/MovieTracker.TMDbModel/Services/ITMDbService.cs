@@ -1,4 +1,4 @@
-﻿using MovieTracker.TMDbModel.ModelObjects;
+﻿using MovieTracker.TMDbModel.AdditionalModelObjects;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
@@ -22,17 +22,11 @@ namespace MovieTracker.TMDbModel.Services
 
         #region Login / Authentication Methods
 
-        Task<bool> Authenticate(Credentials creds);
+        Task<OperationResult> LoginAndSetSessionAsync(Credentials creds);
 
-        Task<OperationResult> LogoutAsync(string sessionId, CancellationToken cancellationToken = default);
+        Task<OperationResult> LogoutSessionAsync(CancellationToken cancellationToken = default);
 
-        Task<string> GetSessionIDAsync();
-
-        Task SetSessionID(string id);
-
-        Task<bool> HasActiveSessionID();
-
-        OperationResult ClearFromStorage();
+        Task<bool> HasExistingSessionIDAsync();
 
         #endregion
 
@@ -44,7 +38,7 @@ namespace MovieTracker.TMDbModel.Services
 
         Task<Movie> GetMovieAsync(int movieId, MovieMethods extraMethods = MovieMethods.Undefined, CancellationToken cancellationToken = default);
 
-        Task<SingleResultContainer<Dictionary<string, WatchProviders>>> GetMovieWatchProvidersAsync(int movieId, CancellationToken cancellationToken = default);
+        //Task<SingleResultContainer<Dictionary<string, WatchProviders>>> GetMovieWatchProvidersAsync(int movieId, CancellationToken cancellationToken = default);
 
         Task<SearchContainer<SearchMovie>> GetPopularMoviesAsync(string language, int page, CancellationToken cancellationToken = default);
 

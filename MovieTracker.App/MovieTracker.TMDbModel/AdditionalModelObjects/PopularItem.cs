@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TMDbLib.Objects.Search;
 
-namespace MovieTracker.TMDbModel.ModelObjects
+namespace MovieTracker.TMDbModel.AdditionalModelObjects
 {
     public class PopularItem
     {

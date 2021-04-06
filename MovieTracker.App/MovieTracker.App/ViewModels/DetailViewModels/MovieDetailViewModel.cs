@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TMDbLib.Objects.Movies;
@@ -9,6 +10,8 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
     public sealed class MovieDetailViewModel : BaseViewModel, IDetailViewModel
     {
         public Movie MovieInfo { get; set; }
+
+        public string Rating { get; set; } = "NR";
         public Task Initialization { get; private set; }
 
         public Command AddToListCommand { get; private set; }
@@ -35,7 +38,8 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
         private async Task InitializeAsync(int id)
         {
             //Handle initialization for the movie info.
-            MovieInfo = await TMDbService.GetMovieAsync(id);
+            MovieInfo = await TMDbService.GetMovieAsync(id, MovieMethods.Releases);
+            Rating = GetRating();
             RadialGaugeViewModel = new RadialGaugeViewModel()
             {
                 MinValue = 1,
@@ -46,6 +50,14 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
             AddToWatchListCommand = new Command(OnAddToWatchlistSelected);
             AddToFavoritesCommand = new Command(OnAddToFavoritesSelected);
             RateCommand = new Command(OnRateSelected);
+        }
+
+        private string GetRating()
+        {
+            var rating = MovieInfo.Releases.Countries.FirstOrDefault(country => country.Iso_3166_1 == "US")?.Certification;
+            if (string.IsNullOrWhiteSpace(rating))
+                return "??";
+            return rating;
         }
 
         private async void OnAddToListSelected()

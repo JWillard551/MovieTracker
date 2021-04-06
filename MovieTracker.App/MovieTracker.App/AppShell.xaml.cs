@@ -24,16 +24,14 @@ namespace MovieTracker.App
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
 
-            //var response = await TMDbService.LogoutAccountAsync();
-            if (true)
+            var response = await TMDbService.LogoutSessionAsync();
+            if (response.Success)
             {
-                //TMDbService.ClearFromStorage();
                 await Shell.Current.GoToAsync("//LoginPage");
             }
             else
             {
-                ToastService.LongAlertMessage("Failed!");
-                //ToastService.LongAlertMessage(response.Message);
+                ToastService.LongAlertMessage(response.Message);
             }
         }
     }

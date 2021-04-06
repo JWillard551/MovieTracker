@@ -1,4 +1,5 @@
 ﻿using MovieTracker.App.ViewModels.DetailViewModels;
+using MovieTracker.TMDbModel.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +20,7 @@ namespace MovieTracker.App.Views.DetailPages
             if (item == null)
                 return;
 
-            cachedImage.Source = item.MovieInfo.PosterPath;
+            cachedImage.Source = new UriImageSource() { Uri = ModelUtils.GetImageUri(item.MovieInfo.PosterPath) };
             base.OnBindingContextChanged();
         }
     }

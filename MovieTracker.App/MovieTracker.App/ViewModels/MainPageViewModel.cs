@@ -35,24 +35,25 @@ namespace MovieTracker.App.ViewModels
 
         public async Task InitializeAsync()
         {
+            //var addRayaLastDragonResult = await TMDbService.AccountChangeWatchlistStatusAsync(TMDbLib.Objects.General.MediaType.Movie, 527774, true);
             //var sessionResult = await TMDbService.AccountGetMovieWatchlistAsync();
 
-            var removeRayaLastDragonResult = await TMDbService.AccountChangeWatchlistStatusAsync(TMDbLib.Objects.General.MediaType.Movie, 527774, false);
-            var addRayaLastDragonResult = await TMDbService.AccountChangeWatchlistStatusAsync(TMDbLib.Objects.General.MediaType.Movie, 527774, true);
+            //var removeRayaLastDragonResult = await TMDbService.AccountChangeWatchlistStatusAsync(TMDbLib.Objects.General.MediaType.Movie, 527774, false);
 
+            //var newSessionResult = await TMDbService.AccountGetMovieWatchlistAsync();
 
-            //IsBusy = true;
-            //var popularMovies = await TMDbService.GetPopularMoviesAsync("en-US", 1);
-            //PopularMovies = new ObservableCollection<PopularItemViewModel>(popularMovies.Results.Select(pm => new PopularItemViewModel(pm)));
-            //var popularShows = await TMDbService.GetPopularShowsAsync("en-US", 1);
-            //PopularShows = new ObservableCollection<PopularItemViewModel>(popularShows.Results.Select(ps => new PopularItemViewModel(ps)));
-            //SelectedSource = PopularMovies;
-            //var trendingToday= await TMDbService.GetTrendingMoviesAsync(TimeWindow.Day);
-            //TrendingToday = new ObservableCollection<PopularItemViewModel>(trendingToday.Results.Select(ttd => new PopularItemViewModel(ttd)));
-            //var trendingThisWeek = await TMDbService.GetTrendingMoviesAsync(TimeWindow.Week);
-            //TrendingThisWeek = new ObservableCollection<PopularItemViewModel>(trendingThisWeek.Results.Select(ttw => new PopularItemViewModel(ttw)));
-            //SelectedTrendingSource = TrendingToday;
-            //IsBusy = false;
+            IsBusy = true;
+            var popularMovies = await TMDbService.GetPopularMoviesAsync("en-US", 1);
+            PopularMovies = new ObservableCollection<PopularItemViewModel>(popularMovies.Results.Select(pm => new PopularItemViewModel(pm)));
+            var popularShows = await TMDbService.GetPopularShowsAsync("en-US", 1);
+            PopularShows = new ObservableCollection<PopularItemViewModel>(popularShows.Results.Select(ps => new PopularItemViewModel(ps)));
+            SelectedSource = PopularMovies;
+            var trendingToday = await TMDbService.GetTrendingMoviesAsync(TimeWindow.Day);
+            TrendingToday = new ObservableCollection<PopularItemViewModel>(trendingToday.Results.Select(ttd => new PopularItemViewModel(ttd)));
+            var trendingThisWeek = await TMDbService.GetTrendingMoviesAsync(TimeWindow.Week);
+            TrendingThisWeek = new ObservableCollection<PopularItemViewModel>(trendingThisWeek.Results.Select(ttw => new PopularItemViewModel(ttw)));
+            SelectedTrendingSource = TrendingToday;
+            IsBusy = false;
         }
 
         public void OnMoviesClicked()

@@ -1,4 +1,4 @@
-﻿using MovieTracker.TMDbModel.ModelObjects;
+﻿using MovieTracker.TMDbModel.AdditionalModelObjects;
 using TMDbLib.Objects.Search;
 
 namespace MovieTracker.App.ViewModels

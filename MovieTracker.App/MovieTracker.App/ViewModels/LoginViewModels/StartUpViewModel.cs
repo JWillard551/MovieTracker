@@ -9,13 +9,11 @@ namespace MovieTracker.App.ViewModels.LoginViewModels
 {
     public class StartUpViewModel : BaseViewModel
     {
-        public ITMDbService TMDbService => DependencyService.Get<ITMDbService>();
-
         public StartUpViewModel() { }
 
         public async void Init()
         {
-            var authenticated = await TMDbService.HasActiveSessionID();
+            var authenticated = await TMDbService.HasExistingSessionIDAsync();
             if (authenticated)
                 await Shell.Current.GoToAsync($"//Main/{nameof(MainPage)}");
             else

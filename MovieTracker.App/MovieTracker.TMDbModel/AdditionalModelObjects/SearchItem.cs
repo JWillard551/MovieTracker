@@ -5,7 +5,7 @@ using System.Linq;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
 
-namespace MovieTracker.TMDbModel.ModelObjects
+namespace MovieTracker.TMDbModel.AdditionalModelObjects
 {
     public class SearchItem
     {
@@ -17,23 +17,20 @@ namespace MovieTracker.TMDbModel.ModelObjects
         public Uri ImageUri { get; set; }
         public MediaType MediaType { get; set; }
 
-        public SearchItem()
+        public SearchItem(SearchBase baseItem)
         {
-            //MediaType = MediaType.Unspecified;
+            MediaType = MediaType.Unknown;
+            Id = baseItem.Id;
+            MediaType = baseItem.MediaType;
             ResultName = "UNKNOWN";
             ReleaseDate = null;
             Overview = "UNKNOWN";
             Rating = 0;
         }
 
-        public SearchItem(SearchBase baseItem)
-        {
-            Id = baseItem.Id;
-            MediaType = baseItem.MediaType;
-        }
-
         public SearchItem(SearchMovie movie)
         {
+            MediaType = MediaType.Movie;
             Id = movie.Id;
             ResultName = movie.OriginalTitle;
             ReleaseDate = movie.ReleaseDate.HasValue ? movie.ReleaseDate.Value : DateTime.Now;
@@ -44,6 +41,7 @@ namespace MovieTracker.TMDbModel.ModelObjects
 
         public SearchItem(SearchTv show)
         {
+            MediaType = MediaType.Tv;
             Id = show.Id;
             ResultName = show.OriginalName;
             ReleaseDate = show.FirstAirDate;
@@ -54,9 +52,9 @@ namespace MovieTracker.TMDbModel.ModelObjects
 
         public SearchItem(SearchPerson person)
         {
+            MediaType = MediaType.Person;
             Id = person.Id;
             ResultName = person.Name;
-            Overview = "Overview";
             ImageUri = ModelUtils.GetImageUri(person.ProfilePath ?? string.Empty);
         }
     }

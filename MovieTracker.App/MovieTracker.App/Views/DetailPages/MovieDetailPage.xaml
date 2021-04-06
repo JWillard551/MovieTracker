@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <converters:RuntimeToFormattedStringConverter x:Key="RuntimeConverter" />
             <converters:CurrencyFormatConverter x:Key="CurrencyFormatConverter" />
+            <converters:GenreToFormattedStringConverter x:Key="GenreFormatConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -51,7 +52,7 @@
                 </Label.FormattedText>
             </Label>
 
-            <Label Text="{Binding MovieInfo.Title}"
+            <Label Text="{Binding MovieInfo.Tagline}"
                    Padding="5,0,0,0"
                    FontAttributes="Italic" />
         </StackLayout>
@@ -114,13 +115,13 @@
                            BackgroundColor="LightCoral"
                            Margin="0"
                            Padding="2">
-                        <!--<Label Text="{Binding MovieInfo.MovieRating}"
+                        <Label Text="{Binding Rating}"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
-                               VerticalOptions="Center" />-->
+                               VerticalOptions="Center" />
                     </Frame>
                     <Label Grid.Column="1"
-                           Text="{Binding MovieInfo.Genres}"
+                           Text="{Binding MovieInfo.Genres, Converter={StaticResource GenreFormatConverter}, Mode=OneWay}"
                            MaxLines="5"
                            LineBreakMode="TailTruncation" />
                 </Grid>

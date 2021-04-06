@@ -14,12 +14,12 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
 
         public List<ShowItemViewModel> WatchlistShows { get; set; }
 
-        public ShowWatchlistViewModel(string sessionId)
+        public ShowWatchlistViewModel()
         {
-            Initialization = InitializeAsync(sessionId);
+            Initialization = InitializeAsync();
         }
 
-        private async Task InitializeAsync(string sessionId)
+        private async Task InitializeAsync()
         {
             var shows = await TMDbService.AccountGetTvWatchlistAsync();
             WatchlistShows = shows.Results.Select(show => new ShowItemViewModel(show)).ToList();
