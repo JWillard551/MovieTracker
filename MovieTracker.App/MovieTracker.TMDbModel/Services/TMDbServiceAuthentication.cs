@@ -26,7 +26,10 @@ namespace MovieTracker.TMDbModel.Services
 
                 UserSession userSession = await TMDbServiceClient.Instance.AuthenticationGetUserSessionAsync(creds.Username, creds.Password);
                 if (userSession != null)
+                {
                     await SaveSessionIDAsync(userSession.SessionId);
+                    await SetActiveSessionIDAsync(userSession.SessionId);
+                }
                 else
                     return new OperationResult(false, "Could not authenticate with TMDb.");
 
@@ -81,7 +84,7 @@ namespace MovieTracker.TMDbModel.Services
                 if (string.IsNullOrWhiteSpace(sessionID))
                     return false;
 
-                await SetActiveSessionID(sessionID);
+                await SetActiveSessionIDAsync(sessionID);
                 return true;
             }
             catch
@@ -144,11 +147,9 @@ namespace MovieTracker.TMDbModel.Services
         /// </summary>
         /// <param name="id">Session ID to be set.</param>
         /// <returns></returns>
-        private async Task SetActiveSessionID(string id)
+        private async Task SetActiveSessionIDAsync(string id)
         {
-            TMDbServiceClient.Instance.SetSessionInformation(id, SessionType.UserSession);
-            // v 1.8.0
-            //await TMDbServiceClient.Instance.SetSessionInformationAsync(sessionID, TMDbLib.Objects.Authentication.SessionType.UserSession);
+            await TMDbServiceClient.Instance.SetSessionInformationAsync(id, TMDbLib.Objects.Authentication.SessionType.UserSession);
         }
 
         /// <summary>

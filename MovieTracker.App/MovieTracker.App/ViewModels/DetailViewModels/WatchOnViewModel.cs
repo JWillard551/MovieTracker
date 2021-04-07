@@ -1,12 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿using MovieTracker.TMDbModel.AdditionalModelObjects;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using TMDbLib.Objects.General;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels
 {
     public class WatchOnViewModel : BaseViewModel, IDetailViewModel
     {
-        //TODO: This is hella confusing. Need to relook at this and better organize the class structure.
-        //public ProviderModelDetails ProviderDetails { get; set; }
-        //public List<ProviderLists> ProviderLists { get; set; }
+        public SingleResultContainer<Dictionary<string, WatchProviders>> Providers { get; set; }
+        private WatchProviders RegionWatchProvider { get; set; }
+        public List<ProviderLists> ProviderLists { get; set; }
         public Task Initialization { get; private set; }
 
         public WatchOnViewModel(int id)
@@ -16,20 +20,22 @@ namespace MovieTracker.App.ViewModels.DetailViewModels
 
         public async Task InitializeAsync(int id)
         {
-            //ProviderDetails = await TMDbServiceClientHelper.GetMovieProvidersById(id, new System.Threading.CancellationToken());
-            //ProviderLists = new List<ProviderLists>();
-            //try
-            //{
-            //    if (ProviderDetails?.Flatrate != null)
-            //        ProviderLists.Add(new ProviderLists("Stream", ProviderDetails.Flatrate.OrderBy(provider => provider.DisplayPriority)));
-            //    if (ProviderDetails?.Rent != null)
-            //        ProviderLists.Add(new ProviderLists("Rent", ProviderDetails.Rent.OrderBy(provider => provider.DisplayPriority)));
-            //    if (ProviderDetails?.Buy != null)
-            //        ProviderLists.Add(new ProviderLists("Buy", ProviderDetails.Buy.OrderBy(provider => provider.DisplayPriority)));
-            //}
-            //catch (Exception ex)
-            //{
-            //}
+            Providers = await TMDbService.GetMovieWatchProvidersAsync(id, new System.Threading.CancellationToken());
+
+            ProviderLists = new List<ProviderLists>();
+            if (Providers?.Results?.ContainsKey("US") ?? false)
+            {
+                RegionWatchProvider = Providers.Results["US"];
+                if (RegionWatchProvider?.FlatRate?.Any() ?? false)
+                    ProviderLists.Add(new ProviderLists("Stream", RegionWatchProvider.FlatRate.OrderBy(x => x.DisplayPriority).Select(item => new ProviderItem(item)).ToList()));
+                if (RegionWatchProvider?.Ads?.Any() ?? false)
+                    ProviderLists.Add(new ProviderLists("Ads", RegionWatchProvider.Ads.OrderBy(x => x.DisplayPriority).Select(item => new ProviderItem(item)).ToList()));
+                if (RegionWatchProvider?.Rent?.Any() ?? false)
+                    ProviderLists.Add(new ProviderLists("Rent", RegionWatchProvider.Rent.OrderBy(x => x.DisplayPriority).Select(item => new ProviderItem(item)).ToList()));
+                if (RegionWatchProvider?.Buy?.Any() ?? false)
+                    ProviderLists.Add(new ProviderLists("Buy", RegionWatchProvider.Buy.OrderBy(x => x.DisplayPriority).Select(item => new ProviderItem(item)).ToList()));
+                
+            }
         }
     }
 }
