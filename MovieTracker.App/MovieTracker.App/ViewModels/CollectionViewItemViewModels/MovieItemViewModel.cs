@@ -11,4 +11,14 @@ namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
             Movie = movie;
         }
     }
+
+    public class RatedMovieItemViewModel : MovieItemViewModel
+    {
+        public double Rating { get; set; }
+
+        public RatedMovieItemViewModel(SearchMovieWithRating ratedMovie) : base(ratedMovie)
+        {
+            Rating = ratedMovie.Rating;
+        }
+    }
 }

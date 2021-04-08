@@ -1,6 +1,4 @@
-﻿using MovieTracker.App.Models;
-using MovieTracker.App.Services;
-using MovieTracker.TMDbModel.Services;
+﻿using MovieTracker.TMDbModel.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

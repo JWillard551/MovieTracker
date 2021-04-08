@@ -5,23 +5,23 @@ using System.Threading.Tasks;
 
 namespace MovieTracker.App.ViewModels.TabbedPageViewModels
 {
-    public class WatchlistTabbedViewModel : BaseViewModel, IDetailViewModel
+    public class FavoritesTabbedPageViewModel : BaseViewModel, IDetailViewModel
     {
         public Task Initialization { get; private set; }
 
-        public MovieWatchlistViewModel MovieViewModel { get; set; }
+        public MovieFavoritesViewModel MovieViewModel { get; set; }
 
-        public ShowWatchlistViewModel ShowViewModel { get; set; }
+        public ShowFavoritesViewModel ShowViewModel { get; set; }
 
-        public WatchlistTabbedViewModel()
+        public FavoritesTabbedPageViewModel()
         {
             Initialization = InitializeAsync();
         }
 
         private async Task InitializeAsync()
         {
-            MovieViewModel = new MovieWatchlistViewModel();
-            ShowViewModel = new ShowWatchlistViewModel();
+            MovieViewModel = new MovieFavoritesViewModel();
+            ShowViewModel = new ShowFavoritesViewModel();
             await Task.WhenAll(MovieViewModel.Initialization, ShowViewModel.Initialization);
         }
     }

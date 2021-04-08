@@ -1,4 +1,6 @@
 ﻿using MovieTracker.App.ViewModels.DetailViewModels;
+using MovieTracker.App.ViewModels.DetailViewModels.Common;
+using MovieTracker.App.ViewModels.DetailViewModels.Movie;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;

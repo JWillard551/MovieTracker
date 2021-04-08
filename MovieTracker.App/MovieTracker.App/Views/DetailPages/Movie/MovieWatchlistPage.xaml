@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.App.Views.DetailPages.Movie.MovieWatchlistPage"
+             xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Movie"
+             xmlns:views="clr-namespace:MovieTracker.App.Views.CollectionItemViews"
+             x:DataType="viewModel:MovieWatchlistViewModel">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <CollectionView x:Name="cv"
+                        ItemsSource="{Binding WatchlistMovies}"
+                        VerticalScrollBarVisibility="Always"
+                        Margin="0">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="00"
+                                   Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <views:WatchlistMovieView />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <ActivityIndicator Color="Navy"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           Margin="0,0,0,20"
+                           InputTransparent="True" />
+    </Grid>
+</ContentPage>

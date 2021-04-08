@@ -2,11 +2,12 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.TabbedPages.WatchlistTabbedPage"
-            xmlns:detailPages="clr-namespace:MovieTracker.App.Views.DetailPages"
+            xmlns:movieDetailPages="clr-namespace:MovieTracker.App.Views.DetailPages.Movie"
+            xmlns:showDetailPages="clr-namespace:MovieTracker.App.Views.DetailPages.Show"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             BarBackgroundColor="Black"
             BarTextColor="White">
-    <detailPages:MovieWatchlistPage x:Name="movieTab" Title="Movies"/>
-    <detailPages:ShowWatchlistPage x:Name="showTab" Title="TV Shows"/>
+    <movieDetailPages:MovieWatchlistPage x:Name="movieTab" Title="Movies"/>
+    <showDetailPages:ShowWatchlistPage x:Name="showTab" Title="TV Shows"/>
 </TabbedPage>

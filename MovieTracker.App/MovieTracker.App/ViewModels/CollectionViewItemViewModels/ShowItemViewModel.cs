@@ -11,4 +11,14 @@ namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
             Show = show;
         }
     }
+
+    public class RatedShowItemViewModel : ShowItemViewModel
+    {
+        public double Rating { get; set; }
+
+        public RatedShowItemViewModel(AccountSearchTv ratedShow) : base(ratedShow)
+        {
+            Rating = ratedShow.Rating;
+        }
+    }
 }
