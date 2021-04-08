@@ -49,6 +49,11 @@ namespace MovieTracker.App.Droid.Renderers
             paintObj.SetStyle(Paint.Style.Stroke);
             paintObj.StrokeWidth = pathWidth;
             paintObj.Color = view.LineColor.ToAndroid();
+            paintObj.Dither = true;
+            paintObj.StrokeJoin = Paint.Join.Round;
+            paintObj.SetPathEffect(new CornerPathEffect(paintObj.StrokeWidth));
+            paintObj.StrokeCap = Paint.Cap.Round;
+            paintObj.AntiAlias = true;
 
             //We're representing the rating as a percentage. To display it as a degree, we multiply our percentage by 360.
             var progressPercent = (float)((view.CurrentProgress / 100) * 360f);

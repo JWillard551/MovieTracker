@@ -1,5 +1,4 @@
 ﻿using MovieTracker.TMDbModel.Client;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,9 +32,9 @@ namespace MovieTracker.TMDbModel.Services
             return await TMDbServiceClient.Instance.GetMovieWatchProvidersAsync(movieId, cancellationToken);
         }
 
-        public Task<Person> GetPersonAsync(int personId, PersonMethods extraMethods = PersonMethods.Undefined, CancellationToken cancellationToken = default)
+        public async Task<Person> GetPersonAsync(int personId, PersonMethods extraMethods = PersonMethods.Undefined, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await TMDbServiceClient.Instance.GetPersonAsync(personId, extraMethods, cancellationToken);
         }
 
         public async Task<SearchContainer<SearchMovie>> GetPopularMoviesAsync(string language, int page, CancellationToken cancellationToken = default)
@@ -58,14 +57,9 @@ namespace MovieTracker.TMDbModel.Services
             return await TMDbServiceClient.Instance.GetTrendingTvAsync(timeWindow, page, cancellationToken);
         }
 
-        public Task<TvShow> GetTVShowAsync(int showId, TvShowMethods extraMethods = TvShowMethods.Undefined, CancellationToken cancellationToken = default)
+        public async Task<TvShow> GetTVShowAsync(int showId, TvShowMethods extraMethods = TvShowMethods.Undefined, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
-        }
-
-        public void PopulateSearchResultFromResourceAsync(SearchBase searchBase)
-        {
-            throw new NotImplementedException();
+            return await TMDbServiceClient.Instance.GetTvShowAsync(showId, extraMethods, null, null, cancellationToken);
         }
 
         public async Task<SearchContainer<SearchBase>> SearchAsync(string query, CancellationToken cancellationToken = default)

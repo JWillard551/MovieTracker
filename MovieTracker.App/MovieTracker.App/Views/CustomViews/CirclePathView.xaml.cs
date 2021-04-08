@@ -11,7 +11,7 @@ namespace MovieTracker.App.Views.CustomViews
         public static BindableProperty MinValueProperty = BindableProperty.Create(nameof(MinValue), typeof(double), typeof(CirclePathView), 1.0d);
         public static BindableProperty MaxValueProperty = BindableProperty.Create(nameof(MaxValue), typeof(double), typeof(CirclePathView), 1.0d);
         public static BindableProperty CurrentProgressProperty = BindableProperty.Create(nameof(CurrentProgress), typeof(double), typeof(CirclePathView), 1.0d);
-        public static BindableProperty LineColorProperty = BindableProperty.Create(nameof(LineColor), typeof(Color), typeof(CirclePathView), Color.Green);
+        public static BindableProperty LineColorProperty = BindableProperty.Create(nameof(LineColor), typeof(Color), typeof(CirclePathView), Color.FromHex("FFFFFF"));
 
         /// <summary>
         /// The minimum value of the gauge's total progress.

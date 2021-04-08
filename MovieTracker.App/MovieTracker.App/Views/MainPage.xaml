@@ -4,8 +4,8 @@
              x:Class="MovieTracker.App.Views.MainPage"
              xmlns:views="clr-namespace:MovieTracker.App.Views"
              Shell.NavBarIsVisible="True">
-    
-    <Grid BackgroundColor="{StaticResource Primary}">
+
+    <Grid BackgroundColor="Black">
         
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

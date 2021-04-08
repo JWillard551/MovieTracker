@@ -24,13 +24,13 @@
                    Style="{StaticResource ImageFrameStyle}"
                    HorizontalOptions="Start"
                    VerticalOptions="Start"
+                   Padding="0"
                    BackgroundColor="{StaticResource Secondary}" />
 
             <ffImage:CachedImage Grid.Column="0"
                                  x:Name="cachedImage"
-                                 HorizontalOptions="Start"
-                                 VerticalOptions="Start"
-                                 Aspect="AspectFill">
+                                 HorizontalOptions="CenterAndExpand"
+                                 VerticalOptions="CenterAndExpand">
             </ffImage:CachedImage>
 
             <StackLayout Grid.Column="1"

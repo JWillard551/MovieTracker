@@ -13,7 +13,8 @@
         <CollectionView x:Name="cv"
                         ItemsSource="{Binding WatchlistShows}"
                         VerticalScrollBarVisibility="Always"
-                        Margin="0">
+                        Margin="0"
+                        BackgroundColor="Black">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="00"

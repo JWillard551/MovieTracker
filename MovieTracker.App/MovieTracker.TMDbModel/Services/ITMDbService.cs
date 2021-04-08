@@ -1,10 +1,8 @@
 ﻿using MovieTracker.TMDbModel.AdditionalModelObjects;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using TMDbLib.Objects.Account;
-using TMDbLib.Objects.Authentication;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.People;
@@ -33,8 +31,6 @@ namespace MovieTracker.TMDbModel.Services
         Task<SearchContainer<SearchBase>> SearchAsync(string query, CancellationToken cancellationToken = default);
 
         void UpdateQueryAndPage(string query);
-
-        void PopulateSearchResultFromResourceAsync(SearchBase searchBase);
 
         Task<Movie> GetMovieAsync(int movieId, MovieMethods extraMethods = MovieMethods.Undefined, CancellationToken cancellationToken = default);
 

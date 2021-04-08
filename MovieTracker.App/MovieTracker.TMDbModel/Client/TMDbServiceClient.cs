@@ -22,6 +22,7 @@ namespace MovieTracker.TMDbModel.Client
         ~TMDbServiceClient()
         {
             Client.Instance.Dispose();
+            Client.ExtendedInstance.Dispose();
         }
     }
 }

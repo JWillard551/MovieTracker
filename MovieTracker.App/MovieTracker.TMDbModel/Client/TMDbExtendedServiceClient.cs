@@ -47,20 +47,20 @@ namespace MovieTracker.TMDbModel.Client
             };
         }
 
-        public Task<T> GetAsync<T>(string cmd, IDictionary<string, object> parameters, CancellationToken cancellationToken)
+        private Task<T> GetAsync<T>(string cmd, IDictionary<string, object> parameters, CancellationToken cancellationToken)
         {
             return this.client.GetAsync(CreateRequestUri(cmd, parameters), HttpCompletionOption.ResponseHeadersRead, cancellationToken)
             .ContinueWith(t => DeserializeAsync<T>(t.Result))
             .Unwrap();
         }
 
-        public Task<T> DeleteAsync<T>(string cmd, IDictionary<string, object> parameters, IDictionary<string, object> content, CancellationToken cancellationToken)
+        private Task<T> DeleteAsync<T>(string cmd, IDictionary<string, object> parameters, IDictionary<string, object> content, CancellationToken cancellationToken)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, CreateRequestUri(cmd, parameters)) { Content = Serialize(content) };
             return this.client.SendAsync(httpRequest, cancellationToken).ContinueWith(t => DeserializeAsync<T>(t.Result)).Unwrap();
         }
 
-        public Task<T> PostAsync<T>(string cmd, IDictionary<string, object> parameters, IDictionary<string, object> content, CancellationToken cancellationToken)
+        private Task<T> PostAsync<T>(string cmd, IDictionary<string, object> parameters, IDictionary<string, object> content, CancellationToken cancellationToken)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, CreateRequestUri(cmd, parameters)) { Content = Serialize(content) };
             return this.client.SendAsync(httpRequest, cancellationToken).ContinueWith(t => DeserializeAsync<T>(t.Result)).Unwrap();

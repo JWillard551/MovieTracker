@@ -29,10 +29,11 @@
         <CollectionView
             x:Name="cv"
             ItemsSource="{Binding ItemsToDisplay}"
-            RemainingItemsThreshold="5"
+            RemainingItemsThreshold="8"
             RemainingItemsThresholdReachedCommand="{Binding LoadMoreItemsCommand}"
             VerticalScrollBarVisibility="Always"
-            Margin="0">
+            Margin="0"
+            BackgroundColor="Black">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout 
