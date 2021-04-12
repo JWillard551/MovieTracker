@@ -24,6 +24,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
                     return null;
             }
         }
+
         public Task Initialization { get; private set; }
 
         public Command PlayTrailerCommand { get; private set; }

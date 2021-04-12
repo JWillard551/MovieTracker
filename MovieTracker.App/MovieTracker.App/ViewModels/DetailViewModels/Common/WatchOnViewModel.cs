@@ -13,14 +13,14 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Common
         public List<ProviderLists> ProviderLists { get; set; }
         public Task Initialization { get; private set; }
 
-        public WatchOnViewModel(int id)
+        public WatchOnViewModel(int id, MediaType mediaType)
         {
-            Initialization = InitializeAsync(id);
+            Initialization = InitializeAsync(id, mediaType);
         }
 
-        public async Task InitializeAsync(int id)
+        public async Task InitializeAsync(int id, MediaType mediaType)
         {
-            Providers = await TMDbService.GetMovieWatchProvidersAsync(id, new System.Threading.CancellationToken());
+            Providers = await TMDbService.GetWatchProvidersAsync(id, mediaType, new System.Threading.CancellationToken());
 
             ProviderLists = new List<ProviderLists>();
             if (Providers?.Results?.ContainsKey("US") ?? false)

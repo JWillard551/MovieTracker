@@ -19,6 +19,7 @@ namespace MovieTracker.App
             InitializeComponent();
             Routing.RegisterRoute(nameof(SearchOptionsPage), typeof(SearchOptionsPage));
             Routing.RegisterRoute(nameof(MovieTabbedPage), typeof(MovieTabbedPage));
+            Routing.RegisterRoute(nameof(ShowTabbedPage), typeof(ShowTabbedPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

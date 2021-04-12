@@ -16,7 +16,7 @@ namespace MovieTracker.App.Views.CustomViews
         public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty TagLineProperty = BindableProperty.Create(nameof(TagLine), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty RatingProperty = BindableProperty.Create(nameof(Rating), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
-        public static readonly BindableProperty RuntimeProperty = BindableProperty.Create(nameof(Runtime), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
+        public static readonly BindableProperty RuntimeOrNumSeasonsProperty = BindableProperty.Create(nameof(RuntimeOrNumSeasons), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty ReleaseDateProperty = BindableProperty.Create(nameof(ReleaseDate), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty StatusProperty = BindableProperty.Create(nameof(Status), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty OriginalLanguageProperty = BindableProperty.Create(nameof(OriginalLanguage), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
@@ -42,10 +42,10 @@ namespace MovieTracker.App.Views.CustomViews
             set => SetValue(RatingProperty, value);
         }
 
-        public string Runtime
+        public string RuntimeOrNumSeasons
         {
-            get => (string)GetValue(RuntimeProperty);
-            set => SetValue(RuntimeProperty, value);
+            get => (string)GetValue(RuntimeOrNumSeasonsProperty);
+            set => SetValue(RuntimeOrNumSeasonsProperty, value);
         }
 
         public string ReleaseDate

@@ -3,6 +3,7 @@ using MovieTracker.App.ViewModels.DetailViewModels.Common;
 using MovieTracker.App.ViewModels.DetailViewModels.Show;
 using System;
 using System.Threading.Tasks;
+using TMDbLib.Objects.General;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.TabbedPageViewModels
@@ -11,7 +12,7 @@ namespace MovieTracker.App.ViewModels.TabbedPageViewModels
     {
         public ShowDetailViewModel Tab1 { get; set; }
 
-        public CastAndCrewViewModel Tab2 { get; set; }
+        public TvCastAndCrewViewModel Tab2 { get; set; }
 
         public WatchOnViewModel Tab3 { get; set; }
 
@@ -34,8 +35,8 @@ namespace MovieTracker.App.ViewModels.TabbedPageViewModels
         {
             //Handle initialization for the movie info.
             Tab1 = new ShowDetailViewModel(id);
-            Tab2 = new CastAndCrewViewModel(id);
-            Tab3 = new WatchOnViewModel(id);
+            Tab2 = new TvCastAndCrewViewModel(id);
+            Tab3 = new WatchOnViewModel(id, MediaType.Tv);
             await Task.WhenAll(Tab1.Initialization, Tab2.Initialization, Tab3.Initialization);
         }
     }

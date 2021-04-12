@@ -11,7 +11,7 @@ namespace MovieTracker.App.Views.TabbedPages
     public partial class MovieTabbedPage : TabbedPage
     {
         private string _movieID;
-        private MovieTabbedPageViewModel _tabbedPage;
+        private MovieTabbedPageViewModel _viewModel;
         public string MovieID
         {
             get => _movieID;
@@ -30,13 +30,13 @@ namespace MovieTracker.App.Views.TabbedPages
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            _tabbedPage = new MovieTabbedPageViewModel(Convert.ToInt32(MovieID));
-            await _tabbedPage.Initialization;
-            BindingContext = _tabbedPage;
-            movieDetail.BindingContext = _tabbedPage.Tab1;
-            castCrew.BindingContext = _tabbedPage.Tab2;
-            watchOn.BindingContext = _tabbedPage.Tab3;
-            _tabbedPage.Tab1.IsLoaded = true;
+            _viewModel = new MovieTabbedPageViewModel(Convert.ToInt32(MovieID));
+            await _viewModel.Initialization;
+            BindingContext = _viewModel;
+            movieDetail.BindingContext = _viewModel.Tab1;
+            castCrew.BindingContext = _viewModel.Tab2;
+            watchOn.BindingContext = _viewModel.Tab3;
+            _viewModel.Tab1.IsLoaded = true;
         }
     }
 }

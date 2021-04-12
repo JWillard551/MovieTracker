@@ -6,7 +6,7 @@ using TMDbLib.Objects.Movies;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Common
 {
-    public class CastAndCrewViewModel : BaseViewModel, IDetailViewModel
+    public class MovieCastAndCrewViewModel : BaseViewModel, IDetailViewModel
     {
         public Task Initialization { get; private set; }
 
@@ -14,7 +14,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Common
 
         public List<MediaCredits> MediaCast { get; set; } = new List<MediaCredits>();
 
-        public CastAndCrewViewModel(int id)
+        public MovieCastAndCrewViewModel(int id)
         {
             Initialization = InitializeAsync(id);
         }

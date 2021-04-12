@@ -2,17 +2,65 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.DetailPages.Show.ShowDetailPage"
-             xmlns:local="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Show">
-    <ContentPage.Content>
-        <StackLayout x:DataType="local:ShowDetailViewModel">
-            <Label Text="{Binding ShowInfo.Name}"
-                   TextColor="Blue"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Label Text="TEST"
-                   TextColor="Black"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand"/>
-        </StackLayout>
-    </ContentPage.Content>
+             xmlns:app="clr-namespace:MovieTracker.App"
+             xmlns:local="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Show"
+             xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
+             xmlns:converters="clr-namespace:MovieTracker.App.Converters">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <app:SharedResources />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:NumberOfSeasonsToFormattedStringConverter x:Key="NumberOfSeasonsConverter" />
+            <converters:CurrencyFormatConverter x:Key="CurrencyFormatConverter" />
+            <converters:GenreToFormattedStringConverter x:Key="GenreFormatConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid x:DataType="local:ShowDetailViewModel"
+          BackgroundColor="Black">
+        <Grid.RowDefinitions>
+            <!--Main Detail Card Row-->
+            <RowDefinition Height="1.75*" />
+            <!--Button Details Row-->
+            <RowDefinition Height="Auto" />
+            <!--Overview Row-->
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--Main Detail Card Row-->
+        <customViews:MainDetailCard Grid.Row="0"
+                                    Margin="5,5,5,2"
+                                    Title="{Binding ShowInfo.OriginalName}"
+                                    ReleaseDate="{Binding ShowInfo.FirstAirDate, StringFormat='({0:yyyy})'}"
+                                    TagLine="{Binding ShowInfo.Tagline}"
+                                    Rating="{Binding Rating}"
+                                    RuntimeOrNumSeasons="{Binding ShowInfo.NumberOfSeasons, Converter={StaticResource NumberOfSeasonsConverter}, Mode=OneWay}"
+                                    Genres="{Binding ShowInfo.Genres, Converter={StaticResource GenreFormatConverter}, Mode=OneWay}"
+                                    Status="{Binding ShowInfo.Status}"
+                                    OriginalLanguage="{Binding ShowInfo.OriginalLanguage}"
+                                    RadialGaugeBindingContext="{Binding RadialGaugeViewModel}"
+                                    UriImage="{Binding UriImage}"
+                                    ControlTemplate="{StaticResource MainDetailCardTemplate}" />
+
+        <!--Buttons Row-->
+        <customViews:DetailButtons Grid.Row="1"
+                                   Margin="5,2,5,2"
+                                   PlayTrailerCommand="{Binding PlayTrailerCommand}"
+                                   PlayTrailerButtonVisible="True"
+                                   AddToWatchlistCommand="{Binding AddToWatchListCommand}"
+                                   AddToWatchlistButtonVisible="True"
+                                   AddToFavoritesCommand="{Binding AddToFavoritesCommand}"
+                                   AddToFavoritesButtonVisible="True"
+                                   RateCommand="{Binding RateCommand}"
+                                   RateButtonVisible="True"
+                                   ControlTemplate="{StaticResource DetailButtonsTemplate}" />
+
+        <!--Overview Row-->
+        <customViews:OverviewDetailCard Grid.Row="2"
+                                        Margin="5,2,5,2"
+                                        Overview="{Binding ShowInfo.Overview}"
+                                        ControlTemplate="{StaticResource OverviewDetailCardTemplate}" />
+    </Grid>
 </ContentPage>

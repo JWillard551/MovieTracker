@@ -5,9 +5,7 @@
              xmlns:app="clr-namespace:MovieTracker.App"
              xmlns:local="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Movie"
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
-             xmlns:converters="clr-namespace:MovieTracker.App.Converters"
-             xmlns:controls="clr-namespace:MovieTracker.App.Controls"
-             xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+             xmlns:converters="clr-namespace:MovieTracker.App.Converters">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -38,7 +36,7 @@
                                     ReleaseDate="{Binding MovieInfo.ReleaseDate, StringFormat='({0:yyyy})'}"
                                     TagLine="{Binding MovieInfo.Tagline}"
                                     Rating="{Binding Rating}"
-                                    Runtime="{Binding MovieInfo.Runtime, Converter={StaticResource RuntimeConverter}, Mode=OneWay}"
+                                    RuntimeOrNumSeasons="{Binding MovieInfo.Runtime, Converter={StaticResource RuntimeConverter}, Mode=OneWay}"
                                     Genres="{Binding MovieInfo.Genres, Converter={StaticResource GenreFormatConverter}, Mode=OneWay}"
                                     Status="{Binding MovieInfo.Status}"
                                     OriginalLanguage="{Binding MovieInfo.OriginalLanguage}"

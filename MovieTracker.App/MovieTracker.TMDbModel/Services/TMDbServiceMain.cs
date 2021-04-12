@@ -27,9 +27,15 @@ namespace MovieTracker.TMDbModel.Services
             return await TMDbServiceClient.Instance.GetMovieAsync(movieId, extraMethods, cancellationToken);
         }
 
-        public async Task<SingleResultContainer<Dictionary<string, WatchProviders>>> GetMovieWatchProvidersAsync(int movieId, CancellationToken cancellationToken = default)
+        public async Task<SingleResultContainer<Dictionary<string, WatchProviders>>> GetWatchProvidersAsync(int mediaId, MediaType mediaType, CancellationToken cancellationToken = default)
         {
-            return await TMDbServiceClient.Instance.GetMovieWatchProvidersAsync(movieId, cancellationToken);
+            if (mediaType == MediaType.Movie)
+                return await TMDbServiceClient.Instance.GetMovieWatchProvidersAsync(mediaId, cancellationToken);
+
+            if (mediaType == MediaType.Tv)
+                return await TMDbServiceClient.Instance.GetTvShowWatchProvidersAsync(mediaId, cancellationToken);
+
+            return new SingleResultContainer<Dictionary<string, WatchProviders>>();
         }
 
         public async Task<Person> GetPersonAsync(int personId, PersonMethods extraMethods = PersonMethods.Undefined, CancellationToken cancellationToken = default)

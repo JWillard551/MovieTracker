@@ -59,7 +59,7 @@ namespace MovieTracker.App.ViewModels
             }
             else if (searchItem.MediaType == MediaType.Tv)
             {
-                //Create ShowDetailViewModel + Push ShowDetailPage
+                await Shell.Current.GoToAsync($"{nameof(ShowTabbedPage)}?ShowID={searchItem.Id}");
             }
             else if (searchItem.MediaType == MediaType.Person)
             {

@@ -34,7 +34,7 @@ namespace MovieTracker.TMDbModel.Services
 
         Task<Movie> GetMovieAsync(int movieId, MovieMethods extraMethods = MovieMethods.Undefined, CancellationToken cancellationToken = default);
 
-        Task<SingleResultContainer<Dictionary<string, WatchProviders>>> GetMovieWatchProvidersAsync(int movieId, CancellationToken cancellationToken = default);
+        Task<SingleResultContainer<Dictionary<string, WatchProviders>>> GetWatchProvidersAsync(int mediaId, MediaType mediaType, CancellationToken cancellationToken = default);
 
         Task<SearchContainer<SearchMovie>> GetPopularMoviesAsync(string language, int page, CancellationToken cancellationToken = default);
 

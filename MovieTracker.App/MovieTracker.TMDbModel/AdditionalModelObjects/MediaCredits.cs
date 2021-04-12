@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMDbLib.Objects.General;
-using TMDbLib.Objects.Movies;
 
 namespace MovieTracker.TMDbModel.AdditionalModelObjects
 {
@@ -23,10 +22,15 @@ namespace MovieTracker.TMDbModel.AdditionalModelObjects
 		//Cast Properties
 		public string Character { get; set; }
 
-		public MediaCredit(Credits credit)
+		public MediaCredit(TMDbLib.Objects.Movies.Credits credit)
 		{
 			Id = credit.Id;
 		}
+
+		public MediaCredit(TMDbLib.Objects.TvShows.Credits credit)
+        {
+			Id = credit.Id;
+        }
 
 		public MediaCredit(Crew crew)
 		{
@@ -39,8 +43,19 @@ namespace MovieTracker.TMDbModel.AdditionalModelObjects
 			Character = string.Empty;
 		}
 
-		public MediaCredit(Cast cast)
+		public MediaCredit(TMDbLib.Objects.Movies.Cast cast)
 		{
+			Id = cast.Id;
+			CreditId = cast.CreditId;
+			Name = cast.Name;
+			Profile = ModelUtils.GetSmallImageUri(cast.ProfilePath);
+			Department = string.Empty;
+			Job = string.Empty;
+			Character = cast.Character;
+		}
+
+		public MediaCredit(TMDbLib.Objects.TvShows.Cast cast)
+        {
 			Id = cast.Id;
 			CreditId = cast.CreditId;
 			Name = cast.Name;
