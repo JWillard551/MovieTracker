@@ -60,10 +60,6 @@ namespace MovieTracker.App.ViewModels
             Items = new List<SearchResultViewModel>();
             var results = await TMDbService.SearchAsync(CurrentQuery, new CancellationToken());
 
-            var movies = results.Results.OfType<SearchMovie>().ToList();
-            var tvs = results.Results.OfType<SearchTv>().ToList();
-            var persons = results.Results.OfType<SearchPerson>().ToList();
-
             foreach (var res in results.Results)
             {
 

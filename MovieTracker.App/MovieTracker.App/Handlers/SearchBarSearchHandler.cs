@@ -13,7 +13,7 @@ namespace MovieTracker.App.Handlers
             SearchBoxVisibility = SearchBoxVisibility.Expanded;
             IsSearchEnabled = true;
             ShowsResults = false;
-            Placeholder = "Find a movie, show, or person";
+            Placeholder = "Find a movie or show";
             PlaceholderColor = Color.LightGray;
             CancelButtonColor = Color.LightGray;
             TextColor = Color.Black;

@@ -10,6 +10,8 @@ namespace MovieTracker.App.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+                return null;
             TimeSpan t = TimeSpan.FromMinutes((int)value);
             return string.Format($"{t.Hours}h {t.Minutes}m");
         }

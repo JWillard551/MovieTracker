@@ -1,5 +1,6 @@
 ﻿using MovieTracker.TMDbModel.Client;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TMDbLib.Objects.General;
@@ -72,6 +73,7 @@ namespace MovieTracker.TMDbModel.Services
         {
             UpdateQueryAndPage(query);
             var results = await TMDbServiceClient.Instance.SearchMultiAsync(CurrentQuery, CurrentPage, false, 0, null, cancellationToken);
+            results.Results = results.Results.Where(x => !(x is SearchPerson)).ToList();
             TotalPages = results.TotalPages;
             TotalResults = results.TotalResults;
             return results;
