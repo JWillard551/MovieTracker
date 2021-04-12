@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieTracker.TMDbModel.Utils;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,9 +13,20 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
         public TMDbLib.Objects.Movies.Movie MovieInfo { get; set; }
 
         public string Rating { get; set; } = "NR";
+
+        public UriImageSource UriImage 
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(MovieInfo?.PosterPath))
+                    return new UriImageSource() { Uri = ModelUtils.GetImageUri(MovieInfo.PosterPath) };
+                else
+                    return null;
+            }
+        }
         public Task Initialization { get; private set; }
 
-        public Command AddToListCommand { get; private set; }
+        public Command PlayTrailerCommand { get; private set; }
 
         public Command AddToWatchListCommand { get; private set; }
 
@@ -46,7 +58,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
                 MaxValue = 100,
                 CurrentProgress = Convert.ToDouble(MovieInfo.VoteAverage * 10)
             };
-            AddToListCommand = new Command(OnAddToListSelected);
+            PlayTrailerCommand = new Command(OnPlayTrailerSelected);
             AddToWatchListCommand = new Command(OnAddToWatchlistSelected);
             AddToFavoritesCommand = new Command(OnAddToFavoritesSelected);
             RateCommand = new Command(OnRateSelected);
@@ -60,7 +72,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
             return rating;
         }
 
-        private async void OnAddToListSelected()
+        private async void OnPlayTrailerSelected()
         {
 
         }

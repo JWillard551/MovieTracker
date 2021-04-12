@@ -6,7 +6,9 @@
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
              xmlns:converters="clr-namespace:MovieTracker.App.Converters"
              HorizontalOptions="Center"
-             VerticalOptions="Center">
+             VerticalOptions="Center"
+             HeightRequest="50"
+             WidthRequest="50">
 
     <ContentView.Resources>
         <ResourceDictionary>

@@ -1,5 +1,213 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    x:Class="MovieTracker.App.SharedResources">
+                    x:Class="MovieTracker.App.SharedResources"
+                    xmlns:controls="clr-namespace:MovieTracker.App.Controls"
+                    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                    xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews">
+
+    <ControlTemplate x:Key="MainDetailCardTemplate">
+        <Frame Margin="0"
+               Padding="0"
+               CornerRadius="5"
+               HasShadow="True"
+               BackgroundColor="{StaticResource Primary}">
+            <Grid Margin="5">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--Title / TagLine-->
+                <StackLayout Grid.Row="0"
+                             Grid.Column="0"
+                             Grid.ColumnSpan="2">
+                    <Label MaxLines="2"
+                           LineBreakMode="WordWrap"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="End">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{TemplateBinding Title}"
+                                      FontAttributes="Bold"
+                                      FontSize="18" />
+                                <Span Text=" " />
+                                <Span Text="{TemplateBinding ReleaseDate}"
+                                      FontAttributes="Bold"
+                                      FontSize="16" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="{TemplateBinding TagLine}"
+                           Padding="5,0,0,0"
+                           FontAttributes="Italic" />
+                </StackLayout>
+
+                <!--Image-->
+                <StackLayout Grid.Row="1"
+                             Grid.RowSpan="2"
+                             Grid.Column="0"
+                             Padding="5"
+                             HorizontalOptions="StartAndExpand"
+                             VerticalOptions="StartAndExpand">
+                    <Frame HasShadow="True"
+                           Margin="0"
+                           Padding="0"
+                           CornerRadius="5"
+                           IsClippedToBounds="True">
+
+                        <ffImage:CachedImage x:Name="cachedImage"
+                                             HorizontalOptions="Center"
+                                             VerticalOptions="Center"
+                                             Source="{TemplateBinding UriImage}" />
+                    </Frame>
+                </StackLayout>
+
+                <!--Rating / Runtime / Status / Etc... -->
+                <Grid Grid.Row="1"
+                      Grid.Column="1"
+                      Grid.RowSpan="2"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Column="0"
+                           Grid.Row="0"
+                           BorderColor="Black"
+                           HasShadow="True"
+                           CornerRadius="2"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           BackgroundColor="LightCoral"
+                           Margin="0"
+                           Padding="3">
+                        <Label Text="{TemplateBinding Rating}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Start" />
+                    </Frame>
+
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Text="{TemplateBinding Runtime}" />
+
+                    <Label Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                           Text="{TemplateBinding Genres}"
+                           MaxLines="4"
+                           LineBreakMode="WordWrap" />
+
+                    <StackLayout Grid.Row="2"
+                                 Grid.Column="0">
+                        <Label Text="Status"
+                               FontAttributes="Bold"
+                               Padding="0"
+                               Margin="0"
+                               FontSize="10" />
+                        <Label Text="{TemplateBinding Status}"
+                               Padding="0"
+                               Margin="0"
+                               FontSize="10" />
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="2"
+                                 Grid.Column="1">
+                        <Label Text="Original Language"
+                               FontAttributes="Bold"
+                               Padding="0"
+                               Margin="0"
+                               FontSize="10" />
+                        <Label Text="{TemplateBinding OriginalLanguage}"
+                               Padding="0"
+                               Margin="0"
+                               FontSize="10" />
+                    </StackLayout>
+
+                    <customViews:RadialGaugeView Grid.Row="3"
+                                                 Grid.Column="1"
+                                                 Margin="0,0,5,0"
+                                                 HorizontalOptions="End"
+                                                 VerticalOptions="Start"
+                                                 BindingContext="{TemplateBinding RadialGaugeBindingContext}" />
+                </Grid>
+            </Grid>
+        </Frame>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="DetailButtonsTemplate">
+        <Frame Margin="0"
+               Padding="0"
+               CornerRadius="5"
+               HasShadow="True"
+               BackgroundColor="{StaticResource Primary}">
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+                <controls:RoundImageButton VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Source="bookmark_white.png"
+                                           Command="{TemplateBinding PlayTrailerCommand}"
+                                           IsVisible="{TemplateBinding PlayTrailerButtonVisible}" />
+
+                <controls:RoundImageButton VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Source="bookmark_white.png"
+                                           Command="{TemplateBinding AddToWatchlistCommand}"
+                                           IsVisible="{TemplateBinding AddToWatchlistButtonVisible}" />
+
+                <controls:RoundImageButton VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Source="favorite_white.png"
+                                           Command="{TemplateBinding AddToFavoritesCommand}"
+                                           IsVisible="{TemplateBinding AddToFavoritesButtonVisible}" />
+
+                <controls:RoundImageButton VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Source="rate_white.png"
+                                           Command="{TemplateBinding RateCommand}"
+                                           IsVisible="{TemplateBinding RateButtonVisible}" />
+            </StackLayout>
+        </Frame>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="OverviewDetailCardTemplate">
+        <Frame Margin="0"
+               Padding="0"
+               CornerRadius="5"
+               HasShadow="True"
+               BackgroundColor="{StaticResource Primary}">
+            <StackLayout>
+                <Label Text="Overview"
+                       FontAttributes="Bold"
+                       TextDecorations="Underline"
+                       FontSize="20"
+                       HorizontalTextAlignment="Center" />
+                <ScrollView VerticalScrollBarVisibility="Always"
+                            Margin="5,2,5,2">
+                    <Label Text="{TemplateBinding Overview}"
+                           FontSize="16"
+                           LineBreakMode="WordWrap"
+                           Margin="5" />
+                </ScrollView>
+            </StackLayout>
+        </Frame>
+    </ControlTemplate>
 </ResourceDictionary>

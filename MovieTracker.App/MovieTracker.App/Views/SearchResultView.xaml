@@ -9,7 +9,7 @@
     
     <Frame Margin="5"
            CornerRadius="5"
-           HasShadow="False"
+           HasShadow="True"
            IsClippedToBounds="True"
            BackgroundColor="{StaticResource Primary}">
         

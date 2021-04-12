@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.App.Views.TabbedPages.ShowTabbedPage"
+             xmlns:showDetailPage="clr-namespace:MovieTracker.App.Views.DetailPages.Show"
+             xmlns:commonDetailPages="clr-namespace:MovieTracker.App.Views.DetailPages.Common"
+             xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.TabbedPageViewModels"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             android:TabbedPage.ToolbarPlacement="Bottom"
+             BarBackgroundColor="Black"
+             BarTextColor="White"
+             x:DataType="viewModel:ShowTabbedPageViewModel">
+    <showDetailPage:ShowDetailPage x:Name="showDetail"
+                                      Title="About" />
+    <commonDetailPages:CastAndCrewDetailPage x:Name="castCrew"
+                                             Title="Cast/Credits" />
+    <commonDetailPages:WatchOnDetailPage x:Name="watchOn"
+                                         Title="Watch" />
+</TabbedPage>
