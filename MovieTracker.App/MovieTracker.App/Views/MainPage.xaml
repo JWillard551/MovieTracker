@@ -59,6 +59,7 @@
                            InputTransparent="True" />
         
         <CarouselView x:Name="cv_popularItems"
+                      IsBounceEnabled="False"
                       Grid.Row="1"
                       ItemsSource="{Binding SelectedSource}"
                       Style="{StaticResource CarouselViewStyle}">

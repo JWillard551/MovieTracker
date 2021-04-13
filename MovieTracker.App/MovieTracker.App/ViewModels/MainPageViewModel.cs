@@ -1,10 +1,8 @@
 ﻿using MovieTracker.App.ViewModels.DetailViewModels;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TMDbLib.Objects.Trending;
-using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels
 {
@@ -30,18 +28,10 @@ namespace MovieTracker.App.ViewModels
         {
             
             Initialization = InitializeAsync();
-            
         }
 
         public async Task InitializeAsync()
         {
-            //var addRayaLastDragonResult = await TMDbService.AccountChangeWatchlistStatusAsync(TMDbLib.Objects.General.MediaType.Movie, 527774, true);
-            //var sessionResult = await TMDbService.AccountGetMovieWatchlistAsync();
-
-            //var removeRayaLastDragonResult = await TMDbService.AccountChangeWatchlistStatusAsync(TMDbLib.Objects.General.MediaType.Movie, 527774, false);
-
-            //var newSessionResult = await TMDbService.AccountGetMovieWatchlistAsync();
-
             IsBusy = true;
             var popularMovies = await TMDbService.GetPopularMoviesAsync("en-US", 1);
             PopularMovies = new ObservableCollection<PopularItemViewModel>(popularMovies.Results.Select(pm => new PopularItemViewModel(pm)));

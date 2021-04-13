@@ -7,9 +7,15 @@
              x:DataType="viewModel:PopularItemViewModel">
     <StackLayout>
         <Frame Style="{StaticResource ImageFrameStyle}">
-            <StackLayout>
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand">
+
                 <ffImage:CachedImage x:Name="cachedImage"
                                      Style="{StaticResource FFCachedImageStyle}">
+                    <ffImage:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Path=ItemTapped}"
+                                              CommandParameter="{Binding PopularItem}" />
+                    </ffImage:CachedImage.GestureRecognizers>
                 </ffImage:CachedImage>
             </StackLayout>
         </Frame>

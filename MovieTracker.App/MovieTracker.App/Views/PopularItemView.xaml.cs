@@ -22,7 +22,6 @@ namespace MovieTracker.App.Views
             var item = BindingContext as PopularItemViewModel;
             if (item == null)
                 return;
-
             cachedImage.Source = item.PopularItem.Poster;
             base.OnBindingContextChanged();
         }
