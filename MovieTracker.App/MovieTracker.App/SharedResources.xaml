@@ -163,27 +163,81 @@
                          VerticalOptions="Center">
                 <controls:RoundImageButton VerticalOptions="Center"
                                            HorizontalOptions="Center"
-                                           Source="bookmark_white.png"
+                                           ImageSource="bookmark_white.png"
                                            Command="{TemplateBinding PlayTrailerCommand}"
-                                           IsVisible="{TemplateBinding PlayTrailerButtonVisible}" />
+                                           IsVisible="{TemplateBinding PlayTrailerButtonVisible}">
+                </controls:RoundImageButton>
 
                 <controls:RoundImageButton VerticalOptions="Center"
                                            HorizontalOptions="Center"
-                                           Source="bookmark_white.png"
                                            Command="{TemplateBinding AddToWatchlistCommand}"
-                                           IsVisible="{TemplateBinding AddToWatchlistButtonVisible}" />
+                                           IsVisible="{TemplateBinding AddToWatchlistButtonVisible}"
+                                           SelectedState="{TemplateBinding WatchlistButtonState}">
+                    <controls:RoundImageButton.Triggers>
+                        <DataTrigger TargetType="controls:RoundImageButton"
+                                     Binding="{TemplateBinding WatchlistButtonState}"
+                                     Value="True">
+                            <!--<Setter Property="SelectedColorState"
+                                    Value="#032541" />-->
+                            <Setter Property="ImageSource"
+                                    Value="bookmark_white_set.png" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="controls:RoundImageButton"
+                                     Binding="{TemplateBinding WatchlistButtonState}"
+                                     Value="False">
+                            <Setter Property="ImageSource"
+                                    Value="bookmark_white.png" />
+                        </DataTrigger>
+                    </controls:RoundImageButton.Triggers>
+                </controls:RoundImageButton>
 
                 <controls:RoundImageButton VerticalOptions="Center"
                                            HorizontalOptions="Center"
-                                           Source="favorite_white.png"
+                                           ImageSource="favorite_white.png"
                                            Command="{TemplateBinding AddToFavoritesCommand}"
-                                           IsVisible="{TemplateBinding AddToFavoritesButtonVisible}" />
+                                           IsVisible="{TemplateBinding AddToFavoritesButtonVisible}"
+                                           SelectedState="{TemplateBinding FavoritesButtonState}">
+                    <controls:RoundImageButton.Triggers>
+                        <DataTrigger TargetType="controls:RoundImageButton"
+                                     Binding="{TemplateBinding FavoritesButtonState}"
+                                     Value="True">
+                            <!--<Setter Property="SelectedColorState"
+                                    Value="#032541" />-->
+                            <Setter Property="ImageSource"
+                                    Value="favorite_white_set.png" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="controls:RoundImageButton"
+                                     Binding="{TemplateBinding FavoritesButtonState}"
+                                     Value="False">
+                            <Setter Property="ImageSource"
+                                    Value="favorite_white.png" />
+                        </DataTrigger>
+                    </controls:RoundImageButton.Triggers>
+                </controls:RoundImageButton>
 
                 <controls:RoundImageButton VerticalOptions="Center"
                                            HorizontalOptions="Center"
-                                           Source="rate_white.png"
+                                           ImageSource="rate_white.png"
                                            Command="{TemplateBinding RateCommand}"
-                                           IsVisible="{TemplateBinding RateButtonVisible}" />
+                                           IsVisible="{TemplateBinding RateButtonVisible}"
+                                           SelectedState="{TemplateBinding RatingsButtonState}">
+                    <controls:RoundImageButton.Triggers>
+                        <DataTrigger TargetType="controls:RoundImageButton"
+                                     Binding="{TemplateBinding RatingsButtonState}"
+                                     Value="True">
+                            <!--<Setter Property="SelectedColorState"
+                                    Value="#032541" />-->
+                            <Setter Property="ImageSource"
+                                    Value="rate_white_set.png" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="controls:RoundImageButton"
+                                     Binding="{TemplateBinding RatingsButtonState}"
+                                     Value="False">
+                            <Setter Property="ImageSource"
+                                    Value="rate_white.png" />
+                        </DataTrigger>
+                    </controls:RoundImageButton.Triggers>
+                </controls:RoundImageButton>
             </StackLayout>
         </Frame>
     </ControlTemplate>

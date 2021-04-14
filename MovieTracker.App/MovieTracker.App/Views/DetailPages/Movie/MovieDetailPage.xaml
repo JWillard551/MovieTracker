@@ -15,6 +15,7 @@
             <converters:RuntimeToFormattedStringConverter x:Key="RuntimeConverter" />
             <converters:CurrencyFormatConverter x:Key="CurrencyFormatConverter" />
             <converters:GenreToFormattedStringConverter x:Key="GenreFormatConverter" />
+            <converters:DoubleToBoolConverter x:Key="DoubleToBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -48,14 +49,23 @@
         <customViews:DetailButtons Grid.Row="1"
                                    Margin="5,2,5,2"
                                    PlayTrailerCommand="{Binding PlayTrailerCommand}"
-                                   PlayTrailerButtonVisible="True"
+                                   PlayTrailerButtonVisible="False"
                                    AddToWatchlistCommand="{Binding AddToWatchListCommand}"
                                    AddToWatchlistButtonVisible="True"
+                                   WatchlistButtonState="{Binding Watchlisted}"
                                    AddToFavoritesCommand="{Binding AddToFavoritesCommand}"
                                    AddToFavoritesButtonVisible="True"
+                                   FavoritesButtonState="{Binding Favorited}"
                                    RateCommand="{Binding RateCommand}"
                                    RateButtonVisible="True"
+                                   RatingsButtonState="{Binding Rated}"
                                    ControlTemplate="{StaticResource DetailButtonsTemplate}" />
+
+        <!--
+        WatchlistButtonColorState="{Binding Path=MovieAccountState.Watchlist, Converter={StaticResource BoolToColorConverter}}"
+         FavoritesButtonColorState="{Binding Path=MovieAccountState.Favorite, Converter={StaticResource BoolToColorConverter}}"
+        RatingButtonColorState="{Binding Path=MovieAccountState.Rating, Converter={StaticResource RatingToColorConverter}}"
+        -->
         
         <!--Overview Row-->
         <customViews:OverviewDetailCard Grid.Row="2"

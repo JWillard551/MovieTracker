@@ -10,7 +10,17 @@ namespace MovieTracker.TMDbModel.Services
 {
     public partial class TMDbService : ITMDbService
     {
-        #region Account Watchlist
+        #region Account Watchlist & States
+
+        public async Task<AccountState> GetMovieAccountStateAsync(int movieId, CancellationToken cancellationToken = default)
+        {
+            return await TMDbServiceClient.Instance.GetMovieAccountStateAsync(movieId, cancellationToken);
+        }
+
+        public async Task<AccountState> GetTvShowAccountStateAsync(int showId, CancellationToken cancellationToken = default)
+        {
+            return await TMDbServiceClient.Instance.GetTvShowAccountStateAsync(showId, cancellationToken);
+        }
 
         public async Task<SearchContainer<SearchMovie>> AccountGetMovieWatchlistAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
         {
@@ -62,32 +72,32 @@ namespace MovieTracker.TMDbModel.Services
 
         public async Task<bool> MovieRemoveRatingAsync(int movieId, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await TMDbServiceClient.Instance.MovieRemoveRatingAsync(movieId, cancellationToken);
         }
 
         public async Task<bool> MovieSetRatingAsync(int movieId, double rating, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await TMDbServiceClient.Instance.MovieSetRatingAsync(movieId, rating, cancellationToken);
         }
 
         public async Task<bool> TvEpisodeRemoveRatingAsync(int tvShowId, int seasonNumber, int episodeNumber, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await TMDbServiceClient.Instance.TvEpisodeRemoveRatingAsync(tvShowId, seasonNumber, episodeNumber, cancellationToken);
         }
 
         public async Task<bool> TvEpisodeSetRatingAsync(int tvShowId, int seasonNumber, int episodeNumber, double rating, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await TMDbServiceClient.Instance.TvEpisodeSetRatingAsync(tvShowId, seasonNumber, episodeNumber, rating, cancellationToken);
         }
 
         public async Task<bool> TvShowRemoveRatingAsync(int tvShowId, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await TMDbServiceClient.Instance.TvShowRemoveRatingAsync(tvShowId, cancellationToken);
         }
 
         public async Task<bool> TvShowSetRatingAsync(int tvShowId, double rating, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await TMDbServiceClient.Instance.TvShowSetRatingAsync(tvShowId, rating, cancellationToken);
         }
 
         #endregion

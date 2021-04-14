@@ -34,7 +34,8 @@
                                  Padding="15">
                         <Frame CornerRadius="10"
                                Padding="10"
-                               IsClippedToBounds="True">
+                               IsClippedToBounds="True"
+                               BackgroundColor="{StaticResource Primary}">
                             <Image Margin="0"
                                    VerticalOptions="CenterAndExpand"
                                    HorizontalOptions="CenterAndExpand">

@@ -1,4 +1,5 @@
-﻿using MovieTracker.TMDbModel.Services;
+﻿using MovieTracker.App.Services;
+using MovieTracker.TMDbModel.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -15,6 +16,7 @@ namespace MovieTracker.App
             LoadDeviceStyles();
 
             DependencyService.Register<TMDbService>();
+            DependencyService.Register<UserPromptService>();
             MainPage = new AppShell();
         }
 

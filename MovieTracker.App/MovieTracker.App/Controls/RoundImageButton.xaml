@@ -5,10 +5,12 @@
              HeightRequest="50"
              WidthRequest="50"
              Padding="0"
-             Margin="0">
-    <Frame CornerRadius="25"
+             Margin="0"
+             x:Name="roundImageButton">
+    <Frame BindingContext="{x:Reference roundImageButton}"
+            CornerRadius="25"
            HasShadow="True"
-           BackgroundColor="#032541"
+           BackgroundColor="{Binding Path=SelectedColorState}"
            Padding="1"
            Margin="1">
         <Image x:Name="buttonImage"

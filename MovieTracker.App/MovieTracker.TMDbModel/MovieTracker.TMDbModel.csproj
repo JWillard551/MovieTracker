@@ -103,6 +103,7 @@
     <Compile Include="Services\TMDbServiceAccountLists.cs" />
     <Compile Include="Services\TMDbServiceMain.cs" />
     <Compile Include="Services\TMDbServiceAuthentication.cs" />
+    <Compile Include="Utils\DetailButtonType.cs" />
     <Compile Include="Utils\ModelUtils.cs" />
   </ItemGroup>
   <ItemGroup>

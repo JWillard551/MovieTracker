@@ -7,9 +7,19 @@
     -->
     <Application.Resources>
         <ResourceDictionary x:Name="primaryDictionary">
+            <!--Theme/Palette #1-->
             <Color x:Key="Primary">#3F92A3</Color>
             <Color x:Key="Secondary">#3FA382</Color>
             <Color x:Key="Tertiary">#3FA350</Color>
+
+            <!--Theme/Palette #2-->
+            <!--<Color x:Key="Primary">#5E1666</Color>
+            <Color x:Key="Secondary">#661645</Color>
+            <Color x:Key="Tertiary">#361666</Color>-->
+
+            <Color x:Key="ButtonPrimary">#653fc0</Color>
+            <Color x:Key="ButtonSecondary">#3FA350</Color>
+
             <Style TargetType="Button">
                 <Setter Property="TextColor"
                         Value="White"></Setter>

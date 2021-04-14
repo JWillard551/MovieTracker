@@ -1,14 +1,15 @@
-﻿using MovieTracker.TMDbModel.Utils;
+﻿using MovieTracker.App.ViewModels.DetailViewModels.Common;
+using MovieTracker.TMDbModel.Utils;
 using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
 {
-    public sealed class MovieDetailViewModel : BaseViewModel, IDetailViewModel
+    public sealed class MovieDetailViewModel : BaseDetailViewModel, IDetailViewModel
     {
         public TMDbLib.Objects.Movies.Movie MovieInfo { get; set; }
 
@@ -52,6 +53,10 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
         {
             //Handle initialization for the movie info.
             MovieInfo = await TMDbService.GetMovieAsync(id, MovieMethods.Releases);
+            AccountState = await TMDbService.GetMovieAccountStateAsync(id);
+            Favorited = AccountState?.Favorite ?? false;
+            Watchlisted = AccountState?.Watchlist ?? false;
+            Rated = System.Convert.ToDouble(AccountState.Rating) > 0;
             Rating = GetRating();
             RadialGaugeViewModel = new RadialGaugeViewModel()
             {
@@ -80,17 +85,17 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
 
         private async void OnAddToWatchlistSelected()
         {
-
+            Watchlisted = await HandleDetailButtonSelectedAsync(Watchlisted, DetailButtonType.Watchlist, MediaType.Movie, MovieInfo.Id);
         }
 
         private async void OnAddToFavoritesSelected()
         {
-
+            Favorited = await HandleDetailButtonSelectedAsync(Favorited, DetailButtonType.Favorites, MediaType.Movie, MovieInfo.Id);
         }
 
         private async void OnRateSelected()
         {
-
+            Rated = await HandleDetailButtonSelectedAsync(Rated, DetailButtonType.Ratings, MediaType.Movie, MovieInfo.Id);
         }
     }
 }
