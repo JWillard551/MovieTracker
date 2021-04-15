@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
 {
-    public class MovieItemViewModel : BaseViewModel
+    public class MovieItemViewModel : BaseDetailViewModel
     {
         public SearchMovie Movie { get; set; }
 
@@ -27,11 +27,9 @@ namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
 
     public class RatedMovieItemViewModel : MovieItemViewModel
     {
-        public double Rating { get; set; }
-
         public RatedMovieItemViewModel(SearchMovieWithRating ratedMovie) : base(ratedMovie)
         {
-            Rating = ratedMovie.Rating;
+            Rating = Math.Round(ratedMovie.Rating).ToString();
         }
     }
 }

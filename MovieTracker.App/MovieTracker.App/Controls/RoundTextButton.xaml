@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.App.Controls.RoundTextButton"
+             xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Common"
+             HeightRequest="50"
+             WidthRequest="50"
+             Padding="0"
+             Margin="0"
+             x:Name="roundTextButton">
+    <Frame BindingContext="{x:Reference roundTextButton}"
+           CornerRadius="25"
+           HasShadow="True"
+           BackgroundColor="{StaticResource Tertiary}"
+           Padding="1"
+           Margin="1">
+        <Label Text="{Binding Rating, Source={RelativeSource AncestorType={x:Type viewModel:BaseDetailViewModel}}}"
+               TextColor="White"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="16" />
+    </Frame>
+</ContentView>

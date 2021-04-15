@@ -7,7 +7,8 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             BarBackgroundColor="Black"
-            BarTextColor="White">
-    <movieDetailPages:MovieFavoritesPage x:Name="movieTab" Title="Movies" />
-    <showDetailPages:ShowFavoritesPage x:Name="showTab" Title="TV Shows" />
+            BarTextColor="White"
+            Title="My Favorites">
+    <movieDetailPages:MovieFavoritesPage x:Name="movieTab" />
+    <showDetailPages:ShowFavoritesPage x:Name="showTab" />
 </TabbedPage>

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using MovieTracker.App.ViewModels.DetailViewModels.Common;
+using System;
 using TMDbLib.Objects.Search;
 
 namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
 {
-    public class ShowItemViewModel : BaseViewModel
+    public class ShowItemViewModel : BaseDetailViewModel
     {
         public SearchTv Show { get; set; }
 
@@ -23,11 +24,9 @@ namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
 
     public class RatedShowItemViewModel : ShowItemViewModel
     {
-        public double Rating { get; set; }
-
         public RatedShowItemViewModel(AccountSearchTv ratedShow) : base(ratedShow)
         {
-            Rating = ratedShow.Rating;
+            Rating = Math.Round(ratedShow.Rating).ToString();
         }
     }
 }

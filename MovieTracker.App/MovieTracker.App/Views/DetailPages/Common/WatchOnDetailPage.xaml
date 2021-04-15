@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.DetailPages.Common.WatchOnDetailPage"
-             BackgroundColor="Black">
+             BackgroundColor="Black"
+             Title="Watch On">
     <CollectionView Grid.Row="0"
                     ItemsLayout="VerticalGrid, 4"
                     ItemsSource="{Binding ProviderLists}"

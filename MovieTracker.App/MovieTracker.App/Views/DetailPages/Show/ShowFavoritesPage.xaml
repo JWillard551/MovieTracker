@@ -4,7 +4,8 @@
              x:Class="MovieTracker.App.Views.DetailPages.Show.ShowFavoritesPage"
              xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Show"
              xmlns:views="clr-namespace:MovieTracker.App.Views.CollectionItemViews"
-             x:DataType="viewModel:ShowFavoritesViewModel">
+             x:DataType="viewModel:ShowFavoritesViewModel"
+             Title="TV Shows">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

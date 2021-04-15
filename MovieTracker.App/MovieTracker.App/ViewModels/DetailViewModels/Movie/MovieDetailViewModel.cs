@@ -13,7 +13,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
     {
         public TMDbLib.Objects.Movies.Movie MovieInfo { get; set; }
 
-        public string Rating { get; set; } = "NR";
+        public string MovieRating { get; set; } = "NR";
 
         public UriImageSource UriImage 
         {

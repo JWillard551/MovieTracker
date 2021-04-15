@@ -10,7 +10,7 @@
             BarBackgroundColor="Black"
             BarTextColor="White"
             x:DataType="viewModel:MovieTabbedPageViewModel">
-    <movieDetailPages:MovieDetailPage x:Name="movieDetail" Title="About"/>
-    <commonDetailPages:CastAndCrewDetailPage x:Name="castCrew" Title="Cast/Credits"/>
-    <commonDetailPages:WatchOnDetailPage x:Name="watchOn" Title="Watch"/>
+    <movieDetailPages:MovieDetailPage x:Name="movieDetail"/>
+    <commonDetailPages:CastAndCrewDetailPage x:Name="castCrew"/>
+    <commonDetailPages:WatchOnDetailPage x:Name="watchOn"/>
 </TabbedPage>

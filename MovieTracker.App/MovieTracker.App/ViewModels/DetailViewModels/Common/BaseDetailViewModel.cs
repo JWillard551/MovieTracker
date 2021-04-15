@@ -28,7 +28,14 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Common
             set { SetProperty(ref _rated, value); }
         }
 
-        protected AccountState AccountState { get; set; }
+        private string _rating = "0";
+        public string Rating
+        {
+            get { return _rating; }
+            set { SetProperty(ref _rating, value); }
+        }
+
+        public AccountState AccountState { get; set; }
 
         protected async Task<bool> HandleRemoveItem(int mediaID, MediaType mediaType, DetailButtonType buttonType)
         {

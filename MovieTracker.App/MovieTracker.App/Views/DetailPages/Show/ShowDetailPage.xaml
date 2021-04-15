@@ -5,7 +5,8 @@
              xmlns:app="clr-namespace:MovieTracker.App"
              xmlns:local="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Show"
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
-             xmlns:converters="clr-namespace:MovieTracker.App.Converters">
+             xmlns:converters="clr-namespace:MovieTracker.App.Converters"
+             Title="Details">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -35,7 +36,7 @@
                                     Title="{Binding ShowInfo.OriginalName}"
                                     ReleaseDate="{Binding ShowInfo.FirstAirDate, StringFormat='({0:yyyy})'}"
                                     TagLine="{Binding ShowInfo.Tagline}"
-                                    Rating="{Binding Rating}"
+                                    Rating="{Binding ShowRating}"
                                     RuntimeOrNumSeasons="{Binding ShowInfo.NumberOfSeasons, Converter={StaticResource NumberOfSeasonsConverter}, Mode=OneWay}"
                                     Genres="{Binding ShowInfo.Genres, Converter={StaticResource GenreFormatConverter}, Mode=OneWay}"
                                     Status="{Binding ShowInfo.Status}"

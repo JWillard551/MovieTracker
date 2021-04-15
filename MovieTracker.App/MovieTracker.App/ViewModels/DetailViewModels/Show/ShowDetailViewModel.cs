@@ -14,7 +14,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
         public Task Initialization { get; private set; }
         public TvShow ShowInfo { get; set; }
 
-        public string Rating { get; set; } = "NR";
+        public string ShowRating { get; set; } = "NR";
 
         public UriImageSource UriImage
         {

@@ -10,10 +10,7 @@
              BarBackgroundColor="Black"
              BarTextColor="White"
              x:DataType="viewModel:ShowTabbedPageViewModel">
-    <showDetailPage:ShowDetailPage x:Name="showDetail"
-                                      Title="About" />
-    <commonDetailPages:CastAndCrewDetailPage x:Name="castCrew"
-                                             Title="Cast/Credits" />
-    <commonDetailPages:WatchOnDetailPage x:Name="watchOn"
-                                         Title="Watch" />
+    <showDetailPage:ShowDetailPage x:Name="showDetail" />
+    <commonDetailPages:CastAndCrewDetailPage x:Name="castCrew" />
+    <commonDetailPages:WatchOnDetailPage x:Name="watchOn" />
 </TabbedPage>

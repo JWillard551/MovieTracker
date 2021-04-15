@@ -1,11 +1,12 @@
 ﻿using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
+using MovieTracker.App.ViewModels.DetailViewModels.Common;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 {
-    public class ShowRatingsViewModel : BaseViewModel, IDetailViewModel
+    public class ShowRatingsViewModel : BaseDetailViewModel, IDetailViewModel
     {
         public Task Initialization { get; private set; }
 
