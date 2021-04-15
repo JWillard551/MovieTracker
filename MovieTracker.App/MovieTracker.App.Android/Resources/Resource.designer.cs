@@ -11829,22 +11829,25 @@ namespace MovieTracker.App.Droid
 			public const int notify_panel_notification_icon_bg = 2131165330;
 			
 			// aapt resource value: 0x7F070093
-			public const int rate_white = 2131165331;
+			public const int outline_remove_white_24 = 2131165331;
 			
 			// aapt resource value: 0x7F070094
-			public const int settings_white = 2131165332;
+			public const int rate_white = 2131165332;
 			
 			// aapt resource value: 0x7F070095
-			public const int test_custom_background = 2131165333;
+			public const int settings_white = 2131165333;
 			
 			// aapt resource value: 0x7F070096
-			public const int tooltip_frame_dark = 2131165334;
+			public const int test_custom_background = 2131165334;
 			
 			// aapt resource value: 0x7F070097
-			public const int tooltip_frame_light = 2131165335;
+			public const int tooltip_frame_dark = 2131165335;
 			
 			// aapt resource value: 0x7F070098
-			public const int xamarin_logo = 2131165336;
+			public const int tooltip_frame_light = 2131165336;
+			
+			// aapt resource value: 0x7F070099
+			public const int xamarin_logo = 2131165337;
 			
 			static Drawable()
 			{
@@ -13310,19 +13313,25 @@ namespace MovieTracker.App.Droid
 			public const int favorite_white = 2131492865;
 			
 			// aapt resource value: 0x7F0C0002
-			public const int icon = 2131492866;
+			public const int favorite_white_set = 2131492866;
 			
 			// aapt resource value: 0x7F0C0003
-			public const int icon_round = 2131492867;
+			public const int icon = 2131492867;
 			
 			// aapt resource value: 0x7F0C0004
-			public const int launcher_foreground = 2131492868;
+			public const int icon_round = 2131492868;
 			
 			// aapt resource value: 0x7F0C0005
-			public const int list_white = 2131492869;
+			public const int launcher_foreground = 2131492869;
 			
 			// aapt resource value: 0x7F0C0006
-			public const int rate_white = 2131492870;
+			public const int list_white = 2131492870;
+			
+			// aapt resource value: 0x7F0C0007
+			public const int outline_remove_white_24 = 2131492871;
+			
+			// aapt resource value: 0x7F0C0008
+			public const int rate_white = 2131492872;
 			
 			static Mipmap()
 			{

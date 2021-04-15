@@ -30,6 +30,49 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Common
 
         protected AccountState AccountState { get; set; }
 
+        protected async Task<bool> HandleRemoveItem(int mediaID, MediaType mediaType, DetailButtonType buttonType)
+        {
+            var result = await UserPromptService.PromptUserYesNoAsync("Remove", $"Remove this item from your {buttonType.ToString()}?");
+            if (result)
+            {
+                switch (buttonType)
+                {
+                    case DetailButtonType.Watchlist:
+                        return await RemoveWatchlistItem(mediaID, mediaType);
+                    case DetailButtonType.Favorites:
+                        return await RemoveFavoritesItem(mediaID, mediaType);
+                    case DetailButtonType.Ratings:
+                        return await RemoveRatingItem(mediaID, mediaType);
+                    default:
+                        return false;
+                }
+            }
+            return false;
+        }
+
+        private async Task<bool> RemoveWatchlistItem(int mediaID, MediaType mediaType)
+        {
+            return await TMDbService.AccountChangeWatchlistStatusAsync(mediaType, mediaID, false);
+        }
+
+        private async Task<bool> RemoveFavoritesItem(int mediaID, MediaType mediaType)
+        {
+            return await TMDbService.AccountChangeFavoriteStatusAsync(mediaType, mediaID, false);
+        }
+
+        private async Task<bool> RemoveRatingItem(int mediaID, MediaType mediaType)
+        {
+            switch (mediaType)
+            {
+                case MediaType.Movie:
+                    return await TMDbService.MovieRemoveRatingAsync(mediaID);
+                case MediaType.Tv:
+                    return await TMDbService.TvShowRemoveRatingAsync(mediaID);
+                default:
+                    return false;
+            }
+        }
+
         protected async Task<bool> HandleDetailButtonSelectedAsync(bool buttonCurrentSetState, DetailButtonType buttonType, MediaType mediaType, int mediaID)
         {
             if (buttonCurrentSetState)
@@ -60,6 +103,9 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Common
                     {
                         var rateResult = await UserPromptService.PromptUserRatingAsync("Rating", "Rate this media (1-10)", keyboard: Xamarin.Forms.Keyboard.Numeric, initialValue: "0");
                         var rating = System.Convert.ToDouble(rateResult);
+                        rating = Math.Round(rating);
+                        if (rating == 0)
+                            return buttonCurrentSetState;
 
                         //TODO: Temporary hack to scrub input and force it between a 1-10 value.
                         if (rating > 10)
@@ -82,10 +128,6 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Common
                                 //If odd numbers are entered this throws and error. For now, just catch it and forget it.
                             }
                             
-                        }
-                        else
-                        {
-                            return buttonCurrentSetState;
                         }
                     }
                     break;

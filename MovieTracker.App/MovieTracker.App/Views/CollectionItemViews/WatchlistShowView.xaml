@@ -4,42 +4,125 @@
              x:Class="MovieTracker.App.Views.CollectionItemViews.WatchlistShowView"
              xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.CollectionViewItemViewModels"
+             xmlns:watchlistViewModel="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Show"
+             xmlns:controls="clr-namespace:MovieTracker.App.Controls"
+             xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
              x:DataType="viewModel:ShowItemViewModel">
-    <Frame Margin="5"
-           CornerRadius="5"
-           HasShadow="True"
-           BackgroundColor="{StaticResource Primary}"
-           Padding="10">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".33*" />
-                <ColumnDefinition Width=".67*" />
-            </Grid.ColumnDefinitions>
+    
+    <Grid HeightRequest="300">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="200" />
-            </Grid.RowDefinitions>
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                  Command="{Binding GoToDetailsCommand, Source={RelativeSource AncestorType={x:Type watchlistViewModel:ShowWatchlistViewModel}}}"
+                                  CommandParameter="{Binding .}" />
+        </Grid.GestureRecognizers>
 
-            <Frame Grid.ColumnSpan="2"
-                   Style="{StaticResource ImageFrameStyle}"
-                   HorizontalOptions="Start"
-                   VerticalOptions="Start"
-                   BackgroundColor="{StaticResource Secondary}" />
+        <Frame Margin="5"
+               CornerRadius="5"
+               HasShadow="True"
+               BackgroundColor="{StaticResource Primary}"
+               Padding="10">
 
-            <ffImage:CachedImage Grid.Column="0"
-                                 x:Name="cachedImage"
-                                 HorizontalOptions="Start"
-                                 VerticalOptions="Start">
-            </ffImage:CachedImage>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".4*" />
+                    <ColumnDefinition Width=".6*" />
+                </Grid.ColumnDefinitions>
 
-            <StackLayout Grid.Column="1"
-                         BackgroundColor="Gray">
-                <Label Text="{Binding Show.Name}"
-                       TextColor="Black" />
-                <Label Text="{Binding Show.Name}"
-                       TextColor="Black" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
 
-            </StackLayout>
-        </Grid>
-    </Frame>
+                <!--Title / Release Year-->
+                <Label Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       MaxLines="2"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Start">
+
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Show.Name}"
+                                  FontAttributes="Bold"
+                                  FontSize="18" />
+                            <Span Text=" " />
+                            <Span Text="{Binding Show.FirstAirDate, StringFormat='({0:yyyy})'}"
+                                  FontAttributes="Bold"
+                                  FontSize="16" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <!--TV / Movie Poster Image-->
+                <Frame Grid.Row="1"
+                       Grid.RowSpan="2"
+                       Grid.Column="0"
+                       Margin="0"
+                       Padding="0"
+                       BackgroundColor="{StaticResource Primary}">
+                    <ffImage:CachedImage x:Name="cachedImage"
+                                         Aspect="AspectFit">
+                        <ffImage:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                  Command="{Binding GoToDetailsCommand, Source={RelativeSource AncestorType={x:Type watchlistViewModel:ShowWatchlistViewModel}}}"
+                                                  CommandParameter="{Binding .}" />
+                        </ffImage:CachedImage.GestureRecognizers>
+                    </ffImage:CachedImage>
+                </Frame>
+
+                <!--TV / Movie Overview-->
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding Show.Overview}"
+                       FontSize="14"
+                       TextColor="Black"
+                       LineBreakMode="TailTruncation"
+                       MaxLines="10" />
+
+                <!--Buttons-->
+                <Grid Grid.Row="2"
+                      Grid.Column="1"
+                      Padding="0"
+                      Margin="0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <customViews:RadialGaugeView Grid.Row="0"
+                                                 Grid.Column="0"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Center"
+                                                 BindingContext="{Binding RadialGaugeViewModel}" />
+
+                    <controls:RoundImageButton Grid.Row="0"
+                                               Grid.Column="1"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               ImageSource="rate_white.png"
+                                               Command="{Binding RateCommand, Source={RelativeSource AncestorType={x:Type watchlistViewModel:ShowWatchlistViewModel}}}"
+                                               CommandParameter="{Binding .}">
+                    </controls:RoundImageButton>
+
+                    <controls:RoundImageButton Grid.Row="0"
+                                               Grid.Column="2"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               ImageSource="outline_remove_white_24.png"
+                                               Command="{Binding RemoveFromWatchlistCommand, Source={RelativeSource AncestorType={x:Type watchlistViewModel:ShowWatchlistViewModel}}}"
+                                               CommandParameter="{Binding .}">
+                    </controls:RoundImageButton>
+                </Grid>
+            </Grid>
+        </Frame>
+    </Grid>
 </ContentView>

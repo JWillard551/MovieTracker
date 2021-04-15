@@ -1,4 +1,5 @@
-﻿using TMDbLib.Objects.Search;
+﻿using System;
+using TMDbLib.Objects.Search;
 
 namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
 {
@@ -6,9 +7,17 @@ namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
     {
         public SearchTv Show { get; set; }
 
+        public RadialGaugeViewModel RadialGaugeViewModel { get; set; }
+
         public ShowItemViewModel(SearchTv show)
         {
             Show = show;
+            RadialGaugeViewModel = new RadialGaugeViewModel()
+            {
+                MinValue = 1,
+                MaxValue = 100,
+                CurrentProgress = Convert.ToDouble(Show.VoteAverage * 10)
+            };
         }
     }
 

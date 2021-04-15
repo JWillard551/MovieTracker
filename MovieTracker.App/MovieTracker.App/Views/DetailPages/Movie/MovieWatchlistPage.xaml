@@ -4,7 +4,8 @@
              x:Class="MovieTracker.App.Views.DetailPages.Movie.MovieWatchlistPage"
              xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Movie"
              xmlns:views="clr-namespace:MovieTracker.App.Views.CollectionItemViews"
-             x:DataType="viewModel:MovieWatchlistViewModel">
+             x:DataType="viewModel:MovieWatchlistViewModel"
+             Title="Movies">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -17,7 +18,7 @@
                         BackgroundColor="Black">
 
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout ItemSpacing="00"
+                <LinearItemsLayout ItemSpacing="0"
                                    Orientation="Vertical" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>

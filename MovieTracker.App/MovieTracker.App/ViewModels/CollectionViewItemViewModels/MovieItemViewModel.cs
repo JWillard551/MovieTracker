@@ -1,4 +1,9 @@
-﻿using TMDbLib.Objects.Search;
+﻿using MovieTracker.App.ViewModels.DetailViewModels.Common;
+using MovieTracker.TMDbModel.Utils;
+using System;
+using TMDbLib.Objects.General;
+using TMDbLib.Objects.Search;
+using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
 {
@@ -6,9 +11,17 @@ namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
     {
         public SearchMovie Movie { get; set; }
 
+        public RadialGaugeViewModel RadialGaugeViewModel { get; set; }
+
         public MovieItemViewModel(SearchMovie movie)
         {
             Movie = movie;
+            RadialGaugeViewModel = new RadialGaugeViewModel()
+            {
+                MinValue = 1,
+                MaxValue = 100,
+                CurrentProgress = Convert.ToDouble(Movie.VoteAverage * 10)
+            };
         }
     }
 
