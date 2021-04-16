@@ -1,9 +1,8 @@
-﻿using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
-using MovieTracker.App.ViewModels.DetailViewModels.Common;
+﻿using MovieTracker.App.ViewModels.BaseViewModels;
+using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
 using MovieTracker.App.Views.TabbedPages;
 using MovieTracker.TMDbModel.Utils;
 using MvvmHelpers;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TMDbLib.Objects.General;
@@ -11,10 +10,8 @@ using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 {
-    public class ShowWatchlistViewModel : BaseDetailViewModel, IDetailViewModel
+    public class ShowWatchlistViewModel : AccountDetailViewModel, IViewModelInitialize
     {
-        public Task Initialization { get; private set; }
-
         private ObservableRangeCollection<ShowItemViewModel> _watchlistShows;
         public ObservableRangeCollection<ShowItemViewModel> WatchlistShows
         {
@@ -22,13 +19,17 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
             set => SetProperty(ref _watchlistShows, value);
         }
 
-        public List<ShowItemViewModel> WatchlistShowList { get; set; }
+        public Task Initialization { get; private set; }
+
+        #region Commands
 
         public Command<ShowItemViewModel> RateCommand { get; private set; }
 
         public Command<ShowItemViewModel> RemoveFromWatchlistCommand { get; private set; }
 
         public Command<ShowItemViewModel> GoToDetailsCommand { get; set; }
+
+        #endregion
 
         public ShowWatchlistViewModel()
         {
@@ -46,7 +47,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 
         private async void OnRateSelected(ShowItemViewModel show)
         {
-            Rated = await HandleDetailButtonSelectedAsync(Rated, DetailButtonType.Ratings, MediaType.Tv, show.Show.Id);
+            ItemRated = await HandleDetailButtonSelectedAsync(ItemRated, DetailButtonType.Ratings, MediaType.Tv, show.Show.Id);
         }
 
         private async void OnRemoveFromWatchlistSelected(ShowItemViewModel show)

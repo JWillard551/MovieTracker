@@ -23,7 +23,7 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <views:WatchlistMovieView />
+                    <views:FavoritesMovieView />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 

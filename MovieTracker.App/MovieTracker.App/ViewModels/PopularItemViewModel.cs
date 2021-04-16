@@ -3,6 +3,7 @@ using MovieTracker.TMDbModel.AdditionalModelObjects;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
 using Xamarin.Forms;
+using MovieTracker.App.ViewModels.BaseViewModels;
 
 namespace MovieTracker.App.ViewModels
 {

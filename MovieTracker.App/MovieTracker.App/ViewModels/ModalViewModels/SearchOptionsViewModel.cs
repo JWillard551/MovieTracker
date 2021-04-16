@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using MovieTracker.App.ViewModels.BaseViewModels;
 
 namespace MovieTracker.App.ViewModels.ModalViewModels
 {

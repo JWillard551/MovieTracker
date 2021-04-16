@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MovieTracker.App.Views.CollectionItemViews.RatingsMovieView"
+             x:Class="MovieTracker.App.Views.CollectionItemViews.FavoritesShowView"
              xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.CollectionViewItemViewModels"
-             xmlns:ratingsViewModel="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Movie"
+             xmlns:favoritesViewModel="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Show"
              xmlns:controls="clr-namespace:MovieTracker.App.Controls"
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
-             x:DataType="viewModel:RatedMovieItemViewModel">
+             x:DataType="viewModel:ShowItemViewModel">
 
     <Grid HeightRequest="300">
 
         <Grid.GestureRecognizers>
             <TapGestureRecognizer NumberOfTapsRequired="1"
-                                  Command="{Binding GoToDetailsCommand, Source={RelativeSource AncestorType={x:Type ratingsViewModel:MovieRatingsViewModel}}}"
+                                  Command="{Binding GoToDetailsCommand, Source={RelativeSource AncestorType={x:Type favoritesViewModel:ShowFavoritesViewModel}}}"
                                   CommandParameter="{Binding .}" />
         </Grid.GestureRecognizers>
 
@@ -45,11 +45,11 @@
 
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding Movie.Title}"
+                            <Span Text="{Binding Show.Name}"
                                   FontAttributes="Bold"
                                   FontSize="18" />
                             <Span Text=" " />
-                            <Span Text="{Binding Movie.ReleaseDate, StringFormat='({0:yyyy})'}"
+                            <Span Text="{Binding Show.FirstAirDate, StringFormat='({0:yyyy})'}"
                                   FontAttributes="Bold"
                                   FontSize="16" />
                         </FormattedString>
@@ -67,7 +67,7 @@
                                          Aspect="AspectFit">
                         <ffImage:CachedImage.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                  Command="{Binding GoToDetailsCommand, Source={RelativeSource AncestorType={x:Type ratingsViewModel:MovieRatingsViewModel}}}"
+                                                  Command="{Binding GoToDetailsCommand, Source={RelativeSource AncestorType={x:Type favoritesViewModel:ShowFavoritesViewModel}}}"
                                                   CommandParameter="{Binding .}" />
                         </ffImage:CachedImage.GestureRecognizers>
                     </ffImage:CachedImage>
@@ -76,7 +76,7 @@
                 <!--TV / Movie Overview-->
                 <Label Grid.Row="1"
                        Grid.Column="1"
-                       Text="{Binding Movie.Overview}"
+                       Text="{Binding Show.Overview}"
                        FontSize="14"
                        TextColor="Black"
                        LineBreakMode="TailTruncation"
@@ -104,21 +104,21 @@
                                                  VerticalOptions="Center"
                                                  BindingContext="{Binding RadialGaugeViewModel}" />
 
-                    <controls:RoundTextButton Grid.Row="0"
-                                              Grid.Column="1"
-                                              HorizontalOptions="Center"
-                                              VerticalOptions="Center"
-                                              Rating="{Binding ItemRating, Mode=TwoWay}"
-                                              Command="{Binding EditRateCommand, Source={RelativeSource AncestorType={x:Type ratingsViewModel:MovieRatingsViewModel}}}"
-                                              CommandParameter="{Binding .}">
-                    </controls:RoundTextButton>
+                    <controls:RoundImageButton Grid.Row="0"
+                                               Grid.Column="1"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               ImageSource="rate_white.png"
+                                               Command="{Binding AddToWatchlistCommand, Source={RelativeSource AncestorType={x:Type favoritesViewModel:ShowFavoritesViewModel}}}"
+                                               CommandParameter="{Binding .}">
+                    </controls:RoundImageButton>
 
                     <controls:RoundImageButton Grid.Row="0"
                                                Grid.Column="2"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
                                                ImageSource="outline_remove_white_24.png"
-                                               Command="{Binding RemoveRatingCommand, Source={RelativeSource AncestorType={x:Type ratingsViewModel:MovieRatingsViewModel}}}"
+                                               Command="{Binding RemoveFavoriteCommand, Source={RelativeSource AncestorType={x:Type favoritesViewModel:ShowFavoritesViewModel}}}"
                                                CommandParameter="{Binding .}">
                     </controls:RoundImageButton>
                 </Grid>

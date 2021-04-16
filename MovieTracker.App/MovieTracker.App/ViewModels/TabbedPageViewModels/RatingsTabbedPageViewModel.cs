@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MovieTracker.App.ViewModels.BaseViewModels;
 
 namespace MovieTracker.App.ViewModels.TabbedPageViewModels
 {
-    public class RatingsTabbedPageViewModel : BaseViewModel, IDetailViewModel
+    public class RatingsTabbedPageViewModel : BaseViewModel, IViewModelInitialize
     {
         public Task Initialization { get; private set; }
 

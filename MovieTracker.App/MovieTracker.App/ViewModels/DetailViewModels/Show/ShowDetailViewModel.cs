@@ -1,6 +1,5 @@
-﻿using MovieTracker.App.ViewModels.DetailViewModels.Common;
+﻿using MovieTracker.App.ViewModels.BaseViewModels;
 using MovieTracker.TMDbModel.Utils;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TMDbLib.Objects.General;
@@ -9,13 +8,11 @@ using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 {
-    public class ShowDetailViewModel : BaseDetailViewModel, IDetailViewModel
+    public class ShowDetailViewModel : AccountDetailViewModel, IViewModelInitialize
     {
         public Task Initialization { get; private set; }
-        public TvShow ShowInfo { get; set; }
-
-        public string ShowRating { get; set; } = "NR";
-
+        public TvShow ShowInfo { get; private set; }
+        public string ShowRating { get; private set; }
         public UriImageSource UriImage
         {
             get
@@ -27,6 +24,8 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
             }
         }
 
+        #region Commands
+
         public Command PlayTrailerCommand { get; private set; }
 
         public Command AddToWatchListCommand { get; private set; }
@@ -35,33 +34,22 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 
         public Command RateCommand { get; private set; }
 
-        private RadialGaugeViewModel _ratingVM;
-        public RadialGaugeViewModel RadialGaugeViewModel
-        {
-            get => _ratingVM;
-            set => SetProperty(ref _ratingVM, value);
-        }
+        #endregion
 
         public ShowDetailViewModel(int id)
         {
             Initialization = InitializeAsync(id);
         }
 
-        public async Task InitializeAsync(int id)
+        private async Task InitializeAsync(int id)
         {
-            //Handle initialization for the movie info.
+            //Handle initialization for the show info.
             ShowInfo = await TMDbService.GetTVShowAsync(id, TvShowMethods.ContentRatings);
-            AccountState = await TMDbService.GetTvShowAccountStateAsync(id);
-            Watchlisted = AccountState?.Watchlist ?? false;
-            Favorited = AccountState?.Favorite ?? false;
-            Rated = System.Convert.ToDouble(AccountState.Rating) > 0;
-            Rating = GetRating();
-            RadialGaugeViewModel = new RadialGaugeViewModel()
-            {
-                MinValue = 1,
-                MaxValue = 100,
-                CurrentProgress = Convert.ToDouble(ShowInfo.VoteAverage * 10)
-            };
+            await InitializeAccountInfo(id);
+            ShowRating = GetRating();
+            InitializeRadialGaugeViewModel(ShowInfo?.VoteAverage ?? 0);
+
+            //Command Initialization
             PlayTrailerCommand = new Command(OnPlayTrailerSelected);
             AddToWatchListCommand = new Command(OnAddToWatchlistSelected);
             AddToFavoritesCommand = new Command(OnAddToFavoritesSelected);
@@ -70,31 +58,32 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 
         private string GetRating()
         {
-            var rating = ShowInfo.ContentRatings.Results.FirstOrDefault(contentRating => contentRating.Iso_3166_1 == "US")?.Rating;
+            var rating = ShowInfo?.ContentRatings?.Results?.FirstOrDefault(contentRating => contentRating.Iso_3166_1 == "US")?.Rating;
             if (string.IsNullOrWhiteSpace(rating))
-                return "??";
+                return "NR";
             return rating;
         }
 
 
         private async void OnPlayTrailerSelected()
         {
-
+            await Task.Delay(1000);
+            return;
         }
 
         private async void OnAddToWatchlistSelected()
         {
-            Watchlisted = await HandleDetailButtonSelectedAsync(Watchlisted, DetailButtonType.Watchlist, MediaType.Tv, ShowInfo.Id);
+            ItemWatchlisted = await HandleDetailButtonSelectedAsync(ItemWatchlisted, DetailButtonType.Watchlist, MediaType.Tv, ShowInfo.Id);
         }
 
         private async void OnAddToFavoritesSelected()
         {
-            Favorited = await HandleDetailButtonSelectedAsync(Favorited, DetailButtonType.Favorites, MediaType.Tv, ShowInfo.Id);
+            ItemFavorited = await HandleDetailButtonSelectedAsync(ItemFavorited, DetailButtonType.Favorites, MediaType.Tv, ShowInfo.Id);
         }
 
         private async void OnRateSelected()
         {
-            Rated = await HandleDetailButtonSelectedAsync(Rated, DetailButtonType.Ratings, MediaType.Tv, ShowInfo.Id);
+            ItemRated = await HandleDetailButtonSelectedAsync(ItemRated, DetailButtonType.Ratings, MediaType.Tv, ShowInfo.Id);
         }
     }
 }

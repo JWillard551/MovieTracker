@@ -3,39 +3,68 @@ using System;
 using System.Threading.Tasks;
 using TMDbLib.Objects.General;
 
-namespace MovieTracker.App.ViewModels.DetailViewModels.Common
+namespace MovieTracker.App.ViewModels.BaseViewModels
 {
-    public class BaseDetailViewModel : BaseViewModel
+    public class AccountDetailViewModel : BaseViewModel
     {
-        private bool _favorited;
-        public bool Favorited
+        #region Account Properties
+
+        private bool _itemFavorited;
+        public bool ItemFavorited
         {
-            get { return _favorited; }
-            set { SetProperty(ref _favorited, value); }
+            get { return _itemFavorited; }
+            set { SetProperty(ref _itemFavorited, value); }
         }
 
-        private bool _watchlisted;
-        public bool Watchlisted
+        private bool _itemWatchlisted;
+        public bool ItemWatchlisted
         {
-            get { return _watchlisted; }
-            set { SetProperty(ref _watchlisted, value); }
+            get { return _itemWatchlisted; }
+            set { SetProperty(ref _itemWatchlisted, value); }
         }
 
-        private bool _rated;
-        public bool Rated
+        private bool _itemRated;
+        public bool ItemRated
         {
-            get { return _rated; }
-            set { SetProperty(ref _rated, value); }
+            get { return _itemRated; }
+            set { SetProperty(ref _itemRated, value); }
         }
 
-        private string _rating = "0";
-        public string Rating
+        private string _itemRating = "0";
+        public string ItemRating
         {
-            get { return _rating; }
-            set { SetProperty(ref _rating, value); }
+            get { return _itemRating; }
+            set { SetProperty(ref _itemRating, value); }
         }
 
-        public AccountState AccountState { get; set; }
+        private RadialGaugeViewModel _radialGaugeViewModel;
+        public RadialGaugeViewModel RadialGaugeViewModel
+        {
+            get => _radialGaugeViewModel;
+            set => SetProperty(ref _radialGaugeViewModel, value);
+        }
+
+        #endregion
+
+        protected async Task InitializeAccountInfo(int id)
+        {
+            var accountState = await TMDbService.GetMovieAccountStateAsync(id);
+            ItemFavorited = accountState?.Favorite ?? false;
+            ItemWatchlisted = accountState?.Watchlist ?? false;
+            ItemRated = System.Convert.ToDouble(accountState?.Rating) > 0;
+        }
+
+        protected void InitializeRadialGaugeViewModel(double voteAvg)
+        {
+            RadialGaugeViewModel = new RadialGaugeViewModel()
+            {
+                MinValue = 1,
+                MaxValue = 100,
+                CurrentProgress = Convert.ToDouble(voteAvg * 10)
+            };
+        }
+
+        #region Item Commands (Update / Remove / Add / Etc...)
 
         protected async Task<bool> HandleRemoveItem(int mediaID, MediaType mediaType, DetailButtonType buttonType)
         {
@@ -106,37 +135,6 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Common
                         else if (mediaType == MediaType.Tv)
                             successful = await TMDbService.TvShowRemoveRatingAsync(mediaID);
                     }
-                    else
-                    {
-                        var rateResult = await UserPromptService.PromptUserRatingAsync("Rating", "Rate this media (1-10)", keyboard: Xamarin.Forms.Keyboard.Numeric, initialValue: "0");
-                        var rating = System.Convert.ToDouble(rateResult);
-                        rating = Math.Round(rating);
-                        if (rating == 0)
-                            return buttonCurrentSetState;
-
-                        //TODO: Temporary hack to scrub input and force it between a 1-10 value.
-                        if (rating > 10)
-                            rating = 10;
-                        else if (rating < 1)
-                            rating = 1;
-
-                        if (rating > 0)
-                        {
-                            try
-                            {
-                                if (mediaType == MediaType.Movie)
-                                    successful = await TMDbService.MovieSetRatingAsync(mediaID, rating);
-                                else if (mediaType == MediaType.Tv)
-                                    successful = await TMDbService.TvShowSetRatingAsync(mediaID, rating);
-                            }
-                            catch (Exception ex)
-                            {
-                                successful = false;
-                                //If odd numbers are entered this throws and error. For now, just catch it and forget it.
-                            }
-                            
-                        }
-                    }
                     break;
             }
 
@@ -154,5 +152,60 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Common
                 return buttonCurrentSetState;
             }
         }
+
+        protected async Task<string> HandleRatingEdit(string initialRating, int mediaID, MediaType mediaType)
+        {
+            bool successful = false;
+            var rateResult = await UserPromptService.PromptUserRatingAsync("Rating", "Rate this media (1-10)", keyboard: Xamarin.Forms.Keyboard.Numeric, initialValue: "0");
+            var rating = System.Convert.ToInt32(rateResult);
+
+            if (rating == 0)
+                return initialRating;
+
+            if (rating > 10)
+                rating = 10;
+            else if (rating < 1)
+                rating = 0;
+
+            if (rating > 0)
+            {
+                try
+                {
+                    if (mediaType == MediaType.Movie)
+                        successful = await TMDbService.MovieSetRatingAsync(mediaID, rating);
+                    else if (mediaType == MediaType.Tv)
+                        successful = await TMDbService.TvShowSetRatingAsync(mediaID, rating);
+                }
+                catch (Exception ex)
+                {
+                    successful = false;
+                }
+
+            }
+            else
+            {
+                var remove = await UserPromptService.PromptUserYesNoAsync("Remove Rating", "Setting the rating to 0 will remove it. Continue?");
+
+                if (remove)
+                {
+                    if (mediaType == MediaType.Movie)
+                        successful = await TMDbService.MovieRemoveRatingAsync(mediaID);
+                    else if (mediaType == MediaType.Tv)
+                        successful = await TMDbService.TvShowRemoveRatingAsync(mediaID);
+
+                    if (successful)
+                    {
+                        ToastService.LongAlertMessage($"Removed rating!");
+                    }
+                }
+            }
+
+            if (successful)
+                return rating.ToString();
+            else
+                return initialRating;
+        }
+
+        #endregion
     }
 }

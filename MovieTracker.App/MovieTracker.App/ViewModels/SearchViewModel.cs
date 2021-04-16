@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TMDbLib.Objects.Search;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels
 {
-    public class SearchViewModel : BaseViewModel
+    public class SearchViewModel : BaseViewModels.BaseViewModel
     {
         public string CurrentQuery { get; set; } = string.Empty;
         public Command LoadMoreItemsCommand { get; set; }

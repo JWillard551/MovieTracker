@@ -3,10 +3,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using TMDbLib.Objects.Trending;
+using MovieTracker.App.ViewModels.BaseViewModels;
 
 namespace MovieTracker.App.ViewModels
 {
-    public class MainPageViewModel : BaseViewModel, IDetailViewModel
+    public class MainPageViewModel : BaseViewModel, IViewModelInitialize
     {
         public ObservableCollection<PopularItemViewModel> PopularMovies { get; set; }
 

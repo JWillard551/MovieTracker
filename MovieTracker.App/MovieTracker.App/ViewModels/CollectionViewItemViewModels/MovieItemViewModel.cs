@@ -1,27 +1,17 @@
-﻿using MovieTracker.App.ViewModels.DetailViewModels.Common;
-using MovieTracker.TMDbModel.Utils;
+﻿using MovieTracker.App.ViewModels.BaseViewModels;
 using System;
-using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
-using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
 {
-    public class MovieItemViewModel : BaseDetailViewModel
+    public class MovieItemViewModel : AccountDetailViewModel
     {
         public SearchMovie Movie { get; set; }
-
-        public RadialGaugeViewModel RadialGaugeViewModel { get; set; }
 
         public MovieItemViewModel(SearchMovie movie)
         {
             Movie = movie;
-            RadialGaugeViewModel = new RadialGaugeViewModel()
-            {
-                MinValue = 1,
-                MaxValue = 100,
-                CurrentProgress = Convert.ToDouble(Movie.VoteAverage * 10)
-            };
+            InitializeRadialGaugeViewModel(movie.VoteAverage);
         }
     }
 
@@ -29,7 +19,7 @@ namespace MovieTracker.App.ViewModels.CollectionViewItemViewModels
     {
         public RatedMovieItemViewModel(SearchMovieWithRating ratedMovie) : base(ratedMovie)
         {
-            Rating = Math.Round(ratedMovie.Rating).ToString();
+            ItemRating = Math.Round(ratedMovie.Rating).ToString();
         }
     }
 }

@@ -5,10 +5,11 @@ using System;
 using System.Threading.Tasks;
 using TMDbLib.Objects.General;
 using Xamarin.Forms;
+using MovieTracker.App.ViewModels.BaseViewModels;
 
 namespace MovieTracker.App.ViewModels.TabbedPageViewModels
 {
-    public class MovieTabbedPageViewModel : BaseViewModel, IDetailViewModel
+    public class MovieTabbedPageViewModel : BaseViewModel, IViewModelInitialize
     {
         public MovieDetailViewModel Tab1 { get; set; }
 

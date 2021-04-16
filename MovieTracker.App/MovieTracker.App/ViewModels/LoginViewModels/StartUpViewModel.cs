@@ -3,6 +3,7 @@ using MovieTracker.App.Views;
 using MovieTracker.App.Views.Login;
 using MovieTracker.TMDbModel.Services;
 using System.Threading.Tasks;
+using MovieTracker.App.ViewModels.BaseViewModels;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.LoginViewModels

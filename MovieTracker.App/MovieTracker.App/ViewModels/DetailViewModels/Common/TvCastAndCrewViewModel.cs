@@ -1,4 +1,5 @@
-﻿using MovieTracker.TMDbModel.AdditionalModelObjects;
+﻿using MovieTracker.App.ViewModels.BaseViewModels;
+using MovieTracker.TMDbModel.AdditionalModelObjects;
 using MovieTracker.TMDbModel.Utils;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using TMDbLib.Objects.TvShows;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Common
 {
-    public class TvCastAndCrewViewModel : BaseViewModel, IDetailViewModel
+    public class TvCastAndCrewViewModel : BaseViewModel, IViewModelInitialize
     {
         public Task Initialization { get; private set; }
 

@@ -1,9 +1,8 @@
-﻿using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
-using MovieTracker.App.ViewModels.DetailViewModels.Common;
+﻿using MovieTracker.App.ViewModels.BaseViewModels;
+using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
 using MovieTracker.App.Views.TabbedPages;
 using MovieTracker.TMDbModel.Utils;
 using MvvmHelpers;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TMDbLib.Objects.General;
@@ -11,12 +10,8 @@ using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
 {
-    public class MovieWatchlistViewModel : BaseDetailViewModel, IDetailViewModel
+    public class MovieWatchlistViewModel : AccountDetailViewModel, IViewModelInitialize
     {
-        public Task Initialization { get; private set; }
-
-        public Command<MovieItemViewModel> RateCommand { get; private set; }
-
         private ObservableRangeCollection<MovieItemViewModel> _watchlistMovies;
         public ObservableRangeCollection<MovieItemViewModel> WatchlistMovies
         {
@@ -24,11 +19,17 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
             set => SetProperty(ref _watchlistMovies, value);
         }
 
-        public List<MovieItemViewModel> WatchlistMovieList { get; set; }
+        public Task Initialization { get; private set; }
+
+        #region Commands
+
+        public Command<MovieItemViewModel> RateCommand { get; private set; }
 
         public Command<MovieItemViewModel> RemoveFromWatchlistCommand { get; private set; }
 
         public Command<MovieItemViewModel> GoToDetailsCommand { get; set; }
+
+        #endregion
 
         public MovieWatchlistViewModel()
         {
@@ -44,22 +45,22 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Movie
             GoToDetailsCommand = new Command<MovieItemViewModel>(GoToDetails);
         }
 
-        private async void OnRateSelected(MovieItemViewModel movie)
+        private async void OnRateSelected(MovieItemViewModel mvm)
         {
-            Rated = await HandleDetailButtonSelectedAsync(Rated, DetailButtonType.Ratings, MediaType.Movie, movie.Movie.Id);
+            ItemRated = await HandleDetailButtonSelectedAsync(ItemRated, DetailButtonType.Ratings, MediaType.Movie, mvm.Movie.Id);
         }
 
-        private async void OnRemoveFromWatchlistSelected(MovieItemViewModel movie)
+        private async void OnRemoveFromWatchlistSelected(MovieItemViewModel mvm)
         {
-            var result = await HandleRemoveItem(movie.Movie.Id, MediaType.Movie, DetailButtonType.Watchlist);
+            var result = await HandleRemoveItem(mvm.Movie.Id, MediaType.Movie, DetailButtonType.Watchlist);
             if (result)
-                WatchlistMovies.Remove(movie);
+                WatchlistMovies.Remove(mvm);
         }
 
-        private async void GoToDetails(MovieItemViewModel viewModel)
+        private async void GoToDetails(MovieItemViewModel mvm)
         {
             IsBusy = true;
-            await Shell.Current.GoToAsync($"{nameof(MovieTabbedPage)}?MovieID={viewModel.Movie.Id}");
+            await Shell.Current.GoToAsync($"{nameof(MovieTabbedPage)}?MovieID={mvm.Movie.Id}");
             IsBusy = false;
         }
     }

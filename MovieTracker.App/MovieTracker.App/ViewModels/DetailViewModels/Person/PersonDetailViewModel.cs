@@ -5,10 +5,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using TMDbLib.Objects.People;
 using Xamarin.Forms;
+using MovieTracker.App.ViewModels.BaseViewModels;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Person
 {
-    public class PersonDetailViewModel : BaseViewModel, IDetailViewModel
+    public class PersonDetailViewModel : BaseViewModel, IViewModelInitialize
     {
         public Task Initialization { get; private set; }
         public TMDbLib.Objects.People.Person PersonInfo { get; set; }

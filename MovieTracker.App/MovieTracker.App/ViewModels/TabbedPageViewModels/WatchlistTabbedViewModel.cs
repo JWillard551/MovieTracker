@@ -2,10 +2,11 @@
 using MovieTracker.App.ViewModels.DetailViewModels.Movie;
 using MovieTracker.App.ViewModels.DetailViewModels.Show;
 using System.Threading.Tasks;
+using MovieTracker.App.ViewModels.BaseViewModels;
 
 namespace MovieTracker.App.ViewModels.TabbedPageViewModels
 {
-    public class WatchlistTabbedViewModel : BaseViewModel, IDetailViewModel
+    public class WatchlistTabbedViewModel : BaseViewModel, IViewModelInitialize
     {
         public Task Initialization { get; private set; }
 

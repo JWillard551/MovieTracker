@@ -1,4 +1,5 @@
 ﻿using MovieTracker.TMDbModel.AdditionalModelObjects;
+using MovieTracker.App.ViewModels.BaseViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using TMDbLib.Objects.General;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Common
 {
-    public class WatchOnViewModel : BaseViewModel, IDetailViewModel
+    public class WatchOnViewModel : BaseViewModel, IViewModelInitialize
     {
         public SingleResultContainer<Dictionary<string, WatchProviders>> Providers { get; set; }
         private WatchProviders RegionWatchProvider { get; set; }

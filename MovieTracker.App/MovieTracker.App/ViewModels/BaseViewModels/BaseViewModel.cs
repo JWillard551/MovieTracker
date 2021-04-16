@@ -6,15 +6,19 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
-namespace MovieTracker.App.ViewModels
+namespace MovieTracker.App.ViewModels.BaseViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public ITMDbService TMDbService => DependencyService.Get<ITMDbService>();
+        #region DI Services
 
-        public IMessage ToastService => DependencyService.Get<IMessage>();
+        protected ITMDbService TMDbService => DependencyService.Get<ITMDbService>();
+        protected IMessage ToastService => DependencyService.Get<IMessage>();
+        protected IUserPromptService UserPromptService => DependencyService.Get<IUserPromptService>();
 
-        public IUserPromptService UserPromptService => DependencyService.Get<IUserPromptService>();
+        #endregion
+
+        #region Base Properties
 
         bool isBusy = false;
         public bool IsBusy
@@ -36,6 +40,8 @@ namespace MovieTracker.App.ViewModels
             get { return title; }
             set { SetProperty(ref title, value); }
         }
+
+        #endregion
 
         public BaseViewModel() { }
 

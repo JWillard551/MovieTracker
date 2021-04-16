@@ -52,13 +52,13 @@
                                    PlayTrailerButtonVisible="False"
                                    AddToWatchlistCommand="{Binding AddToWatchListCommand}"
                                    AddToWatchlistButtonVisible="True"
-                                   WatchlistButtonState="{Binding Watchlisted}"
+                                   WatchlistButtonState="{Binding ItemWatchlisted}"
                                    AddToFavoritesCommand="{Binding AddToFavoritesCommand}"
                                    AddToFavoritesButtonVisible="True"
-                                   FavoritesButtonState="{Binding Favorited}"
+                                   FavoritesButtonState="{Binding ItemFavorited}"
                                    RateCommand="{Binding RateCommand}"
                                    RateButtonVisible="True"
-                                   RatingsButtonState="{Binding Rated}"
+                                   RatingsButtonState="{Binding ItemRated}"
                                    ControlTemplate="{StaticResource DetailButtonsTemplate}" />
 
         <!--Overview Row-->

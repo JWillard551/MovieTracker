@@ -1,4 +1,5 @@
 ﻿using MovieTracker.App.Services;
+using MovieTracker.App.ViewModels.BaseViewModels;
 using MovieTracker.TMDbModel.AdditionalModelObjects;
 using Xamarin.Forms;
 
@@ -9,8 +10,6 @@ namespace MovieTracker.App.ViewModels.LoginViewModels
         public Command<Credentials> LoginCommand { get; }
 
         public Credentials Credentials { get; set; } = new Credentials();
-
-        public IMessage ToastService => DependencyService.Get<IMessage>();
 
         public LoginViewModel()
         {

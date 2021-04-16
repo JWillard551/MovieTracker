@@ -1,14 +1,20 @@
 ﻿using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
 using MovieTracker.TMDbModel.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MovieTracker.App.Views.CollectionItemViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RatingsMovieView : ContentView
+    public partial class FavoritesShowView : ContentView
     {
-        public RatingsMovieView()
+        public FavoritesShowView()
         {
             InitializeComponent();
         }
@@ -20,11 +26,11 @@ namespace MovieTracker.App.Views.CollectionItemViews
             //2. Because it's faster, it handles scenarios with FFImageLoading sometimes (or always) repeating images on a collection view.
             //   as the null set on source helps prevent this from occurring.
             cachedImage.Source = null;
-            var item = BindingContext as MovieItemViewModel;
+            var item = BindingContext as ShowItemViewModel;
             if (item == null)
                 return;
 
-            cachedImage.Source = new UriImageSource() { Uri = ModelUtils.GetImageUri(item.Movie.PosterPath) };
+            cachedImage.Source = new UriImageSource() { Uri = ModelUtils.GetImageUri(item.Show.PosterPath) };
             base.OnBindingContextChanged();
         }
     }

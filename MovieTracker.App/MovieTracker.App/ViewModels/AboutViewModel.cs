@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieTracker.App.ViewModels.BaseViewModels;
+using System;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;

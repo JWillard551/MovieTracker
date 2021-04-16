@@ -1,14 +1,20 @@
 ﻿using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
 using MovieTracker.TMDbModel.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MovieTracker.App.Views.CollectionItemViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RatingsMovieView : ContentView
+    public partial class FavoritesMovieView : ContentView
     {
-        public RatingsMovieView()
+        public FavoritesMovieView()
         {
             InitializeComponent();
         }
