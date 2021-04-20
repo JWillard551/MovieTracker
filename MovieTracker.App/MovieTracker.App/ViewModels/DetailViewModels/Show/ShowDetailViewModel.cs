@@ -45,7 +45,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
         {
             //Handle initialization for the show info.
             ShowInfo = await TMDbService.GetTVShowAsync(id, TvShowMethods.ContentRatings);
-            await InitializeAccountInfo(id);
+            await InitializeAccountInfo(id, MediaType.Tv);
             ShowRating = GetRating();
             InitializeRadialGaugeViewModel(ShowInfo?.VoteAverage ?? 0);
 

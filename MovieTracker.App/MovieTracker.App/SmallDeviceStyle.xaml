@@ -13,6 +13,8 @@
              Phone="10"
              x:Key="PagePadding" />
 
+    <!--#region Frame Styles-->
+
     <Style TargetType="Frame"
            x:Key="ImageFrameStyle">
         <Setter Property="HeightRequest">
@@ -53,6 +55,50 @@
                 Value="0" />
     </Style>
 
+    <Style TargetType="Frame"
+           x:Key="SmallImageFrameStyle">
+        <Setter Property="HeightRequest">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="125"
+                         Tablet="250" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="WidthRequest">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="83"
+                         Tablet="166" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CornerRadius">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="10"
+                         Tablet="20" />
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="HasShadow"
+                Value="True" />
+        <Setter Property="BorderColor"
+                Value="DarkGray" />
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+        <Setter Property="VerticalOptions"
+                Value="Center" />
+        <Setter Property="IsClippedToBounds"
+                Value="True" />
+        <Setter Property="Margin"
+                Value="0" />
+        <Setter Property="Padding"
+                Value="0" />
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region FFCachedImage Styles -->
+
     <Style TargetType="ffImage:CachedImage"
            x:Key="FFCachedImageStyle">
         <Setter Property="HeightRequest">
@@ -75,6 +121,32 @@
                 Value="0" />
     </Style>
 
+    <Style TargetType="ffImage:CachedImage"
+           x:Key="FFCachedSmallImageStyle">
+        <Setter Property="HeightRequest">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="125"
+                         Tablet="250" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="WidthRequest">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="83"
+                         Tablet="166" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Aspect"
+                Value="AspectFill" />
+        <Setter Property="Margin"
+                Value="0" />
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region CarouselView Styles -->
+
     <Style TargetType="CarouselView"
            x:Key="CarouselViewStyle">
         <Setter Property="PeekAreaInsets">
@@ -88,12 +160,26 @@
                 Value="True" />
     </Style>
 
+    <!--#endregion-->
+
+    <!--#region Entry Styles -->
+
     <Style TargetType="Entry"
            x:Key="MainEntryStyle">
-        <Setter Property="HeightRequest"
-                Value="35" />
-        <Setter Property="FontSize"
-                Value="14" />
+        <Setter Property="HeightRequest">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="40"
+                         Tablet="60" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="18"
+                         Tablet="24" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="HorizontalOptions"
                 Value="FillAndExpand" />
         <Setter Property="TextColor"
@@ -101,4 +187,53 @@
         <Setter Property="PlaceholderColor"
                 Value="Gray" />
     </Style>
+
+    <!--#endregion-->
+
+    <!--#region Label Styles -->
+
+    <Style TargetType="Label"
+           x:Key="MainLabelStyle">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="16"
+                         Tablet="32" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily"
+                Value="Roboto" />
+        <Setter Property="TextColor"
+                Value="Black" />
+    </Style>
+
+    <Style TargetType="Label"
+           x:Key="MainLabelItalicStyle">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="16"
+                         Tablet="32" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily"
+                Value="RobotoItalic" />
+        <Setter Property="TextColor"
+                Value="Black" />
+    </Style>
+
+    <Style TargetType="Span"
+           x:Key="MainTitleSpanStyle">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="20"
+                         Tablet="40" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextColor"
+                Value="Black" />
+    </Style>
+
+    <!--#endregion-->
 </ResourceDictionary>

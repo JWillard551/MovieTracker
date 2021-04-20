@@ -29,25 +29,26 @@
                 <StackLayout Grid.Row="0"
                              Grid.Column="0"
                              Grid.ColumnSpan="2">
-                    <Label MaxLines="2"
+                    <Label Style="{StaticResource MainLabelStyle}"
+                           MaxLines="2"
                            LineBreakMode="WordWrap"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="End">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{TemplateBinding Title}"
-                                      FontAttributes="Bold"
-                                      FontSize="18" />
+                                      Style="{StaticResource MainTitleSpanStyle}"
+                                      FontAttributes="Bold" />
                                 <Span Text=" " />
                                 <Span Text="{TemplateBinding ReleaseDate}"
-                                      FontAttributes="Bold"
-                                      FontSize="16" />
+                                      Style="{StaticResource MainTitleSpanStyle}"
+                                      FontAttributes="Bold" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
                     <Label Text="{TemplateBinding TagLine}"
-                           Padding="5,0,0,0"
-                           FontAttributes="Italic" />
+                           Style="{StaticResource MainLabelItalicStyle}"
+                           Padding="5,0,0,0" />
                 </StackLayout>
 
                 <!--Image-->
@@ -100,6 +101,7 @@
                            Margin="0"
                            Padding="3">
                         <Label Text="{TemplateBinding Rating}"
+                               Style="{StaticResource MainLabelStyle}"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
                                VerticalOptions="Start" />
@@ -107,38 +109,40 @@
 
                     <Label Grid.Row="0"
                            Grid.Column="1"
-                           Text="{TemplateBinding RuntimeOrNumSeasons}" />
+                           Text="{TemplateBinding RuntimeOrNumSeasons}"
+                           Style="{StaticResource MainLabelStyle}"/>
 
                     <Label Grid.Row="1"
                            Grid.ColumnSpan="2"
                            Text="{TemplateBinding Genres}"
+                           Style="{StaticResource MainLabelStyle}"
                            MaxLines="4"
                            LineBreakMode="WordWrap" />
 
                     <StackLayout Grid.Row="2"
                                  Grid.Column="0">
                         <Label Text="Status"
+                               Style="{StaticResource MainLabelStyle}"
                                FontAttributes="Bold"
                                Padding="0"
-                               Margin="0"
-                               FontSize="10" />
+                               Margin="0"/>
                         <Label Text="{TemplateBinding Status}"
+                               Style="{StaticResource MainLabelStyle}"
                                Padding="0"
-                               Margin="0"
-                               FontSize="10" />
+                               Margin="0" />
                     </StackLayout>
 
                     <StackLayout Grid.Row="2"
                                  Grid.Column="1">
                         <Label Text="Original Language"
+                               Style="{StaticResource MainLabelStyle}"
                                FontAttributes="Bold"
                                Padding="0"
-                               Margin="0"
-                               FontSize="10" />
+                               Margin="0"/>
                         <Label Text="{TemplateBinding OriginalLanguage}"
+                               Style="{StaticResource MainLabelStyle}"
                                Padding="0"
-                               Margin="0"
-                               FontSize="10" />
+                               Margin="0" />
                     </StackLayout>
 
                     <customViews:RadialGaugeView Grid.Row="3"
@@ -193,7 +197,7 @@
 
                 <controls:RoundImageButton VerticalOptions="Center"
                                            HorizontalOptions="Center"
-                                           ImageSource="favorite_white.png"
+                                           ImageSource="outline_favorite_white_24dp.png"
                                            Command="{TemplateBinding AddToFavoritesCommand}"
                                            IsVisible="{TemplateBinding AddToFavoritesButtonVisible}"
                                            SelectedState="{TemplateBinding FavoritesButtonState}">
@@ -204,13 +208,13 @@
                             <!--<Setter Property="SelectedColorState"
                                     Value="#032541" />-->
                             <Setter Property="ImageSource"
-                                    Value="favorite_white_set.png" />
+                                    Value="outline_favorite_white_set_24dp.png" />
                         </DataTrigger>
                         <DataTrigger TargetType="controls:RoundImageButton"
                                      Binding="{TemplateBinding FavoritesButtonState}"
                                      Value="False">
                             <Setter Property="ImageSource"
-                                    Value="favorite_white.png" />
+                                    Value="outline_favorite_white_24dp.png" />
                         </DataTrigger>
                     </controls:RoundImageButton.Triggers>
                 </controls:RoundImageButton>
@@ -250,6 +254,7 @@
                BackgroundColor="{StaticResource Primary}">
             <StackLayout>
                 <Label Text="Overview"
+                       Style="{StaticResource MainLabelStyle}"
                        FontAttributes="Bold"
                        TextDecorations="Underline"
                        FontSize="20"
@@ -257,7 +262,7 @@
                 <ScrollView VerticalScrollBarVisibility="Always"
                             Margin="5,2,5,2">
                     <Label Text="{TemplateBinding Overview}"
-                           FontSize="16"
+                           Style="{StaticResource MainLabelStyle}"
                            LineBreakMode="WordWrap"
                            Margin="5" />
                 </ScrollView>

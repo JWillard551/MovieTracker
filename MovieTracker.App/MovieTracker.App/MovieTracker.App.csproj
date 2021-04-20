@@ -6,6 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\JosefinSans-Light.ttf" />
+    <None Remove="Fonts\JosefinSans-LightItalic.ttf" />
+    <None Remove="Fonts\Montserrat-Medium.ttf" />
+    <None Remove="Fonts\Montserrat-MediumItalic.ttf" />
+    <None Remove="Fonts\Roboto-Medium.ttf" />
+    <None Remove="Fonts\Roboto-MediumItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Fonts\JosefinSans-Light.ttf" />
+    <EmbeddedResource Include="Fonts\JosefinSans-LightItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Montserrat-Medium.ttf" />
+    <EmbeddedResource Include="Fonts\Montserrat-MediumItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-Medium.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-MediumItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="TMDbLib" Version="1.8.1" />

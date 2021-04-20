@@ -46,9 +46,15 @@ namespace MovieTracker.App.ViewModels.BaseViewModels
 
         #endregion
 
-        protected async Task InitializeAccountInfo(int id)
+        protected async Task InitializeAccountInfo(int id, MediaType mediaType)
         {
-            var accountState = await TMDbService.GetMovieAccountStateAsync(id);
+            AccountState accountState = null;
+
+            if (mediaType == MediaType.Movie)
+                accountState = await TMDbService.GetMovieAccountStateAsync(id);
+            else if (mediaType == MediaType.Tv)
+                accountState = await TMDbService.GetTvShowAccountStateAsync(id);
+
             ItemFavorited = accountState?.Favorite ?? false;
             ItemWatchlisted = accountState?.Watchlist ?? false;
             ItemRated = System.Convert.ToDouble(accountState?.Rating) > 0;
