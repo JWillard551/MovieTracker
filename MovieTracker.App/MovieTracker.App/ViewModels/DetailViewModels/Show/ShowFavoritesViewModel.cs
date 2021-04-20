@@ -3,14 +3,17 @@ using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
 using MovieTracker.App.Views.TabbedPages;
 using MovieTracker.TMDbModel.Utils;
 using MvvmHelpers;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TMDbLib.Objects.General;
+using TMDbLib.Objects.Search;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 {
-    public class ShowFavoritesViewModel : AccountDetailViewModel, IViewModelInitialize
+    public class ShowFavoritesViewModel : PagedLoadingViewModel<SearchContainer<SearchTv>>, IViewModelInitialize
     {
         private ObservableRangeCollection<ShowItemViewModel> _favoriteShows;
         public ObservableRangeCollection<ShowItemViewModel> FavoriteShows
@@ -36,11 +39,12 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 
         private async Task InitializeAsync()
         {
-            var favorites = await TMDbService.AccountGetFavoriteTvAsync();
+            var favorites = await TMDbService.AccountGetFavoriteTvAsync(CurrentPage);
             FavoriteShows = new ObservableRangeCollection<ShowItemViewModel>(favorites.Results.Select(show => new ShowItemViewModel(show)).ToList());
             AddToWatchlistCommand = new Command<ShowItemViewModel>(OnAddToWatchlistCommand);
             RemoveFavoriteCommand = new Command<ShowItemViewModel>(OnRemoveFavoriteCommand);
             GoToDetailsCommand = new Command<ShowItemViewModel>(GoToDetails);
+            LoadMoreItemsCommand = new Command(OnLoadMoreItems);
         }
 
         private async void OnAddToWatchlistCommand(ShowItemViewModel svm)
@@ -60,6 +64,30 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
             IsBusy = true;
             await Shell.Current.GoToAsync($"{nameof(ShowTabbedPage)}?ShowID={svm.Show.Id}");
             IsBusy = false;
+        }
+
+        public override async Task<SearchContainer<SearchTv>> LoadMoreItemsAsync()
+        {
+            try
+            {
+                return await TMDbService.AccountGetFavoriteTvAsync(++CurrentPage);
+            }
+            catch (Exception ex)
+            {
+                //TODO: Log exception
+                return new SearchContainer<SearchTv>() { Results = new List<SearchTv>() };
+            }
+        }
+
+        public override void EvaluateResultsAndUpdateObservableCollection(SearchContainer<SearchTv> results)
+        {
+            if (results.Page > results.TotalPages && results.Results.Count == 0)
+            {
+                ItemLoadingComplete();
+                return;
+            }
+
+            FavoriteShows.AddRange(results.Results.Select(show => new ShowItemViewModel(show)).ToList());
         }
     }
 }

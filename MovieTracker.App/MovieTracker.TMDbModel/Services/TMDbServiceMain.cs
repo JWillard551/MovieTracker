@@ -16,12 +16,6 @@ namespace MovieTracker.TMDbModel.Services
     {
         private readonly string SESSION_ID_TOKEN = "session_id_token";
         private readonly string LANGUAGE_CODE = "en_US";
-        public int PageSize = 20;
-
-        public string CurrentQuery { get; set; } = string.Empty;
-        public int CurrentPage { get; set; }
-        public int TotalPages { get; set; }
-        public int TotalResults { get; set; }
 
         public async Task<Movie> GetMovieAsync(int movieId, MovieMethods extraMethods = MovieMethods.Undefined, CancellationToken cancellationToken = default)
         {
@@ -69,27 +63,11 @@ namespace MovieTracker.TMDbModel.Services
             return await TMDbServiceClient.Instance.GetTvShowAsync(showId, extraMethods, null, null, cancellationToken);
         }
 
-        public async Task<SearchContainer<SearchBase>> SearchAsync(string query, CancellationToken cancellationToken = default)
+        public async Task<SearchContainer<SearchBase>> SearchAsync(string query, int page, CancellationToken cancellationToken = default)
         {
-            UpdateQueryAndPage(query);
-            var results = await TMDbServiceClient.Instance.SearchMultiAsync(CurrentQuery, CurrentPage, false, 0, null, cancellationToken);
+            var results = await TMDbServiceClient.Instance.SearchMultiAsync(query, page, false, 0, null, cancellationToken);
             results.Results = results.Results.Where(x => !(x is SearchPerson)).ToList();
-            TotalPages = results.TotalPages;
-            TotalResults = results.TotalResults;
             return results;
-        }
-
-        public void UpdateQueryAndPage(string query)
-        {
-            if (CurrentQuery.Equals(query))
-            {
-                CurrentPage++;
-            }
-            else
-            {
-                CurrentQuery = query;
-                CurrentPage = 1;
-            }
         }
     }
 }

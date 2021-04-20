@@ -29,7 +29,7 @@
         <CollectionView
             x:Name="cv"
             ItemsSource="{Binding ItemsToDisplay}"
-            RemainingItemsThreshold="8"
+            RemainingItemsThreshold="{Binding ItemThreshold}"
             RemainingItemsThresholdReachedCommand="{Binding LoadMoreItemsCommand}"
             VerticalScrollBarVisibility="Always"
             Margin="0"

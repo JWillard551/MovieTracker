@@ -13,6 +13,8 @@
 
         <CollectionView x:Name="cv"
                         ItemsSource="{Binding RatedShows}"
+                        RemainingItemsThreshold="{Binding ItemThreshold}"
+                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreItemsCommand}"
                         VerticalScrollBarVisibility="Always"
                         Margin="0"
                         BackgroundColor="Black">

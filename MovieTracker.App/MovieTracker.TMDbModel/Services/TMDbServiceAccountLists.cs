@@ -22,12 +22,15 @@ namespace MovieTracker.TMDbModel.Services
             return await TMDbServiceClient.Instance.GetTvShowAccountStateAsync(showId, cancellationToken);
         }
 
-        public async Task<SearchContainer<SearchMovie>> AccountGetMovieWatchlistAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
+        public async Task<SearchContainer<SearchMovie>> AccountGetMovieWatchlistAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
         {
-            return await TMDbServiceClient.Instance.AccountGetMovieWatchlistAsync(page, sortBy, sortOrder, language, cancellationToken);
+            var results = await TMDbServiceClient.Instance.AccountGetMovieWatchlistAsync(page, sortBy, sortOrder, language, cancellationToken);
+            //TotalPages = results.TotalPages;
+            //TotalResults = results.TotalResults;
+            return results;
         }
 
-        public async Task<SearchContainer<SearchTv>> AccountGetTvWatchlistAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
+        public async Task<SearchContainer<SearchTv>> AccountGetTvWatchlistAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
         {
             return await TMDbServiceClient.Instance.AccountGetTvWatchlistAsync(page, sortBy, sortOrder, language, cancellationToken);
         }
@@ -41,12 +44,12 @@ namespace MovieTracker.TMDbModel.Services
 
         #region Account Favorites
 
-        public async Task<SearchContainer<SearchMovie>> AccountGetFavoriteMoviesAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
+        public async Task<SearchContainer<SearchMovie>> AccountGetFavoriteMoviesAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
         {
             return await TMDbServiceClient.Instance.AccountGetFavoriteMoviesAsync(page, sortBy, sortOrder, language, cancellationToken);
         }
 
-        public async Task<SearchContainer<SearchTv>> AccountGetFavoriteTvAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
+        public async Task<SearchContainer<SearchTv>> AccountGetFavoriteTvAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
         {
             return await TMDbServiceClient.Instance.AccountGetFavoriteTvAsync(page, sortBy, sortOrder, language, cancellationToken);
         }
@@ -60,12 +63,12 @@ namespace MovieTracker.TMDbModel.Services
 
         #region Account Ratings
 
-        public async Task<SearchContainer<SearchMovieWithRating>> AccountGetRatedMoviesAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
+        public async Task<SearchContainer<SearchMovieWithRating>> AccountGetRatedMoviesAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
         {
             return await TMDbServiceClient.Instance.AccountGetRatedMoviesAsync(page, sortBy, sortOrder, language, cancellationToken);
         }
 
-        public async Task<SearchContainer<AccountSearchTv>> AccountGetRatedTvShowsAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
+        public async Task<SearchContainer<AccountSearchTv>> AccountGetRatedTvShowsAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
         {
             return await TMDbServiceClient.Instance.AccountGetRatedTvShowsAsync(page, sortBy, sortOrder, language, cancellationToken);
         }

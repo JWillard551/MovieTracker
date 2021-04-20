@@ -14,10 +14,6 @@ namespace MovieTracker.TMDbModel.Services
 {
     public interface ITMDbService
     {
-        string CurrentQuery { get; set; }
-        int CurrentPage { get; set; }
-        int TotalPages { get; set; }
-
         #region Login / Authentication Methods
 
         Task<OperationResult> LoginAndSetSessionAsync(Credentials creds);
@@ -28,9 +24,7 @@ namespace MovieTracker.TMDbModel.Services
 
         #endregion
 
-        Task<SearchContainer<SearchBase>> SearchAsync(string query, CancellationToken cancellationToken = default);
-
-        void UpdateQueryAndPage(string query);
+        Task<SearchContainer<SearchBase>> SearchAsync(string query, int page, CancellationToken cancellationToken = default);
 
         Task<Movie> GetMovieAsync(int movieId, MovieMethods extraMethods = MovieMethods.Undefined, CancellationToken cancellationToken = default);
 
@@ -64,11 +58,11 @@ namespace MovieTracker.TMDbModel.Services
 
         Task<AccountState> GetTvShowAccountStateAsync(int tvShowId, CancellationToken cancellationToken = default);
 
-        Task<SearchContainer<SearchTv>> AccountGetTvWatchlistAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
+        Task<SearchContainer<SearchTv>> AccountGetTvWatchlistAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
 
-        Task<SearchContainer<SearchTv>> AccountGetFavoriteTvAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
+        Task<SearchContainer<SearchTv>> AccountGetFavoriteTvAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
 
-        Task<SearchContainer<AccountSearchTv>> AccountGetRatedTvShowsAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
+        Task<SearchContainer<AccountSearchTv>> AccountGetRatedTvShowsAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
         
         #endregion
 
@@ -76,11 +70,11 @@ namespace MovieTracker.TMDbModel.Services
 
         Task<AccountState> GetMovieAccountStateAsync(int movieId, CancellationToken cancellationToken = default);
 
-        Task<SearchContainer<SearchMovie>> AccountGetMovieWatchlistAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
+        Task<SearchContainer<SearchMovie>> AccountGetMovieWatchlistAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
 
-        Task<SearchContainer<SearchMovie>> AccountGetFavoriteMoviesAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
+        Task<SearchContainer<SearchMovie>> AccountGetFavoriteMoviesAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
 
-        Task<SearchContainer<SearchMovieWithRating>> AccountGetRatedMoviesAsync(int page = 1, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
+        Task<SearchContainer<SearchMovieWithRating>> AccountGetRatedMoviesAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default);
         
         #endregion
 

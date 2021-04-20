@@ -3,14 +3,17 @@ using MovieTracker.App.ViewModels.CollectionViewItemViewModels;
 using MovieTracker.App.Views.TabbedPages;
 using MovieTracker.TMDbModel.Utils;
 using MvvmHelpers;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TMDbLib.Objects.General;
+using TMDbLib.Objects.Search;
 using Xamarin.Forms;
 
 namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 {
-    public class ShowRatingsViewModel : AccountDetailViewModel, IViewModelInitialize
+    public class ShowRatingsViewModel : PagedLoadingViewModel<SearchContainer<AccountSearchTv>>, IViewModelInitialize
     {
         private ObservableRangeCollection<ShowItemViewModel> _ratedShows;
         public ObservableRangeCollection<ShowItemViewModel> RatedShows
@@ -37,11 +40,12 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 
         private async Task InitializeAsync()
         {
-            var rated = await TMDbService.AccountGetRatedTvShowsAsync();
+            var rated = await TMDbService.AccountGetRatedTvShowsAsync(CurrentPage);
             RatedShows = new ObservableRangeCollection<ShowItemViewModel>(rated.Results.Select(tv => new RatedShowItemViewModel(tv)).ToList());
             EditRateCommand = new Command<ShowItemViewModel>(OnEditRateCommand);
             RemoveRatingCommand = new Command<ShowItemViewModel>(OnRemoveRatingCommand);
             GoToDetailsCommand = new Command<ShowItemViewModel>(GoToDetails);
+            LoadMoreItemsCommand = new Command(OnLoadMoreItems);
         }
 
         private async void OnEditRateCommand(ShowItemViewModel svm)
@@ -61,6 +65,30 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
             IsBusy = true;
             await Shell.Current.GoToAsync($"{nameof(ShowTabbedPage)}?ShowID={svm.Show.Id}");
             IsBusy = false;
+        }
+
+        public override async Task<SearchContainer<AccountSearchTv>> LoadMoreItemsAsync()
+        {
+            try
+            {
+                return await TMDbService.AccountGetRatedTvShowsAsync(++CurrentPage);
+            }
+            catch (Exception ex)
+            {
+                //TODO: Log exception
+                return new SearchContainer<AccountSearchTv>() { Results = new List<AccountSearchTv>() };
+            }
+        }
+
+        public override void EvaluateResultsAndUpdateObservableCollection(SearchContainer<AccountSearchTv> results)
+        {
+            if (results.Page > results.TotalPages && results.Results.Count == 0)
+            {
+                ItemLoadingComplete();
+                return;
+            }
+
+            RatedShows.AddRange(results.Results.Select(show => new RatedShowItemViewModel(show)).ToList());
         }
     }
 }
