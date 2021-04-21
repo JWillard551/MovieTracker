@@ -64,11 +64,7 @@ namespace MovieTracker.App.ViewModels
             }
             else if (searchItem.MediaType == MediaType.Person)
             {
-                //Create PersonDetailViewModel + Push PersonDetailPage
-            }
-            else
-            {
-                //Unspecified - Handle.
+                //TODO;
             }
             IsBusy = false;
         }

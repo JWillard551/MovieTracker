@@ -27,7 +27,6 @@ namespace MovieTracker.App.ViewModels
 
         public MainPageViewModel()
         {
-            
             Initialization = InitializeAsync();
         }
 

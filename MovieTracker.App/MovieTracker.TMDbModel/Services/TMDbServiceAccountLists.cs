@@ -1,5 +1,4 @@
 ﻿using MovieTracker.TMDbModel.Client;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using TMDbLib.Objects.Account;
@@ -25,8 +24,6 @@ namespace MovieTracker.TMDbModel.Services
         public async Task<SearchContainer<SearchMovie>> AccountGetMovieWatchlistAsync(int page, AccountSortBy sortBy = AccountSortBy.Undefined, SortOrder sortOrder = SortOrder.Undefined, string language = null, CancellationToken cancellationToken = default)
         {
             var results = await TMDbServiceClient.Instance.AccountGetMovieWatchlistAsync(page, sortBy, sortOrder, language, cancellationToken);
-            //TotalPages = results.TotalPages;
-            //TotalResults = results.TotalResults;
             return results;
         }
 

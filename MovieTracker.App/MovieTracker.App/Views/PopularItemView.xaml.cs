@@ -1,4 +1,5 @@
 ﻿using MovieTracker.App.ViewModels;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +23,13 @@ namespace MovieTracker.App.Views
             var item = BindingContext as PopularItemViewModel;
             if (item == null)
                 return;
-            cachedImage.Source = item?.PopularItem?.Poster;
+            try
+            {
+                cachedImage.Source = item?.PopularItem?.Poster;
+            }
+            catch
+            {
+            }
             base.OnBindingContextChanged();
         }
     }
