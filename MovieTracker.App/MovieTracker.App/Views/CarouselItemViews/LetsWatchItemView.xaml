@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.App.Views.CarouselItemViews.LetsWatchItemView"
+             xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels"
+             xmlns:converter="clr-namespace:MovieTracker.App.Converters"
+             x:DataType="viewModel:LetsWatchItemViewModel">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:FavoriteIconConverter x:Key="FavoriteIconConverter" />
+            <converter:WatchlistIconConverter x:Key="WatchlistIconConverter" />
+            <converter:RatingIconConverter x:Key="RatingIconConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <StackLayout>
+        <Frame Style="{StaticResource ImageFrameStyle}">
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand">
+
+                <ffImage:CachedImage x:Name="cachedImage"
+                                     Style="{StaticResource FFCachedImageStyle}">
+                    <ffImage:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Path=ItemTapped}"
+                                              CommandParameter="{Binding Item}" />
+                    </ffImage:CachedImage.GestureRecognizers>
+                </ffImage:CachedImage>
+            </StackLayout>
+        </Frame>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <ffImage:CachedImage Grid.Row="0" 
+                                 Grid.Column="0"
+                                 Source="{Binding Item.Watchlist, Converter={StaticResource WatchlistIconConverter}, Mode=OneTime}"></ffImage:CachedImage>
+            <ffImage:CachedImage Grid.Row="0"
+                                 Grid.Column="1"
+                                 Source="{Binding Item.Favorite, Converter={StaticResource FavoriteIconConverter}, Mode=OneTime}"></ffImage:CachedImage>
+            <ffImage:CachedImage Grid.Row="0"
+                                 Grid.Column="2"
+                                 Source="{Binding Item.Rated, Converter={StaticResource RatingIconConverter}, Mode=OneTime}"></ffImage:CachedImage>
+        </Grid>
+        <Label Text="{Binding Item.Name}"
+               TextColor="White"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               VerticalOptions="End" />
+    </StackLayout>
+</ContentView>

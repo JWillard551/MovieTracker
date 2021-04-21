@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.App.Views.LetsWatchPage"
+             xmlns:views="clr-namespace:MovieTracker.App.Views.CarouselItemViews"
+             xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels"
+             Shell.NavBarIsVisible="True">
+    <Grid BackgroundColor="Black"
+           Margin="0,25,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ActivityIndicator x:Name="loadingIndicator"  
+                           Grid.Row="0"
+                           Color="Navy"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Margin="0,0,0,20"
+                           InputTransparent="True" />
+
+        <CarouselView x:Name="cv_watchitems"
+                      IsBounceEnabled="False"
+                      Grid.Row="0"
+                      ItemsSource="{Binding FilteredItems}"
+                      Style="{StaticResource LetsWatchCarouselViewStyle}">
+
+            <CarouselView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"
+                                   ItemSpacing="10"
+                                   SnapPointsAlignment="Center"
+                                   SnapPointsType="Mandatory" />
+            </CarouselView.ItemsLayout>
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <views:LetsWatchItemView />
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <StackLayout Grid.Row="1"
+                     BackgroundColor="LightBlue">
+            
+            <Button x:Name="pickMovie_btn" 
+                    Text="Pick a movie for me!"
+                    Clicked="OnPickMovieClicked"></Button>
+            <Button x:Name="pickShow_btn" 
+                    Text="Pick a show for me!"
+                    Clicked="OnPickShowClicked"></Button>
+            <Button x:Name="pick_btn" 
+                    Text="Just pick something!"
+                    Clicked="OnPickClicked"></Button>
+        </StackLayout>
+
+    </Grid>
+</ContentPage>

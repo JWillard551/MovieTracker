@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalModelObjects\LetsWatchItem.cs" />
     <Compile Include="AdditionalModelObjects\ProviderItem.cs" />
     <Compile Include="AdditionalModelObjects\ProviderLists.cs" />
     <Compile Include="Client\TMDbExtendedServiceClient.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Services\TMDbServiceAccountLists.cs" />
     <Compile Include="Services\TMDbServiceMain.cs" />
     <Compile Include="Services\TMDbServiceAuthentication.cs" />
+    <Compile Include="Utils\AccountListType.cs" />
     <Compile Include="Utils\DetailButtonType.cs" />
     <Compile Include="Utils\ModelUtils.cs" />
   </ItemGroup>
