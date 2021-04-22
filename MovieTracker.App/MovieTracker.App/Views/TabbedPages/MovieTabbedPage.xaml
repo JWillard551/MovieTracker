@@ -11,6 +11,7 @@
             android:TabbedPage.BarSelectedItemColor="{StaticResource Tertiary}"
             BarBackgroundColor="Black"
             BarTextColor="White"
+            Shell.FlyoutBehavior="Disabled"
             x:DataType="viewModel:MovieTabbedPageViewModel">
     <movieDetailPages:MovieDetailPage x:Name="movieDetail"/>
     <commonDetailPages:CastAndCrewDetailPage x:Name="castCrew"/>
