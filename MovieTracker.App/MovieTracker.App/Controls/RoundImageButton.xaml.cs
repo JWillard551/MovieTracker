@@ -16,7 +16,6 @@ namespace MovieTracker.App.Controls
         public static readonly BindableProperty SelectedColorStateProperty = BindableProperty.Create(nameof(SelectedColorState), typeof(Color), typeof(RoundImageButton), Color.FromHex("032541"));
         public static readonly BindableProperty SelectedStateProperty = BindableProperty.Create(nameof(SelectedState), typeof(bool), typeof(RoundImageButton), false);
 
-
         public ICommand Command
         {
             get { return (ICommand)GetValue(CommandProperty); }

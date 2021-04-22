@@ -2,17 +2,29 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Controls.RoundImageButton"
-             HeightRequest="50"
-             WidthRequest="50"
              Padding="0"
              Margin="0"
              x:Name="roundImageButton">
+    <ContentView.HeightRequest>
+        <OnIdiom x:TypeArguments="x:Double"
+                 Phone="50"
+                 Tablet="100" />
+    </ContentView.HeightRequest>
+    <ContentView.WidthRequest>
+        <OnIdiom x:TypeArguments="x:Double"
+                 Phone="50"
+                 Tablet="100" />
+    </ContentView.WidthRequest>
     <Frame BindingContext="{x:Reference roundImageButton}"
-            CornerRadius="25"
            HasShadow="True"
            BackgroundColor="{Binding Path=SelectedColorState}"
            Padding="1"
            Margin="1">
+        <Frame.CornerRadius>
+            <OnIdiom x:TypeArguments="x:Single"
+                     Phone="25"
+                     Tablet="50" />
+        </Frame.CornerRadius>
         <Image x:Name="buttonImage"
                VerticalOptions="Center"
                HorizontalOptions="Center"/>
