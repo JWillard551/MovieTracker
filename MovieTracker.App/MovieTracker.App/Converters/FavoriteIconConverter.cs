@@ -6,8 +6,8 @@ namespace MovieTracker.App.Converters
 {
     public class FavoriteIconConverter : IValueConverter
     {
-        public readonly string FAVORITE = "outline_favorite_white_24dp.png";
-        public readonly string FAVORITE_SET = "outline_favorite_white_set_24dp.png";
+        public readonly string FAVORITE = "add_favorite_white.png";
+        public readonly string FAVORITE_SET = "add_favorite_set.png";
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

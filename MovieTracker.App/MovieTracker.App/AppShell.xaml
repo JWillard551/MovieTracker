@@ -97,12 +97,14 @@
     
     <!--Main Pages-->
     <FlyoutItem Route="Main"
-                Title="What's New">
+                Title="What's New"
+                Icon="icon_whatsnew.png">
         <ShellContent Route="MainPage"
                       ContentTemplate="{DataTemplate local:MainPage}" />
     </FlyoutItem>
     <FlyoutItem Route="LetsWatch"
-                Title="Let's Watch">
+                Title="Let's Watch"
+                Icon="icon_letswatch.png">
         <ShellContent Route="LetsWatch"
                       ContentTemplate="{DataTemplate local:LetsWatchPage}" />
     </FlyoutItem>
@@ -112,40 +114,28 @@
                       ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Search" 
-                Icon="icon_feed.png">
+                Icon="icon_search.png">
         <ShellContent Route="SearchPage" 
                       ContentTemplate="{DataTemplate local:SearchPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Watchlists"
-                Icon="icon_feed.png">
+                Icon="icon_watchlist.png">
         <ShellContent Route="WatchlistPage"
                       ContentTemplate="{DataTemplate tabbedPages:WatchlistTabbedPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Favorites"
-                Icon="icon_feed.png">
+                Icon="icon_favorite.png">
         <ShellContent Route="FavoritesPage"
                       ContentTemplate="{DataTemplate tabbedPages:FavoritesTabbedPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Ratings"
-                Icon="icon_feed.png">
+                Icon="icon_ratings.png">
         <ShellContent Route="RatingsPage"
                       ContentTemplate="{DataTemplate tabbedPages:RatingsTabbedPage}" />
     </FlyoutItem>
 
-    <!--<FlyoutItem Title="My Lists"
-                Icon="icon_feed.png">
-        <ShellContent Route="MyListsPage"
-                      ContentTemplate="{DataTemplate local:MyListsPage}" />
-    </FlyoutItem>-->
-
-    <!--<FlyoutItem Title="Browse" 
-                Icon="icon_feed.png">
-        <ShellContent Route="ItemsPage" 
-                      ContentTemplate="{DataTemplate local:ItemsPage}" />
-    </FlyoutItem>-->
-
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
+    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked" IconImageSource="icon_logout.png">
     </MenuItem>
 
     <!--

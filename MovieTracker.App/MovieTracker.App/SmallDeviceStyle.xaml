@@ -160,6 +160,12 @@
                 Value="True" />
     </Style>
 
+    <Style TargetType="CarouselView"
+           x:Key="LetsWatchCarouselViewStyle">
+        <Setter Property="Loop"
+                Value="True" />
+    </Style>
+
     <!--#endregion-->
 
     <!--#region Entry Styles -->

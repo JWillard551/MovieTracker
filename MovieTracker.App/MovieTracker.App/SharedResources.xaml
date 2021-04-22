@@ -181,23 +181,21 @@
                         <DataTrigger TargetType="controls:RoundImageButton"
                                      Binding="{TemplateBinding WatchlistButtonState}"
                                      Value="True">
-                            <!--<Setter Property="SelectedColorState"
-                                    Value="#032541" />-->
                             <Setter Property="ImageSource"
-                                    Value="bookmark_white_set.png" />
+                                    Value="add_watchlist_set.png" />
                         </DataTrigger>
                         <DataTrigger TargetType="controls:RoundImageButton"
                                      Binding="{TemplateBinding WatchlistButtonState}"
                                      Value="False">
                             <Setter Property="ImageSource"
-                                    Value="bookmark_white.png" />
+                                    Value="add_watchlist_white.png" />
                         </DataTrigger>
                     </controls:RoundImageButton.Triggers>
                 </controls:RoundImageButton>
 
                 <controls:RoundImageButton VerticalOptions="Center"
                                            HorizontalOptions="Center"
-                                           ImageSource="outline_favorite_white_24dp.png"
+                                           ImageSource="add_favorite_white.png"
                                            Command="{TemplateBinding AddToFavoritesCommand}"
                                            IsVisible="{TemplateBinding AddToFavoritesButtonVisible}"
                                            SelectedState="{TemplateBinding FavoritesButtonState}">
@@ -205,23 +203,21 @@
                         <DataTrigger TargetType="controls:RoundImageButton"
                                      Binding="{TemplateBinding FavoritesButtonState}"
                                      Value="True">
-                            <!--<Setter Property="SelectedColorState"
-                                    Value="#032541" />-->
                             <Setter Property="ImageSource"
-                                    Value="outline_favorite_white_set_24dp.png" />
+                                    Value="add_favorite_set.png" />
                         </DataTrigger>
                         <DataTrigger TargetType="controls:RoundImageButton"
                                      Binding="{TemplateBinding FavoritesButtonState}"
                                      Value="False">
                             <Setter Property="ImageSource"
-                                    Value="outline_favorite_white_24dp.png" />
+                                    Value="add_favorite_white.png" />
                         </DataTrigger>
                     </controls:RoundImageButton.Triggers>
                 </controls:RoundImageButton>
 
                 <controls:RoundImageButton VerticalOptions="Center"
                                            HorizontalOptions="Center"
-                                           ImageSource="rate_white.png"
+                                           ImageSource="add_rating_white.png"
                                            Command="{TemplateBinding RateCommand}"
                                            IsVisible="{TemplateBinding RateButtonVisible}"
                                            SelectedState="{TemplateBinding RatingsButtonState}">
@@ -229,16 +225,14 @@
                         <DataTrigger TargetType="controls:RoundImageButton"
                                      Binding="{TemplateBinding RatingsButtonState}"
                                      Value="True">
-                            <!--<Setter Property="SelectedColorState"
-                                    Value="#032541" />-->
                             <Setter Property="ImageSource"
-                                    Value="rate_white_set.png" />
+                                    Value="add_rating_set.png" />
                         </DataTrigger>
                         <DataTrigger TargetType="controls:RoundImageButton"
                                      Binding="{TemplateBinding RatingsButtonState}"
                                      Value="False">
                             <Setter Property="ImageSource"
-                                    Value="rate_white.png" />
+                                    Value="add_rating_white.png" />
                         </DataTrigger>
                     </controls:RoundImageButton.Triggers>
                 </controls:RoundImageButton>

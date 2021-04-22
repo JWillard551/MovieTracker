@@ -7,7 +7,14 @@
              xmlns:favoritesViewModel="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Show"
              xmlns:controls="clr-namespace:MovieTracker.App.Controls"
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
+             xmlns:converter="clr-namespace:MovieTracker.App.Converters"
              x:DataType="viewModel:ShowItemViewModel">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:WatchlistIconConverter x:Key="WatchlistIconConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
 
     <Grid HeightRequest="300">
 
@@ -108,16 +115,30 @@
                                                Grid.Column="1"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
-                                               ImageSource="rate_white.png"
+                                               ImageSource="{Binding Path=ItemWatchlisted, Converter={StaticResource WatchlistIconConverter}, Mode=OneTime}"
                                                Command="{Binding AddToWatchlistCommand, Source={RelativeSource AncestorType={x:Type favoritesViewModel:ShowFavoritesViewModel}}}"
                                                CommandParameter="{Binding .}">
+                        <!--<controls:RoundImageButton.Triggers>
+                            <DataTrigger TargetType="controls:RoundImageButton"
+                                         Binding="{Binding Path=ItemWatchlisted}"
+                                         Value="True">
+                                <Setter Property="ImageSource"
+                                        Value="add_watchlist_set.png" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="controls:RoundImageButton"
+                                         Binding="{Binding Path=ItemWatchlisted}"
+                                         Value="False">
+                                <Setter Property="ImageSource"
+                                        Value="add_watchlist_white.png" />
+                            </DataTrigger>
+                        </controls:RoundImageButton.Triggers>-->
                     </controls:RoundImageButton>
 
                     <controls:RoundImageButton Grid.Row="0"
                                                Grid.Column="2"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
-                                               ImageSource="outline_remove_white_24.png"
+                                               ImageSource="remove_white.png"
                                                Command="{Binding RemoveFavoriteCommand, Source={RelativeSource AncestorType={x:Type favoritesViewModel:ShowFavoritesViewModel}}}"
                                                CommandParameter="{Binding .}">
                     </controls:RoundImageButton>

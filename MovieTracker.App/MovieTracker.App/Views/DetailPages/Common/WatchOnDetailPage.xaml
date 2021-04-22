@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.DetailPages.Common.WatchOnDetailPage"
              BackgroundColor="Black"
-             Title="Watch On">
+             Title="Watch On"
+             IconImageSource="icon_watchon_white.png">
+    
     <CollectionView Grid.Row="0"
                     ItemsLayout="VerticalGrid, 4"
                     ItemsSource="{Binding ProviderLists}"

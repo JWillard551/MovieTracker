@@ -108,7 +108,7 @@
                                                Grid.Column="1"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
-                                               ImageSource="rate_white.png"
+                                               ImageSource="add_rating_white.png"
                                                Command="{Binding RateCommand, Source={RelativeSource AncestorType={x:Type watchlistViewModel:MovieWatchlistViewModel}}}"
                                                CommandParameter="{Binding .}">
                     </controls:RoundImageButton>
@@ -117,7 +117,7 @@
                                                Grid.Column="2"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
-                                               ImageSource="outline_remove_white_24.png"
+                                               ImageSource="remove_white.png"
                                                Command="{Binding RemoveFromWatchlistCommand, Source={RelativeSource AncestorType={x:Type watchlistViewModel:MovieWatchlistViewModel}}}"
                                                CommandParameter="{Binding .}">
                     </controls:RoundImageButton>

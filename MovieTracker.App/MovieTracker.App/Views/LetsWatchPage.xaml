@@ -5,6 +5,7 @@
              xmlns:views="clr-namespace:MovieTracker.App.Views.CarouselItemViews"
              xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels"
              Shell.NavBarIsVisible="True">
+    
     <Grid BackgroundColor="Black"
            Margin="0,25,0,0">
         <Grid.RowDefinitions>

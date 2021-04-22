@@ -5,7 +5,8 @@
              xmlns:viewModels="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Common"
              xmlns:converters="clr-namespace:MovieTracker.App.Converters"
              xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             Title="Cast / Crew">
+             Title="Cast / Crew"
+             IconImageSource="icon_castcrew_white.png">
 
     <ContentPage.Resources>
         <ResourceDictionary>

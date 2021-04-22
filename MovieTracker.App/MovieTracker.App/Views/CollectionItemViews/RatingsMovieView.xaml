@@ -117,7 +117,7 @@
                                                Grid.Column="2"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
-                                               ImageSource="outline_remove_white_24.png"
+                                               ImageSource="remove_white.png"
                                                Command="{Binding RemoveRatingCommand, Source={RelativeSource AncestorType={x:Type ratingsViewModel:MovieRatingsViewModel}}}"
                                                CommandParameter="{Binding .}">
                     </controls:RoundImageButton>

@@ -6,13 +6,13 @@ namespace MovieTracker.App.Converters
 {
     public class RatingIconConverter : IValueConverter
     {
-        public readonly string FAVORITE = "outline_favorite_white_24dp.png";
-        public readonly string FAVORITE_SET = "outline_favorite_white_set_24dp.png";
+        public readonly string RATING = "add_rating_white.png";
+        public readonly string RATING_SET = "add_rating_set.png";
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool isSet = (bool)value;
-            return isSet ? FAVORITE_SET : FAVORITE;
+            return isSet ? RATING_SET : RATING;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

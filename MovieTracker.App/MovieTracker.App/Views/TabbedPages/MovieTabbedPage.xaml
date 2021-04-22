@@ -7,6 +7,8 @@
             xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.TabbedPageViewModels"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.BarItemColor="White"
+            android:TabbedPage.BarSelectedItemColor="{StaticResource Tertiary}"
             BarBackgroundColor="Black"
             BarTextColor="White"
             x:DataType="viewModel:MovieTabbedPageViewModel">

@@ -5,7 +5,9 @@
              xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Show"
              xmlns:views="clr-namespace:MovieTracker.App.Views.CollectionItemViews"
              x:DataType="viewModel:ShowRatingsViewModel"
-             Title="TV Shows">
+             Title="TV Shows"
+             IconImageSource="icon_shows.png">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
