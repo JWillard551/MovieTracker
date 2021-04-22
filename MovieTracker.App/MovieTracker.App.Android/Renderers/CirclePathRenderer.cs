@@ -44,7 +44,7 @@ namespace MovieTracker.App.Droid.Renderers
             var paintObj = new Paint();
             var view = Element as CirclePathView;
             //Set pathwidth from DP. This should help with varying screen densities.
-            var pathWidth = Context.ToPixels(4);
+            var pathWidth = GetPathWidthOnIdiom();
 
             paintObj.SetStyle(Paint.Style.Stroke);
             paintObj.StrokeWidth = pathWidth;
@@ -73,6 +73,16 @@ namespace MovieTracker.App.Droid.Renderers
                 // free unmanaged resources here
                 disposed = true;
             }
+        }
+
+        private float GetPathWidthOnIdiom()
+        {
+            if (Xamarin.Essentials.DeviceInfo.Idiom == Xamarin.Essentials.DeviceIdiom.Phone)
+                return Context.ToPixels(4);
+            else if (Xamarin.Essentials.DeviceInfo.Idiom == Xamarin.Essentials.DeviceIdiom.Tablet)
+                return Context.ToPixels(8);
+            else
+                return Context.ToPixels(4);
         }
     }
 }
