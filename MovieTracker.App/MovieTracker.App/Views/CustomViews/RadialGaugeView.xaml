@@ -6,9 +6,18 @@
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
              xmlns:converters="clr-namespace:MovieTracker.App.Converters"
              HorizontalOptions="Center"
-             VerticalOptions="Center"
-             HeightRequest="50"
-             WidthRequest="50">
+             VerticalOptions="Center">
+    
+    <ContentView.HeightRequest>
+        <OnIdiom x:TypeArguments="x:Double"
+                 Phone="50"
+                 Tablet="100" />
+    </ContentView.HeightRequest>
+    <ContentView.WidthRequest>
+        <OnIdiom x:TypeArguments="x:Double"
+                 Phone="50"
+                 Tablet="100" />
+    </ContentView.WidthRequest>
 
     <ContentView.Resources>
         <ResourceDictionary>
@@ -22,6 +31,11 @@
                           BackgroundColor="{StaticResource Primary}"
                           Padding="0"
                           HasShadow="True">
+            <controls:OvalFrame.CornerRadius>
+                <OnIdiom x:TypeArguments="x:Single"
+                         Phone="25"
+                         Tablet="50" />
+            </controls:OvalFrame.CornerRadius>
             <Grid>
                 <customViews:CirclePathView MinValue="{Binding MinValue}"
                                             MaxValue="{Binding MaxValue}"
@@ -29,11 +43,11 @@
                                             LineColor="{Binding CurrentProgress, Converter={StaticResource RatingColorConverter}, Mode=OneWay}"/>
 
                 <Label HorizontalOptions="CenterAndExpand"
-                           VerticalOptions="CenterAndExpand"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           Text="{Binding CurrentProgress, StringFormat='\{0\}%'}"
-                           TextColor="White"/>
+                       VerticalOptions="CenterAndExpand"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Text="{Binding CurrentProgress, StringFormat='\{0\}%'}"
+                       TextColor="White" />
             </Grid>
         </controls:OvalFrame>
   </ContentView.Content>
