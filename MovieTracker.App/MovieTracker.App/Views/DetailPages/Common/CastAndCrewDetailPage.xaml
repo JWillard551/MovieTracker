@@ -15,16 +15,19 @@
     </ContentPage.Resources>
     
     <CollectionView ItemsSource="{Binding MediaCast}"
-                    IsGrouped="True">
+                    IsGrouped="True"
+                    BackgroundColor="Black">
         <CollectionView.GroupHeaderTemplate>
             <DataTemplate>
                 <Frame Margin="0"
-                       Padding="0">
+                       Padding="0"
+                       BackgroundColor="Black">
                     <Label Text="{Binding GroupName}"
                            Style="{StaticResource MainLabelStyle}"
                            Padding="10,0,0,0"
                            TextDecorations="Underline"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold"
+                           TextColor="White"/>
                 </Frame>
             </DataTemplate>
         </CollectionView.GroupHeaderTemplate>

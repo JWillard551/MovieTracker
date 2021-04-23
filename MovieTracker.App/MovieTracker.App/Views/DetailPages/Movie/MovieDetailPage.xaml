@@ -7,8 +7,9 @@
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
              xmlns:converters="clr-namespace:MovieTracker.App.Converters"
              Title="Details"
-             IconImageSource="icon_detail_white.png">
-
+             IconImageSource="icon_detail_white.png"
+             x:DataType="local:MovieDetailViewModel">
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
