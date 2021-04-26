@@ -1,10 +1,4 @@
 ﻿using MovieTracker.App.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +10,7 @@ namespace MovieTracker.App.Views.CustomViews
         public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty TagLineProperty = BindableProperty.Create(nameof(TagLine), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty RatingProperty = BindableProperty.Create(nameof(Rating), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
+        public static readonly BindableProperty TemplatedRatingProperty = BindableProperty.Create(nameof(TemplatedRating), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty RuntimeOrNumSeasonsProperty = BindableProperty.Create(nameof(RuntimeOrNumSeasons), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty ReleaseDateProperty = BindableProperty.Create(nameof(ReleaseDate), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty StatusProperty = BindableProperty.Create(nameof(Status), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
@@ -23,6 +18,9 @@ namespace MovieTracker.App.Views.CustomViews
         public static readonly BindableProperty GenresProperty = BindableProperty.Create(nameof(Genres), typeof(string), typeof(MainDetailCard), string.Empty, BindingMode.OneTime);
         public static readonly BindableProperty RadialGaugeBindingContextProperty = BindableProperty.Create(nameof(RadialGaugeBindingContext), typeof(RadialGaugeViewModel), typeof(MainDetailCard), null, BindingMode.OneTime);
         public static readonly BindableProperty UriImageProperty = BindableProperty.Create(nameof(UriImage), typeof(UriImageSource), typeof(MainDetailCard), null, BindingMode.OneTime);
+        public static readonly BindableProperty RuntimeLabelVisibleProperty = BindableProperty.Create(nameof(RuntimeLabelVisible), typeof(bool), typeof(MainDetailCard), false, BindingMode.OneTime);
+        public static readonly BindableProperty ShowLengthLabelVisibleProperty = BindableProperty.Create(nameof(ShowLengthLabelVisible), typeof(bool), typeof(MainDetailCard), false, BindingMode.OneTime);
+        public static readonly BindableProperty YourScoreLayoutVisibleProperty = BindableProperty.Create(nameof(YourScoreLayoutVisible), typeof(bool), typeof(MainDetailCard), false, BindingMode.TwoWay);
 
         public string Title
         {
@@ -40,6 +38,12 @@ namespace MovieTracker.App.Views.CustomViews
         {
             get => (string)GetValue(RatingProperty);
             set => SetValue(RatingProperty, value);
+        }
+
+        public string TemplatedRating
+        {
+            get => (string)GetValue(TemplatedRatingProperty);
+            set => SetValue(TemplatedRatingProperty, value);
         }
 
         public string RuntimeOrNumSeasons
@@ -82,6 +86,24 @@ namespace MovieTracker.App.Views.CustomViews
         {
             get => (UriImageSource)GetValue(UriImageProperty);
             set => SetValue(UriImageProperty, value);
+        }
+
+        public bool RuntimeLabelVisible
+        {
+            get => (bool)GetValue(RuntimeLabelVisibleProperty);
+            set => SetValue(RuntimeLabelVisibleProperty, value);
+        }
+
+        public bool ShowLengthLabelVisible
+        {
+            get => (bool)GetValue(ShowLengthLabelVisibleProperty);
+            set => SetValue(ShowLengthLabelVisibleProperty, value);
+        }
+
+        public bool YourScoreLayoutVisible
+        {
+            get => (bool)GetValue(YourScoreLayoutVisibleProperty);
+            set => SetValue(YourScoreLayoutVisibleProperty, value);
         }
 
         public MainDetailCard()

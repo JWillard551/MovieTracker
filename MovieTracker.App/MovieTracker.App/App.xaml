@@ -1,25 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MovieTracker.App.App">
-    <!--
-        Define global resources and styles here, that apply to all pages in your app.
-    -->
+             x:Class="MovieTracker.App.App"
+             xmlns:app="clr-namespace:MovieTracker.App"
+             xmlns:appConverters="clr-namespace:MovieTracker.App.Converters">
     <Application.Resources>
-        <ResourceDictionary x:Name="primaryDictionary">
-            <!--Theme/Palette #1-->
+        <ResourceDictionary x:Name="mainResourceDictionary">
+            <!--Primary Color Theme-->
             <Color x:Key="Primary">#3F92A3</Color>
             <Color x:Key="Secondary">#3FA382</Color>
             <Color x:Key="Tertiary">#3FA350</Color>
-
-            <!--Theme/Palette #2-->
-            <!--<Color x:Key="Primary">#5E1666</Color>
-            <Color x:Key="Secondary">#661645</Color>
-            <Color x:Key="Tertiary">#361666</Color>-->
-
-            <Color x:Key="ButtonPrimary">#653fc0</Color>
-            <Color x:Key="ButtonSecondary">#3FA350</Color>
-
+            
             <Style TargetType="Button">
                 <Setter Property="TextColor"
                         Value="White"></Setter>
@@ -42,6 +33,24 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
-        </ResourceDictionary>        
+            
+            <ResourceDictionary.MergedDictionaries>
+                <app:SharedResources />
+                <ResourceDictionary>
+                    <appConverters:CurrencyFormatConverter x:Key="CurrencyFormatConverter" />
+                    <appConverters:CurrentProgressToLineColorConverter x:Key="CurrentProgressToLineColorConverter" />
+                    <appConverters:DoubleToBoolConverter x:Key="DoubleToBoolConverter" />
+                    <appConverters:GenreToFormattedStringConverter x:Key="GenreToFormattedStringConverter" />
+                    <appConverters:NumberOfSeasonsToFormattedStringConverter x:Key="NumberOfSeasonsToFormattedStringConverter" />
+                    <appConverters:ProfileImagePlaceholderConverter x:Key="ProfileImagePlaceholderConverter" />
+                    <appConverters:FavoriteIconConverter x:Key="FavoriteIconConverter" />
+                    <appConverters:RatingIconConverter x:Key="RatingIconConverter" />
+                    <appConverters:WatchlistIconConverter x:Key="WatchlistIconConverter" />
+                    <appConverters:RuntimeToFormattedStringConverter x:Key="RuntimeToFormattedStringConverter" />
+                    <appConverters:StringFormatConverter x:Key="StringFormatConverter" />
+                    <appConverters:StringIsNullVisibilityCheckConverter x:Key="StringIsNullVisibilityCheckConverter" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

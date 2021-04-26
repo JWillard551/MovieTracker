@@ -204,7 +204,7 @@
             <Setter.Value>
                 <OnIdiom x:TypeArguments="x:Double"
                          Phone="16"
-                         Tablet="32" />
+                         Tablet="22" />
             </Setter.Value>
         </Setter>
         <Setter Property="FontFamily"
@@ -212,14 +212,14 @@
         <Setter Property="TextColor"
                 Value="Black" />
     </Style>
-
+    
     <Style TargetType="Label"
            x:Key="MainLabelItalicStyle">
         <Setter Property="FontSize">
             <Setter.Value>
                 <OnIdiom x:TypeArguments="x:Double"
                          Phone="16"
-                         Tablet="32" />
+                         Tablet="22" />
             </Setter.Value>
         </Setter>
         <Setter Property="FontFamily"
@@ -228,15 +228,60 @@
                 Value="Black" />
     </Style>
 
-    <Style TargetType="Span"
-           x:Key="MainTitleSpanStyle">
+    <Style TargetType="Label"
+           x:Key="MediaDetailTitleLabelStyle">
         <Setter Property="FontSize">
             <Setter.Value>
                 <OnIdiom x:TypeArguments="x:Double"
-                         Phone="20"
-                         Tablet="40" />
+                         Phone="16"
+                         Tablet="22" />
             </Setter.Value>
         </Setter>
+        <Setter Property="FontFamily"
+                Value="Roboto" />
+        <Setter Property="TextColor"
+                Value="Black" />
+    </Style>
+
+    <Style TargetType="Span"
+           x:Key="MainSpanStyle">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="16"
+                         Tablet="22" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily"
+                Value="Roboto" />
+        <Setter Property="TextColor"
+                Value="Black" />
+    </Style>
+
+    <Style TargetType="Span"
+           x:Key="MainDetailTitleSpanStyle">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="16"
+                         Tablet="24" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextColor"
+                Value="Black" />
+    </Style>
+
+    <Style TargetType="Span"
+           x:Key="MainDetailDateSpanStyle">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="16"
+                         Tablet="24" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily"
+                Value="Roboto" />
         <Setter Property="TextColor"
                 Value="Black" />
     </Style>

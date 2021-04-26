@@ -7,7 +7,6 @@
              x:DataType="viewModel:ShowFavoritesViewModel"
              Title="TV Shows"
              IconImageSource="icon_shows.png">
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -22,9 +21,10 @@
                         BackgroundColor="Black">
 
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout ItemSpacing="00"
+                <LinearItemsLayout ItemSpacing="0"
                                    Orientation="Vertical" />
             </CollectionView.ItemsLayout>
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <views:FavoritesShowView />
@@ -32,7 +32,6 @@
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-
         <ActivityIndicator Color="Navy"
                            IsRunning="{Binding IsBusy}"
                            HorizontalOptions="Center"

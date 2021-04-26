@@ -6,6 +6,7 @@
             xmlns:commonDetailPages="clr-namespace:MovieTracker.App.Views.DetailPages.Common"
             xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.TabbedPageViewModels"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
             android:TabbedPage.ToolbarPlacement="Bottom"
             android:TabbedPage.BarItemColor="White"
             android:TabbedPage.BarSelectedItemColor="{StaticResource Tertiary}"
@@ -13,31 +14,12 @@
             BarTextColor="White"
             Shell.FlyoutBehavior="Disabled"
             x:DataType="viewModel:MovieTabbedPageViewModel">
-
     <Shell.TitleView>
-        <StackLayout HorizontalOptions="Fill"
-                     VerticalOptions="Fill">
-            <Label Style="{StaticResource MainLabelStyle}"
-                   MaxLines="2"
-                   Margin="0,5,0,0"
-                   
-                   LineBreakMode="TailTruncation"
-                   VerticalTextAlignment="Center">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{Binding Path=Tab1.MovieInfo.Title}"
-                              Style="{StaticResource MainTitleSpanStyle}"
-                              FontSize="17"
-                              FontAttributes="Bold" />
-                        <Span Text=" " />
-                        <Span Text="{Binding Path=Tab1.MovieInfo.ReleaseDate, StringFormat='({0:yyyy})'}"
-                              Style="{StaticResource MainTitleSpanStyle}"
-                              FontSize="16"
-                              FontAttributes="Bold" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-        </StackLayout>
+        <customViews:MovieShowTitleView MediaRating="{Binding Path=Tab1.MovieRating}"
+                                        MediaTitle="{Binding Path=Tab1.MovieInfo.Title}"
+                                        MediaDate="{Binding Path=Tab1.MovieInfo.ReleaseDate, StringFormat='({0:yyyy})'}"
+                                        ControlTemplate="{StaticResource MovieShowDetailTitleView}">
+        </customViews:MovieShowTitleView>
     </Shell.TitleView>
 
     <movieDetailPages:MovieDetailPage x:Name="movieDetail"/>

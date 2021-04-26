@@ -8,7 +8,6 @@
              xmlns:controls="clr-namespace:MovieTracker.App.Controls"
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
              x:DataType="viewModel:RatedShowItemViewModel">
-
     <Grid HeightRequest="300">
 
         <Grid.GestureRecognizers>
@@ -32,7 +31,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="50" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <!--Title / Release Year-->

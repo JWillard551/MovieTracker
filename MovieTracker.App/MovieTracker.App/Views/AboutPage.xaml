@@ -16,8 +16,6 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

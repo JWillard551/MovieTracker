@@ -2,34 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.DetailPages.Movie.MovieDetailPage"
-             xmlns:app="clr-namespace:MovieTracker.App"
              xmlns:local="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Movie"
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
-             xmlns:converters="clr-namespace:MovieTracker.App.Converters"
              Title="Details"
              IconImageSource="icon_detail_white.png"
              x:DataType="local:MovieDetailViewModel">
-    
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <app:SharedResources/>
-            </ResourceDictionary.MergedDictionaries>
-            <converters:RuntimeToFormattedStringConverter x:Key="RuntimeConverter" />
-            <converters:CurrencyFormatConverter x:Key="CurrencyFormatConverter" />
-            <converters:GenreToFormattedStringConverter x:Key="GenreFormatConverter" />
-            <converters:DoubleToBoolConverter x:Key="DoubleToBoolConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <Grid x:DataType="local:MovieDetailViewModel"
           BackgroundColor="Black">
         <Grid.RowDefinitions>
-            <!--Main Detail Card Row-->
             <RowDefinition Height="1.75*" />
-            <!--Button Details Row-->
             <RowDefinition Height="Auto" />
-            <!--Overview Row-->
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
@@ -39,15 +22,17 @@
                                     Title="{Binding MovieInfo.Title}"
                                     ReleaseDate="{Binding MovieInfo.ReleaseDate, StringFormat='({0:yyyy})'}"
                                     TagLine="{Binding MovieInfo.Tagline}"
-                                    Rating="{Binding MovieRating}"
-                                    RuntimeOrNumSeasons="{Binding MovieInfo.Runtime, Converter={StaticResource RuntimeConverter}, Mode=OneWay}"
-                                    Genres="{Binding MovieInfo.Genres, Converter={StaticResource GenreFormatConverter}, Mode=OneWay}"
+                                    RuntimeLabelVisible="True"
+                                    ShowLengthLabelVisible="False"
+                                    YourScoreLayoutVisible="{Binding ItemRated, Mode=TwoWay}"
+                                    RuntimeOrNumSeasons="{Binding MovieInfo.Runtime, Converter={StaticResource RuntimeToFormattedStringConverter}, Mode=OneWay}"
+                                    Genres="{Binding MovieInfo.Genres, Converter={StaticResource GenreToFormattedStringConverter}, Mode=OneWay}"
                                     Status="{Binding MovieInfo.Status}"
                                     OriginalLanguage="{Binding MovieInfo.OriginalLanguage}"
+                                    TemplatedRating="{Binding ItemRating, Mode=TwoWay}"
                                     RadialGaugeBindingContext="{Binding RadialGaugeViewModel}"
                                     UriImage="{Binding UriImage}"
-                                    ControlTemplate="{StaticResource MainDetailCardTemplate}"/>
-
+                                    ControlTemplate="{StaticResource MainDetailCardTemplate}" />
         <!--Buttons Row-->
         <customViews:DetailButtons Grid.Row="1"
                                    Margin="5,2,5,2"
@@ -63,13 +48,6 @@
                                    RateButtonVisible="True"
                                    RatingsButtonState="{Binding ItemRated}"
                                    ControlTemplate="{StaticResource DetailButtonsTemplate}" />
-
-        <!--
-        WatchlistButtonColorState="{Binding Path=MovieAccountState.Watchlist, Converter={StaticResource BoolToColorConverter}}"
-         FavoritesButtonColorState="{Binding Path=MovieAccountState.Favorite, Converter={StaticResource BoolToColorConverter}}"
-        RatingButtonColorState="{Binding Path=MovieAccountState.Rating, Converter={StaticResource RatingToColorConverter}}"
-        -->
-        
         <!--Overview Row-->
         <customViews:OverviewDetailCard Grid.Row="2"
                                         Margin="5,2,5,2"

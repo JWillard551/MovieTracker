@@ -10,7 +10,8 @@ namespace MovieTracker.App.Controls
     {
         public event EventHandler Clicked;
 
-        public static readonly BindableProperty RatingProperty = BindableProperty.Create(nameof(Rating), typeof(string), typeof(RoundImageButton), "0");
+        public static readonly BindableProperty RatingProperty = BindableProperty.Create(nameof(Rating), typeof(string), typeof(RoundImageButton), "0", BindingMode.TwoWay);
+        public static readonly BindableProperty TemplatedRatingProperty = BindableProperty.Create(nameof(TemplatedRating), typeof(string), typeof(RoundImageButton), "0");
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(RoundImageButton), null);
         public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(RoundImageButton), null);
 
@@ -18,6 +19,12 @@ namespace MovieTracker.App.Controls
         {
             get { return (string)GetValue(RatingProperty); }
             set { SetValue(RatingProperty, value); }
+        }
+
+        public string TemplatedRating
+        {
+            get { return (string)GetValue(TemplatedRatingProperty); }
+            set { SetValue(TemplatedRatingProperty, value); }
         }
 
         public ICommand Command

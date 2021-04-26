@@ -7,15 +7,7 @@
              xmlns:favoritesViewModel="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Movie"
              xmlns:controls="clr-namespace:MovieTracker.App.Controls"
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
-             xmlns:converter="clr-namespace:MovieTracker.App.Converters"
              x:DataType="viewModel:MovieItemViewModel">
-
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <converter:WatchlistIconConverter x:Key="WatchlistIconConverter" />
-        </ResourceDictionary>
-    </ContentView.Resources>
-
     <Grid HeightRequest="300">
 
         <Grid.GestureRecognizers>

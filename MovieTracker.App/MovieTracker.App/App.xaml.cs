@@ -29,9 +29,9 @@ namespace MovieTracker.App
         private void LoadDeviceStyles()
         {
             if (IsSmallDevice())
-                primaryDictionary.MergedDictionaries.Add(SmallDeviceStyle.SharedInstance);
+                mainResourceDictionary.MergedDictionaries.Add(SmallDeviceStyle.SharedInstance);
             else
-                primaryDictionary.MergedDictionaries.Add(GeneralDevicesStyle.SharedInstance);
+                mainResourceDictionary.MergedDictionaries.Add(GeneralDevicesStyle.SharedInstance);
         }
 
         protected override void OnStart()

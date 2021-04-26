@@ -8,12 +8,12 @@
     <ContentView.HeightRequest>
         <OnIdiom x:TypeArguments="x:Double"
                  Phone="50"
-                 Tablet="100" />
+                 Tablet="80" />
     </ContentView.HeightRequest>
     <ContentView.WidthRequest>
         <OnIdiom x:TypeArguments="x:Double"
                  Phone="50"
-                 Tablet="100" />
+                 Tablet="80" />
     </ContentView.WidthRequest>
     <Frame BindingContext="{x:Reference roundImageButton}"
            HasShadow="True"
@@ -23,7 +23,7 @@
         <Frame.CornerRadius>
             <OnIdiom x:TypeArguments="x:Single"
                      Phone="25"
-                     Tablet="50" />
+                     Tablet="40" />
         </Frame.CornerRadius>
         <Image x:Name="buttonImage"
                VerticalOptions="Center"

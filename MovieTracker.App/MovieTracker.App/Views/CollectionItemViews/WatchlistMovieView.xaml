@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.CollectionItemViews.WatchlistMovieView"
              xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
@@ -8,7 +8,6 @@
              xmlns:controls="clr-namespace:MovieTracker.App.Controls"
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
              x:DataType="viewModel:MovieItemViewModel">
-
     <Grid HeightRequest="300">
         
         <Grid.GestureRecognizers>
@@ -32,7 +31,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="50" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <!--Title / Release Year-->

@@ -1,20 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.CarouselItemViews.LetsWatchItemView"
              xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels"
-             xmlns:converter="clr-namespace:MovieTracker.App.Converters"
              x:DataType="viewModel:LetsWatchItemViewModel">
-
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <converter:FavoriteIconConverter x:Key="FavoriteIconConverter" />
-            <converter:WatchlistIconConverter x:Key="WatchlistIconConverter" />
-            <converter:RatingIconConverter x:Key="RatingIconConverter" />
-        </ResourceDictionary>
-    </ContentView.Resources>
-    
     <StackLayout>
         <Frame Style="{StaticResource ImageFrameStyle}">
             <StackLayout HorizontalOptions="FillAndExpand"

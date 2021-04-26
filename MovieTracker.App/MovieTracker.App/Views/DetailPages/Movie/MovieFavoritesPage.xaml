@@ -7,7 +7,6 @@
              x:DataType="viewModel:MovieFavoritesViewModel"
              Title="Movies"
              IconImageSource="icon_movies.png">
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -22,7 +21,7 @@
                         BackgroundColor="Black">
 
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout ItemSpacing="00"
+                <LinearItemsLayout ItemSpacing="0"
                                    Orientation="Vertical" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>

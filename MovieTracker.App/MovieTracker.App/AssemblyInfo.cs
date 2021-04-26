@@ -6,5 +6,3 @@ using Xamarin.Forms.Xaml;
 [assembly: ExportFont("Montserrat-MediumItalic.ttf", Alias = "MontserratItalic")]
 [assembly: ExportFont("Roboto-Medium.ttf", Alias = "Roboto")]
 [assembly: ExportFont("Roboto-MediumItalic.ttf", Alias = "RobotoItalic")]
-[assembly: ExportFont("JosefinSans-Light.ttf", Alias = "Josefin")]
-[assembly: ExportFont("JosefinSans-LightItalic.ttf", Alias = "JosefinItalic")]

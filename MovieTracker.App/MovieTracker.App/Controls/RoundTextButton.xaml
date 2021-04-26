@@ -4,16 +4,17 @@
              x:Class="MovieTracker.App.Controls.RoundTextButton"
              Padding="0"
              Margin="0"
-             x:Name="roundTextButton">
+             x:Name="roundTextButton"
+             IsVisible="{Binding Rating, Converter={StaticResource StringIsNullVisibilityCheckConverter}}">
     <ContentView.HeightRequest>
         <OnIdiom x:TypeArguments="x:Double"
                  Phone="50"
-                 Tablet="100" />
+                 Tablet="80" />
     </ContentView.HeightRequest>
     <ContentView.WidthRequest>
         <OnIdiom x:TypeArguments="x:Double"
                  Phone="50"
-                 Tablet="100" />
+                 Tablet="80" />
     </ContentView.WidthRequest>
     <Frame BindingContext="{x:Reference roundTextButton}"
            HasShadow="True"
@@ -23,13 +24,18 @@
         <Frame.CornerRadius>
             <OnIdiom x:TypeArguments="x:Single"
                      Phone="25"
-                     Tablet="50" />
+                     Tablet="80" />
         </Frame.CornerRadius>
         <Label Text="{Binding Rating, Mode=TwoWay}"
                TextColor="White"
                FontAttributes="Bold"
                HorizontalOptions="Center"
-               VerticalOptions="Center"
-               FontSize="16" />
+               VerticalOptions="Center">
+            <Label.FontSize>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="16"
+                         Tablet="25" />
+            </Label.FontSize>
+        </Label>
     </Frame>
 </ContentView>

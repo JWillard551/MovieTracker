@@ -5,11 +5,11 @@
              BackgroundColor="Black"
              Title="Watch On"
              IconImageSource="icon_watchon_white.png">
-    
     <CollectionView Grid.Row="0"
                     ItemsLayout="VerticalGrid, 4"
                     ItemsSource="{Binding ProviderLists}"
                     IsGrouped="True">
+        
         <CollectionView.GroupHeaderTemplate>
             <DataTemplate>
                 <Frame HeightRequest="50"
@@ -25,6 +25,7 @@
 
             </DataTemplate>
         </CollectionView.GroupHeaderTemplate>
+        
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Grid Padding="5">
@@ -60,9 +61,7 @@
 
                     </Label>
                 </Grid>
-
             </DataTemplate>
         </CollectionView.ItemTemplate>
-
     </CollectionView>
 </ContentPage>

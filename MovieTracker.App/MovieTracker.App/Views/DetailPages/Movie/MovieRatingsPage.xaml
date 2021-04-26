@@ -7,7 +7,6 @@
              x:DataType="viewModel:MovieRatingsViewModel"
              Title="Movies"
              IconImageSource="icon_movies.png">
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

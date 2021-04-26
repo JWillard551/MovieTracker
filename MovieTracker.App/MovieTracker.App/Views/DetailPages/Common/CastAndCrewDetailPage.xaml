@@ -2,18 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.DetailPages.Common.CastAndCrewDetailPage"
-             xmlns:viewModels="clr-namespace:MovieTracker.App.ViewModels.DetailViewModels.Common"
-             xmlns:converters="clr-namespace:MovieTracker.App.Converters"
              xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="Cast / Crew"
              IconImageSource="icon_castcrew_white.png">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:ProfileImagePlaceholderConverter x:Key="ProfileImagePlaceholderConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    
     <CollectionView ItemsSource="{Binding MediaCast}"
                     IsGrouped="True"
                     BackgroundColor="Black">

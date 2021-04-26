@@ -4,26 +4,20 @@
              x:Class="MovieTracker.App.Views.CustomViews.RadialGaugeView"
              xmlns:controls="clr-namespace:MovieTracker.App.Controls"
              xmlns:customViews="clr-namespace:MovieTracker.App.Views.CustomViews"
-             xmlns:converters="clr-namespace:MovieTracker.App.Converters"
              HorizontalOptions="Center"
              VerticalOptions="Center">
     
     <ContentView.HeightRequest>
         <OnIdiom x:TypeArguments="x:Double"
                  Phone="50"
-                 Tablet="100" />
+                 Tablet="80" />
     </ContentView.HeightRequest>
+    
     <ContentView.WidthRequest>
         <OnIdiom x:TypeArguments="x:Double"
                  Phone="50"
-                 Tablet="100" />
+                 Tablet="80" />
     </ContentView.WidthRequest>
-
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <converters:CurrentProgressToLineColorConverter x:Key="RatingColorConverter" />
-        </ResourceDictionary>
-    </ContentView.Resources>
 
     <ContentView.Content>
         <controls:OvalFrame HorizontalOptions="FillAndExpand"
@@ -34,20 +28,25 @@
             <controls:OvalFrame.CornerRadius>
                 <OnIdiom x:TypeArguments="x:Single"
                          Phone="25"
-                         Tablet="50" />
+                         Tablet="40" />
             </controls:OvalFrame.CornerRadius>
             <Grid>
                 <customViews:CirclePathView MinValue="{Binding MinValue}"
                                             MaxValue="{Binding MaxValue}"
                                             CurrentProgress="{Binding CurrentProgress}"
-                                            LineColor="{Binding CurrentProgress, Converter={StaticResource RatingColorConverter}, Mode=OneWay}"/>
+                                            LineColor="{Binding CurrentProgress, Converter={StaticResource CurrentProgressToLineColorConverter}, Mode=OneWay}"/>
 
                 <Label HorizontalOptions="CenterAndExpand"
                        VerticalOptions="CenterAndExpand"
-                       FontSize="16"
                        FontAttributes="Bold"
                        Text="{Binding CurrentProgress, StringFormat='\{0\}%'}"
-                       TextColor="White" />
+                       TextColor="White">
+                    <Label.FontSize>
+                        <OnIdiom x:TypeArguments="x:Double"
+                                 Phone="16"
+                                 Tablet="25" />
+                    </Label.FontSize>
+                </Label>
             </Grid>
         </controls:OvalFrame>
   </ContentView.Content>

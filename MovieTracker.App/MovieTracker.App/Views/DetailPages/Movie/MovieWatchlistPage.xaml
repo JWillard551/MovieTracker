@@ -7,7 +7,6 @@
              x:DataType="viewModel:MovieWatchlistViewModel"
              Title="Movies"
              IconImageSource="icon_movies.png">
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

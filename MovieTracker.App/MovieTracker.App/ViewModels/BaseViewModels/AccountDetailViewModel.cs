@@ -58,6 +58,7 @@ namespace MovieTracker.App.ViewModels.BaseViewModels
             ItemFavorited = accountState?.Favorite ?? false;
             ItemWatchlisted = accountState?.Watchlist ?? false;
             ItemRated = System.Convert.ToDouble(accountState?.Rating) > 0;
+            ItemRating = GetMediaAccountRating(accountState?.Rating ?? 0);
         }
 
         protected void InitializeRadialGaugeViewModel(double voteAvg)
@@ -68,6 +69,13 @@ namespace MovieTracker.App.ViewModels.BaseViewModels
                 MaxValue = 100,
                 CurrentProgress = Convert.ToDouble(voteAvg * 10)
             };
+        }
+
+        private string GetMediaAccountRating(double rating)
+        {
+            if (rating == 0)
+                return string.Empty;
+            else return rating.ToString();
         }
 
         #region Item Commands (Update / Remove / Add / Etc...)
@@ -140,6 +148,22 @@ namespace MovieTracker.App.ViewModels.BaseViewModels
                             successful = await TMDbService.MovieRemoveRatingAsync(mediaID);
                         else if (mediaType == MediaType.Tv)
                             successful = await TMDbService.TvShowRemoveRatingAsync(mediaID);
+                    }
+                    else
+                    {
+                        var newRating = await HandleRatingEdit("0", mediaID, mediaType);
+                        if (string.IsNullOrWhiteSpace(newRating) || newRating.Equals("0"))
+                        {
+                            ItemRating = "";
+                            ItemRated = false;
+                            return buttonCurrentSetState;
+                        }
+                        else
+                        {
+                            ItemRating = newRating;
+                            ItemRated = true;
+                            return !buttonCurrentSetState;
+                        }
                     }
                     break;
             }

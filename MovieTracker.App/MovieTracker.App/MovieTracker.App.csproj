@@ -6,8 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Fonts\JosefinSans-Light.ttf" />
-    <None Remove="Fonts\JosefinSans-LightItalic.ttf" />
     <None Remove="Fonts\Montserrat-Medium.ttf" />
     <None Remove="Fonts\Montserrat-MediumItalic.ttf" />
     <None Remove="Fonts\Roboto-Medium.ttf" />
@@ -15,8 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Fonts\JosefinSans-Light.ttf" />
-    <EmbeddedResource Include="Fonts\JosefinSans-LightItalic.ttf" />
     <EmbeddedResource Include="Fonts\Montserrat-Medium.ttf" />
     <EmbeddedResource Include="Fonts\Montserrat-MediumItalic.ttf" />
     <EmbeddedResource Include="Fonts\Roboto-Medium.ttf" />
@@ -88,13 +84,13 @@
     <EmbeddedResource Update="Views\CustomViews\MainDetailCard.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\CustomViews\MovieShowTitleView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\CustomViews\OverviewDetailCard.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CustomViews\RadialGaugeView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\CustomViews\SharedViews.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LetsWatchPage.xaml">
