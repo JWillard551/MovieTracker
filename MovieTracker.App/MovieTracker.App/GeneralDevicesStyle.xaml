@@ -289,5 +289,32 @@
     </Style>
 
     <!--#endregion-->
+    
+    <!--#region Button Styles-->
+
+    <Style TargetType="Button"
+           x:Key="RatingButtonStyle">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="14"
+                         Tablet="22" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CornerRadius"
+                Value="10" />
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+        <Setter Property="VerticalOptions"
+                Value="Center" />
+        <Setter Property="FontFamily"
+                Value="Roboto" />
+        <Setter Property="TextColor"
+                Value="WhiteSmoke" />
+        <Setter Property="Margin"
+                Value="5" />
+    </Style>
+
+    <!--#endregion-->
 
 </ResourceDictionary>

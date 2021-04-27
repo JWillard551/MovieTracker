@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.App.Views.Popups.RatingPopUp"
+             xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.PopUps"
+             Shell.PresentationMode="ModalAnimated"
+             x:DataType="viewModel:RatingPopUpViewModel"
+             Padding="50"
+             SystemPaddingSides="All">
+    <popup:PopupPage.Content>
+        <Frame CornerRadius="10"
+               HasShadow="True"
+               BackgroundColor="{StaticResource Primary}"
+               VerticalOptions="Center"
+               HorizontalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="Fill"
+                         VerticalOptions="Fill">
+                <Label Text="Rate this Item!!"
+                       Style="{StaticResource MainLabelStyle}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"/>
+                <ScrollView>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="0"
+                                Text="1"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked"/>
+                        <Button Grid.Row="1"
+                                Text="2"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked" />
+                        <Button Grid.Row="2"
+                                Text="3"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked" />
+                        <Button Grid.Row="3"
+                                Text="4"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked" />
+                        <Button Grid.Row="4"
+                                Text="5"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked" />
+                        <Button Grid.Row="5"
+                                Text="6"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked" />
+                        <Button Grid.Row="6"
+                                Text="7"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked" />
+                        <Button Grid.Row="7"
+                                Text="8"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked" />
+                        <Button Grid.Row="8"
+                                Text="9"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked"/>
+                        <Button Grid.Row="9"
+                                Text="10"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked" />
+                        <Button Grid.Row="10"
+                                Text="Cancel"
+                                Style="{StaticResource RatingButtonStyle}"
+                                BackgroundColor="{StaticResource Tertiary}"
+                                Clicked="Button_Clicked" />
+                    </Grid>
+                </ScrollView>
+            </StackLayout>
+        </Frame>
+    </popup:PopupPage.Content>
+</popup:PopupPage>

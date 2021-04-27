@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="MovieTracker.App.Views.Popups.ConfirmationPopUp"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:viewModel="clr-namespace:MovieTracker.App.ViewModels.PopUps"
+                 Shell.PresentationMode="ModalAnimated"
+                 x:DataType="viewModel:ConfirmationPopUpViewModel"
+                 SystemPaddingSides="All"
+                 Padding="50"
+                 x:Name="confirmPopup">
+    <popup:PopupPage.Content>
+        <Frame CornerRadius="10"
+               HasShadow="True"
+               BackgroundColor="{StaticResource Primary}"
+               VerticalOptions="Center"
+               HorizontalOptions="FillAndExpand">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       Text="{Binding ConfirmationMessage}"
+                       Style="{StaticResource MainLabelStyle}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center" />
+
+                <Button Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="5"
+                        Text="{Binding ConfirmationOptionText}"
+                        BackgroundColor="{StaticResource Tertiary}"
+                        TextColor="WhiteSmoke"
+                        Clicked="ConfirmButton_Clicked"
+                        VerticalOptions="End" />
+
+                <Button Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5"
+                        Text="{Binding CancelOptionText}"
+                        BackgroundColor="{StaticResource Tertiary}"
+                        TextColor="WhiteSmoke"
+                        Clicked="CancelButton_Clicked" 
+                        VerticalOptions="End" />
+            </Grid>
+        </Frame>
+    </popup:PopupPage.Content>
+</popup:PopupPage>

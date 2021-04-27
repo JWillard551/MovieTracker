@@ -82,7 +82,7 @@ namespace MovieTracker.App.ViewModels.BaseViewModels
 
         protected async Task<bool> HandleRemoveItem(int mediaID, MediaType mediaType, DetailButtonType buttonType)
         {
-            var result = await UserPromptService.PromptUserYesNoAsync("Remove", $"Remove this item from your {buttonType.ToString()}?");
+            var result = await UserPromptService.PromptUserYesNoAsync($"Remove this item from your {buttonType.ToString()}?");
             if (result)
             {
                 switch (buttonType)
@@ -127,7 +127,7 @@ namespace MovieTracker.App.ViewModels.BaseViewModels
         {
             if (buttonCurrentSetState)
             {
-                var dialogResult = await UserPromptService.PromptUserYesNoAsync(buttonType.ToString(), $"Remove this from your {buttonType.ToString()}?");
+                var dialogResult = await UserPromptService.PromptUserYesNoAsync($"Remove this from your {buttonType.ToString()}?");
                 if (!dialogResult)
                     return buttonCurrentSetState;
             }
@@ -171,9 +171,9 @@ namespace MovieTracker.App.ViewModels.BaseViewModels
             if (successful)
             {
                 if (!buttonCurrentSetState)
-                    ToastService.LongAlertMessage($"Added to {buttonType.ToString()}!");
+                    ToastService.ShortAlertMessage($"Added to {buttonType.ToString()}!");
                 else
-                    ToastService.LongAlertMessage($"Removed from {buttonType.ToString()}!");
+                    ToastService.ShortAlertMessage($"Removed from {buttonType.ToString()}!");
             
                 return !buttonCurrentSetState;
             }
@@ -186,16 +186,8 @@ namespace MovieTracker.App.ViewModels.BaseViewModels
         protected async Task<string> HandleRatingEdit(string initialRating, int mediaID, MediaType mediaType)
         {
             bool successful = false;
-            var rateResult = await UserPromptService.PromptUserRatingAsync("Rating", "Rate this media (1-10)", keyboard: Xamarin.Forms.Keyboard.Numeric, initialValue: "0");
+            var rateResult = await UserPromptService.PromptUserRatingAsync(mediaID, mediaType);
             var rating = System.Convert.ToInt32(rateResult);
-
-            if (rating == 0)
-                return initialRating;
-
-            if (rating > 10)
-                rating = 10;
-            else if (rating < 1)
-                rating = 0;
 
             if (rating > 0)
             {
@@ -208,13 +200,13 @@ namespace MovieTracker.App.ViewModels.BaseViewModels
                 }
                 catch (Exception ex)
                 {
+                    ToastService.LongAlertMessage($"Failed to set rating on item!");
                     successful = false;
                 }
-
             }
-            else
+            else if (rating == 0)
             {
-                var remove = await UserPromptService.PromptUserYesNoAsync("Remove Rating", "Setting the rating to 0 will remove it. Continue?");
+                var remove = await UserPromptService.PromptUserYesNoAsync("Remove this rating?");
 
                 if (remove)
                 {
@@ -228,6 +220,10 @@ namespace MovieTracker.App.ViewModels.BaseViewModels
                         ToastService.LongAlertMessage($"Removed rating!");
                     }
                 }
+            }
+            else if (rating == -1)
+            {
+                return initialRating;
             }
 
             if (successful)

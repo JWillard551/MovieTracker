@@ -28,6 +28,7 @@ namespace MovieTracker.App.iOS
 
             CachedImageRenderer.Init();
             CachedImageRenderer.InitImageSourceHandler();
+            Rg.Plugins.Popup.Popup.Init();
 
             DependencyService.Register<iOSToast>();
 
