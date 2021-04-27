@@ -25,6 +25,12 @@
                FontAttributes="Bold"
                HorizontalOptions="Center"
                HorizontalTextAlignment="Center"
-               VerticalOptions="End" />
+               VerticalOptions="End">
+            <Label.FontSize>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="14"
+                         Tablet="18" />
+            </Label.FontSize>
+        </Label>
     </StackLayout>
 </ContentView>
