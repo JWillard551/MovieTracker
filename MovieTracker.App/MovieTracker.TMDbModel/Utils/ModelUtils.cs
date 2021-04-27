@@ -12,6 +12,15 @@ namespace MovieTracker.TMDbModel.Utils
             return new Random().Next(max);
         }
 
+        public static int RandomizeNonFirst(int max)
+        {
+            var result = new Random().Next(max);
+            if (result == 0 && max > 1)
+                return result + 1;
+            else
+                return result;
+        }
+
         public static Uri GetImageUri(string imagePath)
         {
             if (string.IsNullOrWhiteSpace(imagePath))
