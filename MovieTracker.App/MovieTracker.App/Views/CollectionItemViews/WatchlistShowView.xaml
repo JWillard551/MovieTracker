@@ -61,9 +61,7 @@
                 <Frame Grid.Row="1"
                        Grid.RowSpan="2"
                        Grid.Column="0"
-                       Margin="0"
-                       Padding="0"
-                       BackgroundColor="{StaticResource Primary}">
+                       Style="{StaticResource ImageFrameStyle}">
                     <ffImage:CachedImage x:Name="cachedImage"
                                          Aspect="AspectFit">
                         <ffImage:CachedImage.GestureRecognizers>

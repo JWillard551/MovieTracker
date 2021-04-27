@@ -42,7 +42,7 @@
         <Setter Property="HasShadow"
                 Value="True" />
         <Setter Property="BorderColor"
-                Value="DarkGray" />
+                Value="Transparent" />
         <Setter Property="HorizontalOptions"
                 Value="Center" />
         <Setter Property="VerticalOptions"
@@ -53,6 +53,8 @@
                 Value="0" />
         <Setter Property="Padding"
                 Value="0" />
+        <Setter Property="BackgroundColor"
+                Value="Transparent" />
     </Style>
 
     <Style TargetType="Frame"
@@ -82,7 +84,7 @@
         <Setter Property="HasShadow"
                 Value="True" />
         <Setter Property="BorderColor"
-                Value="DarkGray" />
+                Value="Transparent" />
         <Setter Property="HorizontalOptions"
                 Value="Center" />
         <Setter Property="VerticalOptions"
@@ -93,6 +95,8 @@
                 Value="0" />
         <Setter Property="Padding"
                 Value="0" />
+        <Setter Property="BackgroundColor"
+                Value="Transparent" />
     </Style>
 
     <!--#endregion-->
