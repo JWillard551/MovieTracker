@@ -1,6 +1,7 @@
 ﻿using MovieTracker.App.Services;
 using MovieTracker.App.Views.ModalViews;
 using MovieTracker.App.Views.TabbedPages;
+using MovieTracker.TMDbModel.AdditionalModelObjects;
 using MovieTracker.TMDbModel.Services;
 using System;
 using Xamarin.Forms;
@@ -12,6 +13,8 @@ namespace MovieTracker.App
         public ITMDbService TMDbService => DependencyService.Get<ITMDbService>();
         public IMessage ToastService => DependencyService.Get<IMessage>();
 
+        public IUserPromptService UserPromptService => DependencyService.Get<IUserPromptService>();
+
         public AppShell()
         {
             InitializeComponent();
@@ -22,14 +25,15 @@ namespace MovieTracker.App
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            var response = await TMDbService.LogoutSessionAsync();
-            if (response.Success)
+            OperationResult response = new OperationResult(false);
+            bool logout = await UserPromptService.PromptUserYesNoAsync("Logout?", "Yes", "No");
+            if (logout)
             {
-                await Shell.Current.GoToAsync("//LoginPage");
-            }
-            else
-            {
-                ToastService.LongAlertMessage(response.Message);
+                response = await TMDbService.LogoutSessionAsync();
+                if (response.Success)
+                    await Shell.Current.GoToAsync("//LoginPage");
+                else
+                    ToastService.LongAlertMessage(response.Message);
             }
         }
     }
