@@ -133,8 +133,10 @@
                                        Style="{StaticResource MainLabelStyle}">
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="Runtime | "
+                                            <Span Text="Runtime"
                                                   Style="{StaticResource MainSpanStyle}" />
+                                            <Span Text=" || "
+                                                  TextColor="{StaticResource Secondary}" />
                                             <Span Text="{TemplateBinding RuntimeOrNumSeasons}"
                                                   Style="{StaticResource MainSpanStyle}" />
                                         </FormattedString>
@@ -144,8 +146,10 @@
                                        Style="{StaticResource MainLabelStyle}">
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="Show Length | "
+                                            <Span Text="Show Length"
                                                   Style="{StaticResource MainSpanStyle}" />
+                                            <Span Text=" || "
+                                                  TextColor="{StaticResource Secondary}" />
                                             <Span Text="{TemplateBinding RuntimeOrNumSeasons}"
                                                   Style="{StaticResource MainSpanStyle}" />
                                         </FormattedString>
@@ -155,31 +159,41 @@
                                        LineBreakMode="WordWrap">
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="Genre(s) | "
+                                            <Span Text="Genre(s)"
                                                   Style="{StaticResource MainSpanStyle}" />
+                                            <Span Text=" || "
+                                                  TextColor="{StaticResource Secondary}" />
                                             <Span Text="{TemplateBinding Genres}" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-                                <Label Text="Status | "
-                                       Style="{StaticResource MainLabelStyle}"
+                                <Label Style="{StaticResource MainLabelStyle}"
                                        FontAttributes="Bold"
                                        Padding="0"
-                                       Margin="0" />
-                                <Label Text="{TemplateBinding Status}"
-                                       Style="{StaticResource MainLabelStyle}"
-                                       Padding="0"
-                                       Margin="0" />
+                                       Margin="0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Status" />
+                                            <Span Text=" || "
+                                                  TextColor="{StaticResource Secondary}" />
+                                            <Span Text="{TemplateBinding Status}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
 
-                                <Label Text="Original Language | "
-                                       Style="{StaticResource MainLabelStyle}"
+                                <Label Style="{StaticResource MainLabelStyle}"
                                        FontAttributes="Bold"
                                        Padding="0"
-                                       Margin="0" />
-                                <Label Text="{TemplateBinding OriginalLanguage}"
-                                       Style="{StaticResource MainLabelStyle}"
-                                       Padding="0"
-                                       Margin="0" />
+                                       Margin="0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Original Language" />
+                                            <Span Text=" || "
+                                                  TextColor="{StaticResource Secondary}" />
+                                            <Span Text="{TemplateBinding OriginalLanguage}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                             </StackLayout>
                         </ScrollView>
                     </StackLayout>

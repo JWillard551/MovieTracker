@@ -13,6 +13,15 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
         public Task Initialization { get; private set; }
         public TvShow ShowInfo { get; private set; }
         public string ShowRating { get; private set; }
+
+        public string Language
+        {
+            get
+            {
+                return ShowInfo.SpokenLanguages.FirstOrDefault(lang => lang.Iso_639_1 == ShowInfo.OriginalLanguage)?.Name ?? string.Empty;
+            }
+        }
+
         public UriImageSource UriImage
         {
             get

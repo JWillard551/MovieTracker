@@ -289,7 +289,7 @@ namespace MovieTracker.App.ViewModels
             FilteredItems = TotalItems;
 
             //The total items include favorite and rated items as well. These can be turned off from the filter buttons on screen.
-            FilteredItems = new ObservableCollection<LetsWatchItemViewModel>(FilteredItems.Where(item => item.Item.Favorite == FavoritesEnabled && item.Item.Rated == RatingsEnabled));
+            FilteredItems = new ObservableCollection<LetsWatchItemViewModel>(FilteredItems.Where(item => (item.Item.Favorite == FavoritesEnabled || item.Item.Rated == RatingsEnabled) && item.Item.Watchlist == true));
         }
 
         public int FilterItemsByMediaType(MediaType mediaType = MediaType.Unknown)

@@ -13,7 +13,8 @@
                HasShadow="True"
                BackgroundColor="{StaticResource Primary}"
                VerticalOptions="Center"
-               HorizontalOptions="FillAndExpand">
+               HorizontalOptions="FillAndExpand"
+               HeightRequest="400">
             <StackLayout HorizontalOptions="Fill"
                          VerticalOptions="Fill">
                 <Label Text="Rate this Item!!"

@@ -28,7 +28,7 @@
                                     RuntimeOrNumSeasons="{Binding MovieInfo.Runtime, Converter={StaticResource RuntimeToFormattedStringConverter}, Mode=OneWay}"
                                     Genres="{Binding MovieInfo.Genres, Converter={StaticResource GenreToFormattedStringConverter}, Mode=OneWay}"
                                     Status="{Binding MovieInfo.Status}"
-                                    OriginalLanguage="{Binding MovieInfo.OriginalLanguage}"
+                                    OriginalLanguage="{Binding Language}"
                                     TemplatedRating="{Binding ItemRating, Mode=TwoWay}"
                                     RadialGaugeBindingContext="{Binding RadialGaugeViewModel}"
                                     UriImage="{Binding UriImage}"
