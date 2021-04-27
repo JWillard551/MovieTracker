@@ -23,7 +23,10 @@ namespace MovieTracker.App.Views
             if (item == null)
                 return;
 
-            cachedImage.Source = item.SearchItem.ImageUri;
+            if (item?.SearchItem?.ImageUri == null)
+                cachedImage.Source = "imgplaceholder.png";
+            else
+                cachedImage.Source = item?.SearchItem?.ImageUri;
             base.OnBindingContextChanged();
         }
     }

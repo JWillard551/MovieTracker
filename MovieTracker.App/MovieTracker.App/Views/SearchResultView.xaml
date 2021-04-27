@@ -23,10 +23,11 @@
             </Grid.RowDefinitions>
 
             <ffImage:CachedImage x:Name="cachedImage"
-                                 HorizontalOptions="Start"
+                                 HorizontalOptions="Center"
                                  VerticalOptions="Center"
                                  LoadingPlaceholder="imgplaceholder.png"
-                                 ErrorPlaceholder="imgplaceholder.png">
+                                 ErrorPlaceholder="imgplaceholder.png"
+                                 Aspect="AspectFill">
                 <ffImage:CachedImage.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1"
                                           Command="{Binding SearchResultTapped}"
