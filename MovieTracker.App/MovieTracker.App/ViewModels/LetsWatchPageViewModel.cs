@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
 using Xamarin.Forms;
 
@@ -17,7 +18,31 @@ namespace MovieTracker.App.ViewModels
         public ObservableCollection<LetsWatchItemViewModel> TotalItems { get; set; }
         public ObservableCollection<LetsWatchItemViewModel> FilteredItems { get; set; }
 
+        bool _watchlistEnabled = true;
+        public bool WatchlistEnabled
+        {
+            get { return _watchlistEnabled; }
+            set { SetProperty(ref _watchlistEnabled, value); }
+        }
+
+        bool _favoritesEnabled = true;
+        public bool FavoritesEnabled
+        {
+            get { return _favoritesEnabled; }
+            set { SetProperty(ref _favoritesEnabled, value); }
+        }
+
+        bool _ratingsEnabled = true;
+        public bool RatingsEnabled
+        {
+            get { return _ratingsEnabled; }
+            set { SetProperty(ref _ratingsEnabled, value); }
+        }
+
         public Task Initialization { get; private set; }
+
+        public Command ToggleFavoritesCommand { get; private set; }
+        public Command ToggleRatingsCommand { get; private set; }
 
         public LetsWatchPageViewModel()
         {
@@ -37,6 +62,11 @@ namespace MovieTracker.App.ViewModels
 
             BuildList(wlMovies, favMovies, ratedMovies, wlShows, favShows, ratedShows);
             SetFilteredList();
+
+            //Command Initialization
+            ToggleFavoritesCommand = new Command(OnToggleFavorites);
+            ToggleRatingsCommand = new Command(OnToggleRatings);
+
             IsBusy = false;
         }
 
@@ -56,6 +86,16 @@ namespace MovieTracker.App.ViewModels
         {
             FilteredItems = new ObservableCollection<LetsWatchItemViewModel>(LetsWatchItems.Values.ToList());
             TotalItems = FilteredItems;
+        }
+
+        private void OnToggleFavorites()
+        {
+            FavoritesEnabled = !FavoritesEnabled;
+        }
+
+        private void OnToggleRatings()
+        {
+            RatingsEnabled = !RatingsEnabled;
         }
 
         private async Task<List<SearchMovie>> LoadWatchlistMoviesAsync()
@@ -244,38 +284,25 @@ namespace MovieTracker.App.ViewModels
             }
         }
 
-        public void Refresh()
-        {
-            
-        }
-
         private void ResetFilteredItems()
         {
             FilteredItems = TotalItems;
+
+            //The total items include favorite and rated items as well. These can be turned off from the filter buttons on screen.
+            FilteredItems = new ObservableCollection<LetsWatchItemViewModel>(FilteredItems.Where(item => item.Item.Favorite == FavoritesEnabled && item.Item.Rated == RatingsEnabled));
         }
 
-        public int OnPickMovie()
+        public int FilterItemsByMediaType(MediaType mediaType = MediaType.Unknown)
         {
             IsBusy = true;
             ResetFilteredItems();
-            FilteredItems = new ObservableCollection<LetsWatchItemViewModel>(FilteredItems.Where(item => item.Item.MediaType == TMDbLib.Objects.General.MediaType.Movie));
-            IsBusy = false;
-            return FilteredItems.Count;
-        }
 
-        public int OnPickShow()
-        {
-            IsBusy = true;
-            ResetFilteredItems();
-            FilteredItems = new ObservableCollection<LetsWatchItemViewModel>(FilteredItems.Where(item => item.Item.MediaType == TMDbLib.Objects.General.MediaType.Tv));
-            IsBusy = false;
-            return FilteredItems.Count;
-        }
+            if (mediaType == MediaType.Movie)
+                FilteredItems = new ObservableCollection<LetsWatchItemViewModel>(FilteredItems.Where(item => item.Item.MediaType == MediaType.Movie));
 
-        public int OnPick()
-        {
-            IsBusy = true;
-            ResetFilteredItems();
+            if (mediaType == MediaType.Tv)
+                FilteredItems = new ObservableCollection<LetsWatchItemViewModel>(FilteredItems.Where(item => item.Item.MediaType == MediaType.Tv));
+
             IsBusy = false;
             return FilteredItems.Count;
         }

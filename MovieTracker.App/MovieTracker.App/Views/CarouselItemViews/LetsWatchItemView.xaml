@@ -29,13 +29,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
-            <ffImage:CachedImage Grid.Row="0" 
+
+            <ffImage:CachedImage Grid.Row="0"
                                  Grid.Column="0"
-                                 Source="{Binding Item.Watchlist, Converter={StaticResource WatchlistIconConverter}, Mode=OneTime}"></ffImage:CachedImage>
+                                 Source="{Binding Item.Favorite, Converter={StaticResource FavoriteIconConverter}, Mode=OneTime}"></ffImage:CachedImage>
             <ffImage:CachedImage Grid.Row="0"
                                  Grid.Column="1"
-                                 Source="{Binding Item.Favorite, Converter={StaticResource FavoriteIconConverter}, Mode=OneTime}"></ffImage:CachedImage>
+                                 Source="{Binding Item.Watchlist, Converter={StaticResource WatchlistIconConverter}, Mode=OneTime}"></ffImage:CachedImage>
             <ffImage:CachedImage Grid.Row="0"
                                  Grid.Column="2"
                                  Source="{Binding Item.Rated, Converter={StaticResource RatingIconConverter}, Mode=OneTime}"></ffImage:CachedImage>

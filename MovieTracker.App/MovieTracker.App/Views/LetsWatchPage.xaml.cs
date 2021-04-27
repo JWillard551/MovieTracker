@@ -1,6 +1,7 @@
 ﻿using MovieTracker.App.ViewModels;
 using MovieTracker.TMDbModel.Utils;
 using System;
+using TMDbLib.Objects.General;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,8 +11,6 @@ namespace MovieTracker.App.Views
     public partial class LetsWatchPage : ContentPage
     {
         LetsWatchPageViewModel _viewModel;
-        private bool StartUp { get; set; } = true;
-
         public LetsWatchPage()
         {
             InitializeComponent();
@@ -44,54 +43,29 @@ namespace MovieTracker.App.Views
 
         public void OnPickMovieClicked(object sender, EventArgs e)
         {
-            ToggleButtons(false);
-            int range = _viewModel.OnPickMovie();
-            if (range == 0)
-                return;
-            if (range == 1)
-                return;
-
-            var rand = ModelUtils.Randomize(range);
-
-            //var index = Convert.ToInt32(Math.Round((range / 2.0m), MidpointRounding.AwayFromZero));
-            var item = _viewModel.FilteredItems[rand];
-
-            cv_watchitems.ScrollTo(item, position:ScrollToPosition.MakeVisible);
-            ToggleButtons(true);
+            OnShuffle(_viewModel.FilterItemsByMediaType(MediaType.Movie));
         }
 
         public void OnPickShowClicked(object sender, EventArgs e)
         {
-            ToggleButtons(false);
-            int range = _viewModel.OnPickShow();
-            if (range == 0)
-                return;
-            if (range == 1)
-                return;
-
-            var rand = ModelUtils.Randomize(range);
-
-            //var index = Convert.ToInt32(Math.Round((range / 2.0m), MidpointRounding.AwayFromZero));
-            var item = _viewModel.FilteredItems[rand];
-
-            cv_watchitems.ScrollTo(item, position: ScrollToPosition.MakeVisible);
-            ToggleButtons(true);
+            OnShuffle(_viewModel.FilterItemsByMediaType(MediaType.Tv));
         }
 
         public void OnPickClicked(object sender, EventArgs e)
         {
+            OnShuffle(_viewModel.FilterItemsByMediaType());
+        }
+
+        private void OnShuffle(int range)
+        {
             ToggleButtons(false);
-            int range = _viewModel.OnPick();
             if (range == 0)
+            {
+                ToggleButtons(true);
                 return;
-            if (range == 1)
-                return;
+            }
 
-            var rand = ModelUtils.Randomize(range);
-
-            //var index = Convert.ToInt32(Math.Round((range / 2.0m), MidpointRounding.AwayFromZero));
-            var item = _viewModel.FilteredItems[rand];
-
+            var item = _viewModel.FilteredItems[ModelUtils.Randomize(range)];
             cv_watchitems.ScrollTo(item, position: ScrollToPosition.MakeVisible);
             ToggleButtons(true);
         }

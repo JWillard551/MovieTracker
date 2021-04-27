@@ -9,8 +9,7 @@ namespace MovieTracker.TMDbModel.Utils
     {
         public static int Randomize(int max)
         {
-            var rand = new Random();
-            return rand.Next(max);
+            return new Random().Next(max);
         }
 
         public static Uri GetImageUri(string imagePath)

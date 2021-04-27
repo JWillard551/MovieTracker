@@ -30,7 +30,7 @@
                     Padding="0"
                     Margin="20,5,5,0"
                     CornerRadius="15"
-                    BackgroundColor="{StaticResource Secondary}"
+                    BackgroundColor="{StaticResource PrimaryButton}"
                     Clicked="OnMoviesClicked" />
 
             <Button Grid.Column="1" 
@@ -44,7 +44,7 @@
                     Padding="0"
                     Margin="5,5,20,0"
                     CornerRadius="15"
-                    BackgroundColor="{StaticResource Secondary}"
+                    BackgroundColor="{StaticResource PrimaryButton}"
                     Clicked="OnShowsClicked" />
 
         </Grid>
@@ -94,7 +94,7 @@
                     Padding="0"
                     Margin="20,5,5,0"
                     CornerRadius="15"
-                    BackgroundColor="{StaticResource Secondary}"
+                    BackgroundColor="{StaticResource PrimaryButton}"
                     Clicked="OnTrendingTodayClicked" />
             <Button Grid.Column="1" 
                     x:Name="btn_ThisWeek"
@@ -107,7 +107,7 @@
                     Padding="0"
                     Margin="5,5,20,0"
                     CornerRadius="15"
-                    BackgroundColor="{StaticResource Secondary}"
+                    BackgroundColor="{StaticResource PrimaryButton}"
                     Clicked="OnTrendingThisWeekClicked" />
         </Grid>
 

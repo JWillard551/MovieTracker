@@ -77,7 +77,7 @@ namespace MovieTracker.App.Views
 
         private void ToggleSelectedColorOnButton(Button button, bool isSelected)
         {
-            button.BackgroundColor = isSelected ? Color.FromHex("3F92A3") : Color.FromHex("3FA382");
+            button.BackgroundColor = isSelected ? Color.FromHex("3FA382") : Color.FromHex("032541");
         }
 
         private bool SetSelectedPopularButton(Button button)

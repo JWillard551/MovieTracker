@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieTracker.App.Views.LetsWatchPage"
              xmlns:views="clr-namespace:MovieTracker.App.Views.CarouselItemViews"
-             Shell.NavBarIsVisible="True">
+             xmlns:controls="clr-namespace:MovieTracker.App.Controls"
+             Shell.NavBarIsVisible="True"
+             BackgroundColor="Black">
     <Grid BackgroundColor="Black"
            Margin="0,25,0,0">
         <Grid.RowDefinitions>
@@ -39,18 +41,86 @@
             </CarouselView.ItemTemplate>
         </CarouselView>
 
-        <StackLayout Grid.Row="1"
-                     BackgroundColor="LightBlue">
-            
+        <StackLayout Grid.Row="1">
+            <BoxView HorizontalOptions="Fill"
+                     VerticalOptions="Start"
+                     Color="{StaticResource Secondary}">
+                <BoxView.HeightRequest>
+                    <OnIdiom x:TypeArguments="x:Double"
+                             Phone="2"
+                             Tablet="4" />
+                </BoxView.HeightRequest>
+            </BoxView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <controls:RoundImageButton Grid.Row="0"
+                                           Grid.Column="0"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Command="{Binding ToggleFavoritesCommand}">
+                    <controls:RoundImageButton.Triggers>
+                        <DataTrigger TargetType="controls:RoundImageButton"
+                                     Binding="{Binding FavoritesEnabled}"
+                                     Value="True">
+                            <Setter Property="ImageSource"
+                                    Value="add_favorite_set.png" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="controls:RoundImageButton"
+                                     Binding="{Binding FavoritesEnabled}"
+                                     Value="False">
+                            <Setter Property="ImageSource"
+                                    Value="favorite_disabled.png" />
+                        </DataTrigger>
+                    </controls:RoundImageButton.Triggers>
+                </controls:RoundImageButton>
+
+                <controls:RoundImageButton Grid.Row="0"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Command="{Binding ToggleRatingsCommand}">
+                    <controls:RoundImageButton.Triggers>
+                        <DataTrigger TargetType="controls:RoundImageButton"
+                                     Binding="{Binding RatingsEnabled}"
+                                     Value="True">
+                            <Setter Property="ImageSource"
+                                    Value="add_rating_set.png" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="controls:RoundImageButton"
+                                     Binding="{Binding RatingsEnabled}"
+                                     Value="False">
+                            <Setter Property="ImageSource"
+                                    Value="rating_disabled.png" />
+                        </DataTrigger>
+                    </controls:RoundImageButton.Triggers>
+                </controls:RoundImageButton>
+            </Grid>
+            <BoxView HorizontalOptions="Fill"
+                     VerticalOptions="Start"
+                     Color="{StaticResource Secondary}">
+                <BoxView.HeightRequest>
+                    <OnIdiom x:TypeArguments="x:Double"
+                             Phone="2"
+                             Tablet="4" />
+                </BoxView.HeightRequest>
+            </BoxView>
+
             <Button x:Name="pickMovie_btn" 
-                    Text="Pick a movie for me!"
-                    Clicked="OnPickMovieClicked"></Button>
+                    Text="Shuffle Movies"
+                    Clicked="OnPickMovieClicked"
+                    Style="{StaticResource MainButtonStyle}"></Button>
             <Button x:Name="pickShow_btn" 
-                    Text="Pick a show for me!"
-                    Clicked="OnPickShowClicked"></Button>
+                    Text="Shuffle Shows"
+                    Clicked="OnPickShowClicked"
+                    Style="{StaticResource MainButtonStyle}"></Button>
             <Button x:Name="pick_btn" 
-                    Text="Just pick something!"
-                    Clicked="OnPickClicked"></Button>
+                    Text="Shuffle All"
+                    Clicked="OnPickClicked"
+                    Style="{StaticResource MainButtonStyle}"></Button>
         </StackLayout>
 
     </Grid>

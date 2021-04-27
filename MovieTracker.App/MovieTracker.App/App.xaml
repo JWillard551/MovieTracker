@@ -11,6 +11,9 @@
             <Color x:Key="Secondary">#3FA382</Color>
             <Color x:Key="Tertiary">#3FA350</Color>
             <Color x:Key="Remove">#C94B49</Color>
+            <Color x:Key="PrimaryButton">#032541</Color>
+            <Color x:Key="CardTitleColor">#032541</Color>
+            <Color x:Key="DisabledButton">#332196F3</Color>
             
             <Style TargetType="Button">
                 <Setter Property="TextColor"
@@ -21,13 +24,13 @@
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor"
-                                            Value="{StaticResource Primary}" />
+                                            Value="{StaticResource PrimaryButton}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor"
-                                            Value="#332196F3" />
+                                            Value="{StaticResource DisabledButton}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
