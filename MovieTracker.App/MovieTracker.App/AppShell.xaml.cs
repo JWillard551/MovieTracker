@@ -1,6 +1,4 @@
 ﻿using MovieTracker.App.Services;
-using MovieTracker.App.Views;
-using MovieTracker.App.Views.DetailPages;
 using MovieTracker.App.Views.ModalViews;
 using MovieTracker.App.Views.TabbedPages;
 using MovieTracker.TMDbModel.Services;
@@ -24,7 +22,6 @@ namespace MovieTracker.App
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-
             var response = await TMDbService.LogoutSessionAsync();
             if (response.Success)
             {

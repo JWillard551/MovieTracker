@@ -10,6 +10,7 @@
             <Color x:Key="Primary">#3F92A3</Color>
             <Color x:Key="Secondary">#3FA382</Color>
             <Color x:Key="Tertiary">#3FA350</Color>
+            <Color x:Key="Remove">#C94B49</Color>
             
             <Style TargetType="Button">
                 <Setter Property="TextColor"
