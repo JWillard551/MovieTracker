@@ -112,7 +112,7 @@
                                                ImageSource="{Binding Path=ItemWatchlisted, Converter={StaticResource WatchlistIconConverter}, Mode=OneTime}"
                                                Command="{Binding AddToWatchlistCommand, Source={RelativeSource AncestorType={x:Type favoritesViewModel:MovieFavoritesViewModel}}}"
                                                CommandParameter="{Binding .}">
-                        <!--<controls:RoundImageButton.Triggers>
+                        <controls:RoundImageButton.Triggers>
                             <DataTrigger TargetType="controls:RoundImageButton"
                                          Binding="{Binding Path=ItemWatchlisted}"
                                          Value="True">
@@ -125,7 +125,7 @@
                                 <Setter Property="ImageSource"
                                         Value="add_watchlist_white.png" />
                             </DataTrigger>
-                        </controls:RoundImageButton.Triggers>-->
+                        </controls:RoundImageButton.Triggers>
                     </controls:RoundImageButton>
 
                     <controls:RoundImageButton Grid.Row="0"

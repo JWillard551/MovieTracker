@@ -49,7 +49,7 @@ namespace MovieTracker.App.ViewModels.DetailViewModels.Show
 
         private async void OnAddToWatchlistCommand(ShowItemViewModel svm)
         {
-            //svm.ItemRating = await HandleRatingEdit(svm.ItemRating, svm.Show.Id, MediaType.Tv);
+            svm.ItemWatchlisted = await HandleDetailButtonSelectedAsync(svm.ItemWatchlisted, DetailButtonType.Watchlist, MediaType.Tv, svm.Show.Id);
         }
 
         private async void OnRemoveFavoriteCommand(ShowItemViewModel svm)
