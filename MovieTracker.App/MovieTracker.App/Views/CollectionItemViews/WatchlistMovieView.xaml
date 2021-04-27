@@ -40,7 +40,9 @@
                        MaxLines="2"
                        LineBreakMode="WordWrap"
                        HorizontalOptions="StartAndExpand"
-                       VerticalOptions="Start">
+                       VerticalOptions="Start"
+                       TextColor="{StaticResource CardTitleColor}"
+                       Style="{StaticResource MainLabelStyle}">
 
                     <Label.FormattedText>
                         <FormattedString>
@@ -76,6 +78,7 @@
                 <Label Grid.Row="1"
                        Grid.Column="1"
                        Text="{Binding Movie.Overview}"
+                       Style="{StaticResource CardLabelStyle}"
                        FontSize="14"
                        TextColor="Black"
                        LineBreakMode="TailTruncation"

@@ -44,16 +44,16 @@
                 <Label Padding="2,0,0,0"
                        MaxLines="3"
                        LineBreakMode="WordWrap"
-                       HorizontalOptions="StartAndExpand">
+                       HorizontalOptions="StartAndExpand"
+                       TextColor="{StaticResource CardTitleColor}"
+                       Style="{StaticResource MainLabelStyle}">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="{Binding SearchItem.ResultName}" 
-                                  FontAttributes="Bold"
-                                  FontSize="15"/>
+                                  FontAttributes="Bold"/>
                             <Span Text=" ("/>
                             <Span Text="{Binding SearchItem.ReleaseDate, StringFormat='{0:yyyy}'}"
-                                  FontAttributes="Bold"
-                                  FontSize="15"/>
+                                  FontAttributes="Bold"/>
                             <Span Text=")"/>
                         </FormattedString>
                     </Label.FormattedText>
@@ -61,11 +61,11 @@
 
                 <!--Movie Overview-->
                 <Label Padding="10,2,2,2"
-                       FontSize="12"
                        MaxLines="6"
                        LineBreakMode="TailTruncation"
                        HorizontalOptions="StartAndExpand"
-                       Text="{Binding SearchItem.Overview}"/>
+                       Text="{Binding SearchItem.Overview}"
+                       Style="{StaticResource CardLabelStyle}" />
             </StackLayout>
 
             <!--Rating-->

@@ -20,6 +20,7 @@
             </StackLayout>
         </Frame>
         <Label Text="{Binding PopularItem.PopularItemName}"
+               Style="{StaticResource MainLabelStyle}"
                TextColor="White"
                FontAttributes="Bold"
                HorizontalOptions="Center"

@@ -229,6 +229,21 @@
     </Style>
 
     <Style TargetType="Label"
+           x:Key="CardLabelStyle">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double"
+                         Phone="14"
+                         Tablet="18" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily"
+                Value="Roboto" />
+        <Setter Property="TextColor"
+                Value="Black" />
+    </Style>
+
+    <Style TargetType="Label"
            x:Key="MediaDetailTitleLabelStyle">
         <Setter Property="FontSize">
             <Setter.Value>

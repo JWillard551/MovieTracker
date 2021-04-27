@@ -19,19 +19,30 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" 
+            <Button Grid.Column="0"
                     x:Name="btn_Movies"
                     Text="Popular Movies"
                     BorderWidth="1"
                     BorderColor="{StaticResource Tertiary}"
                     FontAttributes="Bold"
-                    HeightRequest="25"
-                    WidthRequest="150"
+                    FontFamily="Roboto"
                     Padding="0"
                     Margin="20,5,5,0"
                     CornerRadius="15"
                     BackgroundColor="{StaticResource PrimaryButton}"
-                    Clicked="OnMoviesClicked" />
+                    Clicked="OnMoviesClicked">
+                <Button.HeightRequest>
+                    <OnIdiom x:TypeArguments="x:Double"
+                             Phone="25"
+                             Tablet="50" />
+                </Button.HeightRequest>
+
+                <Button.WidthRequest>
+                    <OnIdiom x:TypeArguments="x:Double"
+                             Phone="150"
+                             Tablet="150" />
+                </Button.WidthRequest>
+            </Button>
 
             <Button Grid.Column="1" 
                     x:Name="btn_Shows"
@@ -39,13 +50,24 @@
                     BorderWidth="1"
                     BorderColor="{StaticResource Tertiary}"
                     FontAttributes="Bold"
-                    HeightRequest="25"
-                    WidthRequest="150"
+                    FontFamily="Roboto"
                     Padding="0"
                     Margin="5,5,20,0"
                     CornerRadius="15"
                     BackgroundColor="{StaticResource PrimaryButton}"
-                    Clicked="OnShowsClicked" />
+                    Clicked="OnShowsClicked">
+                <Button.HeightRequest>
+                    <OnIdiom x:TypeArguments="x:Double"
+                             Phone="25"
+                             Tablet="50" />
+                </Button.HeightRequest>
+
+                <Button.WidthRequest>
+                    <OnIdiom x:TypeArguments="x:Double"
+                             Phone="150"
+                             Tablet="150" />
+                </Button.WidthRequest>
+            </Button>
 
         </Grid>
 
@@ -89,26 +111,48 @@
                     BorderWidth="1"
                     BorderColor="{StaticResource Tertiary}"
                     FontAttributes="Bold"
-                    HeightRequest="25"
-                    WidthRequest="150"
+                    FontFamily="Roboto"
                     Padding="0"
                     Margin="20,5,5,0"
                     CornerRadius="15"
                     BackgroundColor="{StaticResource PrimaryButton}"
-                    Clicked="OnTrendingTodayClicked" />
+                    Clicked="OnTrendingTodayClicked">
+                <Button.HeightRequest>
+                    <OnIdiom x:TypeArguments="x:Double"
+                             Phone="25"
+                             Tablet="50" />
+                </Button.HeightRequest>
+
+                <Button.WidthRequest>
+                    <OnIdiom x:TypeArguments="x:Double"
+                             Phone="150"
+                             Tablet="150" />
+                </Button.WidthRequest>
+            </Button>
             <Button Grid.Column="1" 
                     x:Name="btn_ThisWeek"
                     Text="Trending This Week"
                     BorderWidth="1"
                     BorderColor="{StaticResource Tertiary}"
                     FontAttributes="Bold"
-                    HeightRequest="25"
-                    WidthRequest="150"
+                    FontFamily="Roboto"
                     Padding="0"
                     Margin="5,5,20,0"
                     CornerRadius="15"
                     BackgroundColor="{StaticResource PrimaryButton}"
-                    Clicked="OnTrendingThisWeekClicked" />
+                    Clicked="OnTrendingThisWeekClicked">
+                <Button.HeightRequest>
+                    <OnIdiom x:TypeArguments="x:Double"
+                             Phone="25"
+                             Tablet="50" />
+                </Button.HeightRequest>
+
+                <Button.WidthRequest>
+                    <OnIdiom x:TypeArguments="x:Double"
+                             Phone="150"
+                             Tablet="150" />
+                </Button.WidthRequest>
+            </Button>
         </Grid>
 
         <ActivityIndicator Grid.Row="3"
