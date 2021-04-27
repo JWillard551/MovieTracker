@@ -53,6 +53,7 @@
                     <appConverters:RuntimeToFormattedStringConverter x:Key="RuntimeToFormattedStringConverter" />
                     <appConverters:StringFormatConverter x:Key="StringFormatConverter" />
                     <appConverters:StringIsNullVisibilityCheckConverter x:Key="StringIsNullVisibilityCheckConverter" />
+                    <appConverters:ImagePlaceholderConverter x:Key="ImagePlaceholderConverter" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
