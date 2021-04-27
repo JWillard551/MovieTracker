@@ -36,7 +36,7 @@ namespace MovieTracker.TMDbModel.AdditionalModelObjects
             ReleaseDate = movie.ReleaseDate.HasValue ? movie.ReleaseDate.Value : DateTime.Now;
             Overview = movie.Overview;
             Rating = movie.VoteAverage;
-            ImageUri = ModelUtils.GetImageUri(movie.PosterPath ?? string.Empty);
+            ImageUri = ModelUtils.GetImageUri(movie?.PosterPath);
         }
 
         public SearchItem(SearchTv show)
@@ -47,7 +47,7 @@ namespace MovieTracker.TMDbModel.AdditionalModelObjects
             ReleaseDate = show.FirstAirDate;
             Overview = show.Overview;
             Rating = show.VoteAverage;
-            ImageUri = ModelUtils.GetImageUri(show.PosterPath ?? string.Empty);
+            ImageUri = ModelUtils.GetImageUri(show?.PosterPath);
         }
 
         public SearchItem(SearchPerson person)
@@ -55,7 +55,7 @@ namespace MovieTracker.TMDbModel.AdditionalModelObjects
             MediaType = MediaType.Person;
             Id = person.Id;
             ResultName = person.Name;
-            ImageUri = ModelUtils.GetImageUri(person.ProfilePath ?? string.Empty);
+            ImageUri = ModelUtils.GetImageUri(person?.ProfilePath);
         }
     }
 }
